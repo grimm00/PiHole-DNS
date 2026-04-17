@@ -1,0 +1,27 @@
+# PiHole-DNS — Docker Compose Stack
+# Layer 0 (MVP): Pi-Hole DNS server
+# Layer 1 (planned): Add OurFileServer, local DNS records
+#
+# Prerequisites:
+#   - Static IP configured on the Pi
+#   - Docker and Docker Compose installed
+#
+# Usage:
+#   docker compose up -d
+#   docker compose logs -f pihole
+
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "80:80/tcp"
+    environment:
+      TZ: 'America/New_York'
+      # WEBPASSWORD: set in .env file
+    volumes:
+      - ./etc-pihole:/etc/pihole
+      - ./etc-dnsmasq.d:/etc/dnsmasq.d
+    restart: unless-stopped
