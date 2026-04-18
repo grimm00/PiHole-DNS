@@ -159,6 +159,12 @@ Facts that change over time; the interview log above stays as-is.
 
 - **2026-04-17:** Raspberry Pi uses **Ethernet** for LAN access (updated from interview note that expected Wi‑Fi first). Interview section **3.4** remains historical.
 
+### Meta — quality, dogfood, and feedback (not part of the original interview)
+
+While working this repo, **keep in mind** cross-cutting **quality attributes** and **dev-infra** experiments (e.g. **agentic workflow modernization**, evolving explore/research/decision flows). No extra ceremony here — D7 already points at dogfooding.
+
+When you have something concrete: **open a GitHub issue** in **this** repo (or the relevant **dev-infra** repo) to report **what worked**, **what hurt**, and **what you’d change**. That stays lighter than extending this seed file for every lesson learned.
+
 ---
 
 **Last Updated:** 2026-04-17
