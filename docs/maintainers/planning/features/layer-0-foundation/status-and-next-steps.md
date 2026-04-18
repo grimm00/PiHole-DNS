@@ -7,11 +7,11 @@
 
 ## Progress summary
 
-**Overall:** 1/9 tasks complete
+**Overall:** 2/9 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
-| Runbooks — operator procedures | 🟠 In Progress | 1/4 tasks | Task 1 done |
+| Runbooks — operator procedures | 🟠 In Progress | 2/4 tasks | Tasks 1–2 done |
 | Repository entry points | 🔴 Not Started | 0/2 tasks | |
 | Compose and image pin | 🔴 Not Started | 0/2 tasks | |
 | Layer 0 closure | 🔴 Not Started | 0/1 tasks | Optional roadmap update |
@@ -20,7 +20,7 @@
 
 ## Next steps
 
-1. **Task 2** — Author [backup-and-restore](../../../../runbooks/backup-and-restore.md) content (`/task 2` or continue runbook group).
+1. **Task 3** — Author [minimum-deploy](../../../../runbooks/minimum-deploy.md) (`/task 3`).
 2. Expand group 2 when ready — `/transition-plan layer-0-foundation --expand --group 2`.
 3. Implement — `/task next` on branch `feat/layer-0-foundation`.
 

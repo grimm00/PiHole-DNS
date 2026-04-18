@@ -24,7 +24,7 @@ tasks_files:
 
 **Status:** 🟠 In Progress  
 **Created:** 2026-04-19  
-**Last Updated:** 2026-04-19  
+**Last Updated:** 2026-04-17  
 **Source:** [ADR-001 … ADR-004](../../../../decisions/layer-0-foundation/README.md), [requirements](../../../../research/layer-0-foundation/requirements.md), [design](../../../../design/layer-0-foundation/design-layer-0.md)
 
 ---
@@ -83,4 +83,4 @@ Implement Layer 0 MVP **operator documentation** and **reproducible Compose** pe
 
 ---
 
-**Last updated:** 2026-04-19
+**Last updated:** 2026-04-17

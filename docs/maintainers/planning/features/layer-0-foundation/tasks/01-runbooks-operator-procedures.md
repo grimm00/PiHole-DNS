@@ -3,7 +3,7 @@
 **Feature:** layer-0-foundation  
 **Group:** Runbooks — operator procedures  
 **Status:** 🟠 In Progress  
-**Last updated:** 2026-04-19  
+**Last updated:** 2026-04-17  
 
 ---
 
@@ -32,7 +32,7 @@
 
 ---
 
-- [ ] **Task 2:** Author backup, restore, and Teleporter workflow (`FR-3`, `ADR-003`)
+- [x] **Task 2:** Author backup, restore, and Teleporter workflow (`FR-3`, `ADR-003`)
 
   - **Purpose:** Satisfy **FR-3** with a **minimal** home-LAN runbook; **Teleporter is required** in your process per interview/ADR-003 (not optional-only).
 
