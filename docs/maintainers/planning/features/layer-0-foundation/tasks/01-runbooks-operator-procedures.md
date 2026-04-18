@@ -2,7 +2,8 @@
 
 **Feature:** layer-0-foundation  
 **Group:** Runbooks — operator procedures  
-**Status:** 🟠 In Progress  
+**Status:** ✅ Complete  
+**Completed:** 2026-04-17  
 **Last updated:** 2026-04-17  
 
 ---
@@ -69,7 +70,7 @@
 
 ---
 
-- [ ] **Task 4:** Document image digest bump workflow in runbooks (`NFR-1`, `ADR-004`)
+- [x] **Task 4:** Document image digest bump workflow in runbooks (`NFR-1`, `ADR-004`)
 
   - **Purpose:** Operationalize digest pinning (`pihole/pihole@sha256:…`) after verify, aligned with work habits and **NFR-1**.
 
@@ -98,9 +99,9 @@
 
 ## Completion criteria
 
-- [ ] Tasks 1–4 checkboxes done; runbooks index lists all new pages.  
-- [ ] Wording consistent with **FR-3**, **FR-4**, **NFR-1** and accepted ADRs.  
-- [ ] No secrets or live LAN identifiers in public text.
+- [x] Tasks 1–4 checkboxes done; runbooks index lists all new pages.  
+- [x] Wording consistent with **FR-3**, **FR-4**, **NFR-1** and accepted ADRs.  
+- [x] No secrets or live LAN identifiers in public text.
 
 ---
 
@@ -118,4 +119,4 @@
 
 ---
 
-**Last updated:** 2026-04-19
+**Last updated:** 2026-04-17

@@ -1,7 +1,7 @@
 # Runbooks
 
 **Purpose:** Operator-facing procedures (backup, rollback, deploy).  
-**Status:** 🟡 Layer 0 — index in place; full procedures in linked pages ([ADR-003](../maintainers/decisions/layer-0-foundation/adr-003-backup-rollback-runbook.md), [ADR-004](../maintainers/decisions/layer-0-foundation/adr-004-minimum-deploy-and-image-pinning.md)).
+**Status:** 🟢 Layer 0 — backup, minimum deploy, and digest workflow documented ([ADR-003](../maintainers/decisions/layer-0-foundation/adr-003-backup-rollback-runbook.md), [ADR-004](../maintainers/decisions/layer-0-foundation/adr-004-minimum-deploy-and-image-pinning.md)).
 
 ---
 
@@ -10,7 +10,7 @@
 | Document | What it covers |
 |----------|----------------|
 | [Backup and restore](backup-and-restore.md) | What to back up, **Teleporter** (required), rollback order (**FR-3**) |
-| [Minimum deploy](minimum-deploy.md) | Git + `.env` + Compose on the Pi, verify UI; image digest workflow (**FR-4**, **NFR-1**) |
+| [Minimum deploy](minimum-deploy.md) | Git + `.env` + Compose on the Pi, verify UI; [digest pin workflow](minimum-deploy.md#pinning-the-pi-hole-image) (**FR-4**, **NFR-1**) |
 
 **Related decisions:** [ADR-003](../maintainers/decisions/layer-0-foundation/adr-003-backup-rollback-runbook.md) (where runbooks live; Teleporter required) · [ADR-004](../maintainers/decisions/layer-0-foundation/adr-004-minimum-deploy-and-image-pinning.md) (minimum deploy + digest pin)
 
@@ -24,4 +24,4 @@
 
 ---
 
-**Last updated:** 2026-04-19
+**Last updated:** 2026-04-17

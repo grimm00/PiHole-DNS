@@ -7,11 +7,11 @@
 
 ## Progress summary
 
-**Overall:** 3/9 tasks complete
+**Overall:** 4/9 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
-| Runbooks — operator procedures | 🟠 In Progress | 3/4 tasks | Tasks 1–3 done |
+| Runbooks — operator procedures | ✅ Complete | 4/4 tasks | Tasks 1–4 done |
 | Repository entry points | 🔴 Not Started | 0/2 tasks | |
 | Compose and image pin | 🔴 Not Started | 0/2 tasks | |
 | Layer 0 closure | 🔴 Not Started | 0/1 tasks | Optional roadmap update |
@@ -20,8 +20,8 @@
 
 ## Next steps
 
-1. **Task 4** — Document image digest bump in runbooks (`/task 4` or `/task next`).
-2. Expand group 2 when ready — `/transition-plan layer-0-foundation --expand --group 2`.
+1. **Task 5** — Operator quickstart in root `README.md` + runbook links (`/task 5` or `/task next`).
+2. Expand group 2 if needed — `/transition-plan layer-0-foundation --expand --group 2`.
 3. Implement — `/task next` on branch `feat/layer-0-foundation`.
 
 ---

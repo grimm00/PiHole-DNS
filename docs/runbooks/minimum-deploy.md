@@ -100,9 +100,69 @@ Per [ADR-004](../maintainers/decisions/layer-0-foundation/adr-004-minimum-deploy
 
 ## Pinning the Pi-hole image
 
-**NFR-1** / **ADR-004:** After a **verified** working deploy, pin `pihole/pihole` using a **digest** in `docker-compose.yml` so rebuilds do not silently re-resolve a moving tag.
+**NFR-1** / **ADR-004:** Set `pihole/pihole` to an **image digest** (`pihole/pihole@sha256:…`) in [`docker-compose.yml`](../../docker-compose.yml) after a **verified** working deploy, so rebuilds do not silently re-resolve a moving tag. For Pi-hole–specific upgrade behavior, prefer upstream docs (**C-1**): [Pi-hole — Docker upgrading](https://docs.pi-hole.net/docker/upgrading/).
 
-**Step-by-step** commands (pull, `docker image inspect`, edit Compose, smoke-test) will be added in this same document as the Layer 0 runbook set is completed. Until then, use [Pi-hole — Docker upgrading](https://docs.pi-hole.net/docker/upgrading/) for image lifecycle (**C-1**) and [ADR-004](../maintainers/decisions/layer-0-foundation/adr-004-minimum-deploy-and-image-pinning.md) for project policy.
+### Why pin
+
+- **Reproducibility** — The same `docker compose up` uses the same image bits.
+- **Control** — You choose when to adopt a new digest; tags like `latest` can move independently of your expectations.
+
+### When to pin or bump
+
+- **First pin:** After **[Verify](#verify)** succeeds with the build you want to keep (often while `image:` still uses a tag such as `latest` or a version tag).
+- **Bump to a newer build:** After you decide to upgrade — **back up first** (see below), then pull, pin the new digest, and smoke-test.
+
+Always complete a [Backup and restore](backup-and-restore.md) pass (**Teleporter** + `./etc-pihole` / `./etc-dnsmasq.d`) before `docker compose pull`, image changes, or destructive volume edits.
+
+### Pin or bump (example flow)
+
+Run on the **Pi** from the repository root (where `docker-compose.yml` lives).
+
+1. **Pull** the image you intend to run (skip if you only need to record the digest of an image already present):
+
+   ```bash
+   docker compose pull
+   ```
+
+   Or pull an explicit tag:
+
+   ```bash
+   docker pull pihole/pihole:latest
+   ```
+
+2. **Read the digest** Docker associated with that image:
+
+   ```bash
+   docker image inspect pihole/pihole --format '{{index .RepoDigests 0}}'
+   ```
+
+   Expect `pihole/pihole@sha256:…`. If `RepoDigests` is empty or you have several Pi-hole images, run `docker image inspect` (or `docker images`) and take the digest from the `RepoDigests` entry for the image ID you just pulled.
+
+3. **Edit** `docker-compose.yml` — set the `pihole` service `image:` to that digest (no tag after `@sha256:…`):
+
+   ```yaml
+   # e.g. verified 2026-04-17 from tag …
+   image: pihole/pihole@sha256:0123456789abcdef…
+   ```
+
+4. **Apply** the change:
+
+   ```bash
+   docker compose up -d
+   ```
+
+5. **Smoke-test** — Repeat [Verify](#verify): `docker compose ps`, Pi-hole admin UI, DNS from an opt-in client.
+
+6. **Commit** the pin so the repo stays reproducible:
+
+   ```bash
+   git add docker-compose.yml
+   git commit -m "chore(compose): pin pihole image to digest"
+   ```
+
+### Cache and offline use
+
+**NFR-1:** On the same host, Docker **reuses the local image store** when the digest matches; you are not forced to re-pull from the registry every time. **Private registry**, **`docker save` / `load`**, and **air-gap** workflows stay **out of scope** for Layer 0 until multi-host or air-gap needs arise ([ADR-004](../maintainers/decisions/layer-0-foundation/adr-004-minimum-deploy-and-image-pinning.md), roadmap).
 
 ---
 
