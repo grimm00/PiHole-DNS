@@ -8,12 +8,12 @@ blocking_failures: 0
 total_checks: 8
 passed_checks: 8
 warnings: 0
-status: READY_FOR_TAG
+status: RELEASED
 ---
 
 ## Summary
 
-**Overall readiness status:** **READY_FOR_TAG** — Layer 0 documentation is complete; root **`CHANGELOG.md`** is present, **`README`** reports **v0.1.0**, and release notes are **final**. Remaining step: **create git tag `v0.1.0`** on the chosen release commit and publish the GitHub release if desired.
+**Overall readiness status:** **RELEASED** — Layer 0 documentation is complete; root **`CHANGELOG.md`** is present, **`README`** reports **v0.1.0**, release notes are **final**, and git tag **`v0.1.0`** points at commit **`3fafca1`**. Optional: publish a GitHub Release from the tag.
 
 **Readiness score:** **92%** (manual assessment; no automated release script in this repo).
 
@@ -49,7 +49,7 @@ status: READY_FOR_TAG
 - [x] Release notes finalized (`/release-finalize`)
 - [x] Version references updated (`/release-finalize`) — `README.md`
 - [x] Release branch `release/v0.1.0` carries finalized docs
-- [ ] Tag **`v0.1.0`** created on release commit
+- [x] Tag **`v0.1.0`** created on release commit (`3fafca1`)
 - [ ] GitHub release published *(optional)*
 - [ ] Release PR merged to **`main`** *(if using that workflow)*
 
@@ -57,9 +57,9 @@ status: READY_FOR_TAG
 
 ## Recommended next steps
 
-1. Tag: `git tag -a v0.1.0 -m "v0.1.0 — Layer 0 foundation"` on the finalized release commit.
-2. Push tag: `git push origin v0.1.0`
-3. Open **`/pr --release`** or merge `release/v0.1.0` → `main` per project policy.
+1. *(Done)* Tag **`v0.1.0`** pushed to `origin`.
+2. Optional: create a **GitHub Release** from tag `v0.1.0` using [`RELEASE-NOTES.md`](RELEASE-NOTES.md) as body text.
+3. Merge **`release/v0.1.0`** or **`develop`** → **`main`** when ready for default-branch parity.
 
 ---
 
