@@ -50,7 +50,7 @@
 
 ---
 
-- [ ] **Task 3:** Author minimum deploy on the Pi and verification steps (`FR-4`, `ADR-004`)
+- [x] **Task 3:** Author minimum deploy on the Pi and verification steps (`FR-4`, `ADR-004`)
 
   - **Purpose:** Document the **Track A** path: repo on disk, secrets in `.env`, Compose up, verify — no mise/ghcr in Layer 0.
 
