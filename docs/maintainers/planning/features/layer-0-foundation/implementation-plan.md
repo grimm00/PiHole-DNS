@@ -62,7 +62,7 @@ Implement Layer 0 MVP **operator documentation** and **reproducible Compose** pe
 ### Repository entry points
 
 - [x] Task 5: Add operator quickstart to root `README.md` and link to runbooks
-- [ ] Task 6: Align `docs/README.md` (and related indexes) with runbook and design links
+- [x] Task 6: Align `docs/README.md` (and related indexes) with runbook and design links
 
 ### Compose and image pin
 

@@ -10,7 +10,7 @@
 
 ### Active Features
 
-- **[layer-0-foundation](layer-0-foundation/README.md)** — Layer 0 MVP implementation (runbooks, README, digest pin) (🔴 Not started)
+- **[layer-0-foundation](layer-0-foundation/README.md)** — Layer 0 MVP (runbooks, README entry points, Compose digest pin) — 🟠 In progress ([status](layer-0-foundation/status-and-next-steps.md))
 
 ---
 

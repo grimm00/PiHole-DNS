@@ -2,7 +2,8 @@
 
 **Feature:** layer-0-foundation  
 **Group:** Repository entry points  
-**Status:** 🟠 In Progress  
+**Status:** ✅ Complete  
+**Completed:** 2026-04-19  
 **Last updated:** 2026-04-19  
 
 ---
@@ -37,7 +38,7 @@
 
 ---
 
-- [ ] **Task 6:** Align `docs/README.md` (and related indexes) with runbook and design links  
+- [x] **Task 6:** Align `docs/README.md` (and related indexes) with runbook and design links  
 
   - **Purpose:** **`docs/README.md`** is the doc hub; it should mirror design §2.1 — operators see **runbooks** first; maintainers see **maintainers/** and **roadmap**; placeholders (“coming soon”) are removed or pointed at real Layer 0 content.
 
@@ -71,9 +72,9 @@
 
 ## Completion criteria
 
-- [ ] Root README links to runbooks; no duplicate of full procedures (link instead).  
-- [ ] `docs/README.md` lists runbooks and roadmap; stale “coming soon” removed where Layer 0 content exists.  
-- [ ] No secrets or `.env` contents in README text.
+- [x] Root README links to runbooks; no duplicate of full procedures (link instead).  
+- [x] `docs/README.md` lists runbooks and roadmap; stale “coming soon” removed where Layer 0 content exists.  
+- [x] No secrets or `.env` contents in README text.
 
 ---
 
