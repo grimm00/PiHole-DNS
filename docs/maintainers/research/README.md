@@ -2,7 +2,7 @@
 
 **Purpose:** Research and analysis for architectural decisions  
 **Status:** ✅ Active  
-**Last Updated:** 2026-04-17
+**Last Updated:** 2026-04-18
 
 ---
 
@@ -10,7 +10,7 @@
 
 ### Active Research
 
-- **[layer-0-foundation](layer-0-foundation/README.md)** — Layer 0 MVP (stages 0–4; Stage 0 = prior art opening). (🔴 Research)
+- **[layer-0-foundation](layer-0-foundation/README.md)** — Layer 0 MVP (stages 0–4; requirements **Final**). (🟡 Decision)
 
 ---
 
@@ -147,6 +147,6 @@ cp docs/maintainers/research/requirements-template.md \
 
 ---
 
-**Last Updated:** 2026-04-17  
+**Last Updated:** 2026-04-18  
 **Status:** ✅ Active
 

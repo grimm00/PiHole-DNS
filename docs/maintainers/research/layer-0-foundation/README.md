@@ -1,9 +1,9 @@
 # Layer 0 — Foundation — Research Hub
 
 **Purpose:** Research supporting MVP: stable addressing, Pi-hole in Compose, opt-in DNS, safety, minimal deploy.  
-**Status:** 🟡 Ready to consolidate (Stages 0–4 complete)  
+**Status:** ✅ Consolidated — requirements **Final** (2026-04-18)  
 **Created:** 2026-04-17  
-**Last Updated:** 2026-04-17  
+**Last Updated:** 2026-04-18  
 **Sources:** [Exploration](../../explorations/layer-0-foundation/exploration.md), [research-topics](../../explorations/layer-0-foundation/research-topics.md), [roadmap](../../../roadmap.md)
 
 ---
@@ -34,4 +34,4 @@ Work proceeds in **stages**. **Stage 0** is the customary opening: **prior art a
 
 Layer 0 research validates how to reach a **verifiable** MVP: Pi reachable at a stable address, Pi-hole running from this repo’s Compose, at least one client using Pi-hole by choice, with sane backup/rollback and a minimal git-to-Pi workflow.
 
-**Next:** **`/research layer-0-foundation --consolidate`** → **`/decision layer-0-foundation --from-research`**
+**Next:** **`/decision layer-0-foundation --from-research`**

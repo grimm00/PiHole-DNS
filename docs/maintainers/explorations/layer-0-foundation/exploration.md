@@ -1,6 +1,6 @@
 # Exploration: Layer 0 — Foundation (MVP)
 
-**Status:** ✅ Scoped to Layer 0 (ready for research; no separate conduct step)  
+**Status:** ✅ Scoped to Layer 0; research **Stages 0–4** complete; [requirements](../../research/layer-0-foundation/requirements.md) **Final**  
 **Created:** 2026-04-17  
 **Sources:** [Roadmap](../../../roadmap.md) (Layer 0 — Foundation); [pihole-dns-from-seed](../pihole-dns-from-seed/exploration.md)
 
@@ -80,10 +80,9 @@
 
 ## Next steps
 
-1. Work through [`research-topics.md`](research-topics.md) (Topics 1–2 first).  
-2. Record decisions as ADRs where options compete.  
-3. Update [roadmap](../../../roadmap.md) Layer 0 status when MVP criteria are met.
+1. **`/decision layer-0-foundation --from-research`** — ADRs from consolidated requirements.  
+2. Update [roadmap](../../../roadmap.md) Layer 0 status when MVP criteria are met.
 
 ---
 
-**Last Updated:** 2026-04-17
+**Last Updated:** 2026-04-18

@@ -137,7 +137,7 @@ Official [Pi-hole Docker](https://docs.pi-hole.net/docker/) and [configuration](
 
 ## Requirements discovered
 
-See [requirements.md](requirements.md): **FR-2**, **A-3**; reinforces **NFR-1**, **C-1**.
+See [requirements.md](requirements.md): **FR-2**, **A-3**; **C-1**.
 
 ---
 

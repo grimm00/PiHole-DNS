@@ -1,14 +1,17 @@
 # Requirements — Layer 0 — Foundation
 
 **Source:** Research ([research-summary.md](research-summary.md))  
-**Status:** Draft  
+**Status:** Final  
 **Created:** 2026-04-17  
+**Consolidated:** 2026-04-18  
 
 ---
 
 ## Overview
 
-Requirements discovered during Layer 0 research. Populate from stage documents as findings solidify.
+Requirements discovered during Layer 0 research, consolidated after Stages 0–4.
+
+**Counts:** **4** functional (FR), **1** non-functional (NFR), **1** constraint (C), **5** assumptions (A).
 
 **Stages:** [0](research-stage-0-prior-art.md) · [1](research-stage-1-stable-addressing.md) · [2](research-stage-2-pihole-compose.md) · [3](research-stage-3-safety-rollback.md) · [4](research-stage-4-minimum-deploy.md)
 
@@ -28,11 +31,11 @@ Requirements discovered during Layer 0 research. Populate from stage documents a
 
 ---
 
-### FR-2: Pi-hole Compose — ports, v6 env, and persistence
+### FR-2: Pi-hole Compose — v6 config, ports, env, and persistence
 
-**Description:** The Layer 0 stack must run **`pihole/pihole`** with **published** host ports **53/tcp**, **53/udp**, and **80/tcp** (minimum for DNS + HTTP admin). Compose must set **Pi-hole v6–compatible** variables: at minimum **`FTLCONF_dns_listeningMode: 'ALL'`** for default bridge networking, **`FTLCONF_webserver_api_password`** (or **`WEBPASSWORD_FILE`**) for the web UI password, and **`FTLCONF_misc_etc_dnsmasq_d: 'true'`** if the repo bind-mounts **`./etc-dnsmasq.d`→`/etc/dnsmasq.d`** (v6 does not load that directory otherwise). Persist **`./etc-pihole`→`/etc/pihole`** for Pi-hole state.
+**Description:** The Layer 0 stack must run **`pihole/pihole`** consistent with **Pi-hole v6** (do not rely on legacy v5-only environment variable names except where upstream documents migration). Compose must use **published** host ports **53/tcp**, **53/udp**, and **80/tcp** (minimum for DNS + HTTP admin). Set **v6-appropriate** variables: at minimum **`FTLCONF_dns_listeningMode: 'ALL'`** for default bridge networking, **`FTLCONF_webserver_api_password`** (or **`WEBPASSWORD_FILE`**) for the web UI password, and **`FTLCONF_misc_etc_dnsmasq_d: 'true'`** if the repo bind-mounts **`./etc-dnsmasq.d`→`/etc/dnsmasq.d`**. Persist **`./etc-pihole`→`/etc/pihole`** for Pi-hole state.
 
-**Source:** [research-stage-2-pihole-compose.md](research-stage-2-pihole-compose.md)
+**Source:** [research-stage-0-prior-art.md](research-stage-0-prior-art.md), [research-stage-2-pihole-compose.md](research-stage-2-pihole-compose.md) *(consolidated: former NFR-1 “v6–compatible configuration” merged here)*
 
 **Priority:** High
 
@@ -54,7 +57,7 @@ Requirements discovered during Layer 0 research. Populate from stage documents a
 
 ### FR-4: Documented minimum deploy path (Layer 0, Track A)
 
-**Description:** The project must document a **minimum** operator path to run the stack on the Raspberry Pi **without** requiring mise, private registry, or CI: obtain the repo on the Pi (**`git clone`** / **`git pull`**), create **`.env`** with **`FTLCONF_webserver_api_password`** (and any other variables referenced by Compose), ensure bind-mount directories exist (**`./etc-pihole`**, **`./etc-dnsmasq.d`**), run **`docker compose pull`** (as needed) and **`docker compose up -d`**, then verify with **`docker compose ps`** and the Pi-hole admin UI. The document must reference **image pinning / cache** per **NFR-2** and link to Pi-hole [Docker upgrading](https://docs.pi-hole.net/docker/upgrading/) for image updates.
+**Description:** The project must document a **minimum** operator path to run the stack on the Raspberry Pi **without** requiring mise, private registry, or CI: obtain the repo on the Pi (**`git clone`** / **`git pull`**), create **`.env`** with **`FTLCONF_webserver_api_password`** (and any other variables referenced by Compose), ensure bind-mount directories exist (**`./etc-pihole`**, **`./etc-dnsmasq.d`**), run **`docker compose pull`** (as needed) and **`docker compose up -d`**, then verify with **`docker compose ps`** and the Pi-hole admin UI. The document must reference **image pinning / cache** per **NFR-1** and link to Pi-hole [Docker upgrading](https://docs.pi-hole.net/docker/upgrading/) for image updates.
 
 **Source:** [research-stage-4-minimum-deploy.md](research-stage-4-minimum-deploy.md)
 
@@ -66,23 +69,11 @@ Requirements discovered during Layer 0 research. Populate from stage documents a
 
 ## Non-functional requirements
 
-### NFR-1: Pi-hole v6–compatible configuration
-
-**Description:** Docker Compose and environment variables for `pihole/pihole` must match **Pi-hole v6** expectations (e.g. web password via `FTLCONF_webserver_api_password` or documented secret-file mechanism), not legacy v5-only variable names.
-
-**Source:** [research-stage-0-prior-art.md](research-stage-0-prior-art.md)
-
-**Priority:** High
-
-**Status:** 🔴 Pending
-
----
-
-### NFR-2: Pin and cache container images (project-wide)
+### NFR-1: Pin and cache container images (project-wide)
 
 **Description:** For **every** container base image used in this project (Pi-hole, file services, future stacks): (1) obtain the image from the upstream tag (prefer **immutable date tags** or record **digest** after verify — see [Docker image digests](https://docs.docker.com/dhi/core-concepts/digests/)); (2) on subsequent deploys or rebuilds, **prefer a cached copy**—either the image already present in the local Docker store or an image stored in a **private registry** / offline artifact (`docker save` / `load`)—so rebuilds do not silently re-resolve `latest` from the public internet. Initial Layer 0 bring-up may use `latest` or a single explicit pull; **after** a verified deploy, move **`image:`** in Compose toward a **Pi-hole date tag** or **`@sha256:…`** and treat **Stage 4** findings + **FR-4** as the operational baseline. **Defer** private registry / ghcr until multi-host or air-gap needs arise (see [research-stage-4-minimum-deploy.md](research-stage-4-minimum-deploy.md)).
 
-**Source:** [research-stage-4-minimum-deploy.md](research-stage-4-minimum-deploy.md); operator direction 2026-04-17.
+**Source:** [research-stage-4-minimum-deploy.md](research-stage-4-minimum-deploy.md); operator direction 2026-04-17. *(Renumbered from former NFR-2 during consolidation.)*
 
 **Priority:** Medium (high for long-term reproducibility; after Stages 1–2 stable runtime)
 
@@ -120,9 +111,9 @@ Requirements discovered during Layer 0 research. Populate from stage documents a
 
 ### A-3: Host port 53 available for Docker publish
 
-**Description:** No other host service permanently binds **0.0.0.0:53** (or the address Docker maps) in a way that prevents the Pi-hole container from publishing DNS. On Raspberry Pi OS Bookworm, **`systemd-resolved`** stub on **127.0.0.53** is often absent; if **`docker compose up`** fails on port **53**, diagnose with **`ss`/`lsof`** before applying Ubuntu-specific **`resolved`** workarounds.
+**Description:** No other host service permanently binds **0.0.0.0:53** (or the address Docker maps) in a way that prevents the Pi-hole container from publishing DNS. On Raspberry Pi OS Bookworm, **`systemd-resolved`** stub on **127.0.0.53** is often absent; if **`docker compose up`** fails on port **53**, diagnose with **`ss`/`lsof`** (avoid matching **5353** when checking — use a port-specific filter). Before applying Ubuntu-specific **`resolved`** workarounds, confirm the listener is actually **`resolved`**.
 
-**Source:** [research-stage-2-pihole-compose.md](research-stage-2-pihole-compose.md)
+**Source:** [research-stage-2-pihole-compose.md](research-stage-2-pihole-compose.md) *(A-3 wording clarified during consolidation: mDNS **5353** vs DNS **53**.)*
 
 ---
 
@@ -142,4 +133,4 @@ Requirements discovered during Layer 0 research. Populate from stage documents a
 
 ---
 
-**Last Updated:** 2026-04-17
+**Last Updated:** 2026-04-18

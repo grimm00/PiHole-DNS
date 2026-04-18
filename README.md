@@ -63,7 +63,7 @@ Track A smallest loop — **no mise, no private registry, no CI** required to pr
 5. **Run:** `docker compose pull` (optional when changing image tags) then `docker compose up -d`.
 6. **Check:** `docker compose ps`, open `http://<Pi_IP>/admin/`, point **one** test client at the Pi for DNS ([Stage 1 checklist](docs/maintainers/research/layer-0-foundation/research-stage-1-stable-addressing.md)).
 
-**Images:** First bring-up may use `latest`; after things work, pin **`pihole/pihole`** to a [date tag or digest](https://docs.pi-hole.net/docker/) and prefer a [cached local image](https://docs.docker.com/dhi/core-concepts/digests/) on rebuild — see [NFR-2](docs/maintainers/research/layer-0-foundation/requirements.md) and [Stage 4 research](docs/maintainers/research/layer-0-foundation/research-stage-4-minimum-deploy.md). **Upgrades:** [Pi-hole Docker upgrading](https://docs.pi-hole.net/docker/upgrading/).
+**Images:** First bring-up may use `latest`; after things work, pin **`pihole/pihole`** to a [date tag or digest](https://docs.pi-hole.net/docker/) and prefer a [cached local image](https://docs.docker.com/dhi/core-concepts/digests/) on rebuild — see [NFR-1](docs/maintainers/research/layer-0-foundation/requirements.md) and [Stage 4 research](docs/maintainers/research/layer-0-foundation/research-stage-4-minimum-deploy.md). **Upgrades:** [Pi-hole Docker upgrading](https://docs.pi-hole.net/docker/upgrading/).
 
 ---
 

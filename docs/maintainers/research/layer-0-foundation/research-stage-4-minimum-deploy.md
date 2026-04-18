@@ -16,7 +16,7 @@ What is the **smallest** workflow from this repo to a running stack on the Pi **
 
 ## Context
 
-GitOps-lite long-term; Layer 0 should not depend on full CI/registry pipeline. Align with **Stage 0** (OurFileServer-style: repo on disk, `docker compose up`). **NFR-2** (pin/cache images) is validated and operationalized here.
+GitOps-lite long-term; Layer 0 should not depend on full CI/registry pipeline. Align with **Stage 0** (OurFileServer-style: repo on disk, `docker compose up`). **NFR-1** (pin/cache images) is validated and operationalized here.
 
 ---
 
@@ -89,7 +89,7 @@ No **mise**, **ghcr**, or **CI** is required for this path — they are **deferr
 
 **Source:** [Docker image digests](https://docs.docker.com/dhi/core-concepts/digests/); Pi-hole versioning docs.
 
-**Relevance:** **NFR-2** is satisfied operationally by: (1) document the policy; (2) move Compose from `latest` to **date tag or digest** after first successful bring-up; (3) prefer **cached** local image on rebuild when offline or avoiding re-pull.
+**Relevance:** **NFR-1** is satisfied operationally by: (1) document the policy; (2) move Compose from `latest` to **date tag or digest** after first successful bring-up; (3) prefer **cached** local image on rebuild when offline or avoiding re-pull.
 
 ---
 
@@ -103,7 +103,7 @@ No **mise**, **ghcr**, or **CI** is required for this path — they are **deferr
 
 **Source:** Docker CLI documentation; community homelab.
 
-**Relevance:** NFR-2 “prefer cached copy” is achievable on a **single Pi** without extra infrastructure.
+**Relevance:** NFR-1 “prefer cached copy” is achievable on a **single Pi** without extra infrastructure.
 
 ---
 
@@ -125,7 +125,7 @@ No **mise**, **ghcr**, or **CI** is required for this path — they are **deferr
 **Key insights**
 
 - [x] **Git + `.env` + `docker compose`** is sufficient for Layer 0 MVP deploy.  
-- [x] **NFR-2** is actionable: pin after proof, use local cache, escalate to registry/save-load only when triggers appear.  
+- [x] **NFR-1** is actionable: pin after proof, use local cache, escalate to registry/save-load only when triggers appear.  
 - [x] **`.gitignore`** already matches secret hygiene for `.env` and volume data.
 
 ---
@@ -140,7 +140,7 @@ No **mise**, **ghcr**, or **CI** is required for this path — they are **deferr
 
 ## Requirements discovered
 
-See [requirements.md](requirements.md): **FR-4**; **NFR-2** wording finalized via this stage; **A-5**.
+See [requirements.md](requirements.md): **FR-4**; **NFR-1** wording finalized via this stage; **A-5**.
 
 ---
 

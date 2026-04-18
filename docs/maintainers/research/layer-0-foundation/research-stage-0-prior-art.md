@@ -105,7 +105,7 @@ What **existing implementations, images, and patterns** are most relevant to Lay
 
 ## Requirements discovered
 
-Captured in [requirements.md](requirements.md) as **NFR-1**, **C-1**, **A-1** (see file). Summary:
+Captured in [requirements.md](requirements.md) as **FR-2** (v6 + Compose), **C-1**, **A-1** (see file). Summary:
 
 - Align Compose env with **Pi-hole v6** (`FTLCONF_webserver_api_password` or secret file).  
 - Treat **Pi-hole Docker docs** as normative for port conflicts and upgrades.  

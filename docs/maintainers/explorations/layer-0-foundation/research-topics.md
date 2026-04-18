@@ -73,7 +73,7 @@ Research is scaffolded under [`docs/maintainers/research/layer-0-foundation/`](.
 
 **Priority:** Medium
 
-**Suggested approach:** Document `git pull` + `docker compose up -d` (or equivalent); when ghcr/mise become worthwhile; secret handling for `.env`. **Image policy:** after first pull from a public tag, move toward **pinned tags/digests** and **prefer cached images** (local Docker store or private registry) on rebuild—**same pattern for every base image** in the repo (see Stage 4 doc + NFR-2).
+**Suggested approach:** Document `git pull` + `docker compose up -d` (or equivalent); when ghcr/mise become worthwhile; secret handling for `.env`. **Image policy:** after first pull from a public tag, move toward **pinned tags/digests** and **prefer cached images** (local Docker store or private registry) on rebuild—**same pattern for every base image** in the repo (see Stage 4 doc + NFR-1).
 
 **Research:** ✅ [research-stage-4-minimum-deploy.md](../../research/layer-0-foundation/research-stage-4-minimum-deploy.md)
 
