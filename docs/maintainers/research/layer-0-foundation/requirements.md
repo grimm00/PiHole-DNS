@@ -52,6 +52,18 @@ Requirements discovered during Layer 0 research. Populate from stage documents a
 
 ---
 
+### FR-4: Documented minimum deploy path (Layer 0, Track A)
+
+**Description:** The project must document a **minimum** operator path to run the stack on the Raspberry Pi **without** requiring mise, private registry, or CI: obtain the repo on the Pi (**`git clone`** / **`git pull`**), create **`.env`** with **`FTLCONF_webserver_api_password`** (and any other variables referenced by Compose), ensure bind-mount directories exist (**`./etc-pihole`**, **`./etc-dnsmasq.d`**), run **`docker compose pull`** (as needed) and **`docker compose up -d`**, then verify with **`docker compose ps`** and the Pi-hole admin UI. The document must reference **image pinning / cache** per **NFR-2** and link to Pi-hole [Docker upgrading](https://docs.pi-hole.net/docker/upgrading/) for image updates.
+
+**Source:** [research-stage-4-minimum-deploy.md](research-stage-4-minimum-deploy.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
 ## Non-functional requirements
 
 ### NFR-1: Pi-hole v6–compatible configuration
@@ -68,9 +80,9 @@ Requirements discovered during Layer 0 research. Populate from stage documents a
 
 ### NFR-2: Pin and cache container images (project-wide)
 
-**Description:** For **every** container base image used in this project (Pi-hole, file services, future stacks): (1) obtain the image from the upstream tag (prefer **immutable date tags** or record **digest** after verify); (2) on subsequent deploys or rebuilds, **prefer a cached copy**—either the image already present in the local Docker store or an image stored in a **private registry** / offline artifact—so rebuilds do not silently re-resolve `latest` from the public internet. Initial Layer 0 bring-up may use `latest` or a single explicit pull; this NFR is **fully satisfied** when Stage 4 documents the operational workflow and Compose pins references accordingly.
+**Description:** For **every** container base image used in this project (Pi-hole, file services, future stacks): (1) obtain the image from the upstream tag (prefer **immutable date tags** or record **digest** after verify — see [Docker image digests](https://docs.docker.com/dhi/core-concepts/digests/)); (2) on subsequent deploys or rebuilds, **prefer a cached copy**—either the image already present in the local Docker store or an image stored in a **private registry** / offline artifact (`docker save` / `load`)—so rebuilds do not silently re-resolve `latest` from the public internet. Initial Layer 0 bring-up may use `latest` or a single explicit pull; **after** a verified deploy, move **`image:`** in Compose toward a **Pi-hole date tag** or **`@sha256:…`** and treat **Stage 4** findings + **FR-4** as the operational baseline. **Defer** private registry / ghcr until multi-host or air-gap needs arise (see [research-stage-4-minimum-deploy.md](research-stage-4-minimum-deploy.md)).
 
-**Source:** [research-stage-4-minimum-deploy.md](research-stage-4-minimum-deploy.md) (to be validated in Stage 4 conduct); operator direction 2026-04-17.
+**Source:** [research-stage-4-minimum-deploy.md](research-stage-4-minimum-deploy.md); operator direction 2026-04-17.
 
 **Priority:** Medium (high for long-term reproducibility; after Stages 1–2 stable runtime)
 
@@ -119,6 +131,14 @@ Requirements discovered during Layer 0 research. Populate from stage documents a
 **Description:** For Layer 0, **non-participating devices** continue to use normal router/DHCP DNS. **Opted-in** test clients can revert DNS settings locally without requiring a router reconfiguration, so rollback does not depend on a single network chokepoint beyond “use Pi-hole IP or don’t.”
 
 **Source:** [research-stage-3-safety-rollback.md](research-stage-3-safety-rollback.md)
+
+---
+
+### A-5: Secrets and volume data stay out of git
+
+**Description:** Operator-created **`.env`** (and similar) holding **`FTLCONF_webserver_api_password`** and other secrets is **not** committed; runtime data under **`./etc-pihole`** and **`./etc-dnsmasq.d`** remains on the Pi only, consistent with [`.gitignore`](../../../../.gitignore).
+
+**Source:** [research-stage-4-minimum-deploy.md](research-stage-4-minimum-deploy.md)
 
 ---
 

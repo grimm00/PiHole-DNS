@@ -75,6 +75,8 @@ Research is scaffolded under [`docs/maintainers/research/layer-0-foundation/`](.
 
 **Suggested approach:** Document `git pull` + `docker compose up -d` (or equivalent); when ghcr/mise become worthwhile; secret handling for `.env`. **Image policy:** after first pull from a public tag, move toward **pinned tags/digests** and **prefer cached images** (local Docker store or private registry) on rebuild—**same pattern for every base image** in the repo (see Stage 4 doc + NFR-2).
 
+**Research:** ✅ [research-stage-4-minimum-deploy.md](../../research/layer-0-foundation/research-stage-4-minimum-deploy.md)
+
 ---
 
 ## Deferred (not Layer 0)
@@ -87,7 +89,7 @@ See [seed research topics](../pihole-dns-from-seed/research-topics.md) for Layer
 
 1. Conduct **Stage 0** (prior art), then **Stages 1–2** before heavy implementation.  
 2. Complete Stages 3–4; update [requirements.md](../../research/layer-0-foundation/requirements.md).  
-3. Feed findings into ADRs; link from [roadmap](../../../roadmap.md).
+3. **`--consolidate`** → **`/decision`**; feed ADRs; link from [roadmap](../../../roadmap.md).
 
 ---
 

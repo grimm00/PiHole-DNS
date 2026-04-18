@@ -52,6 +52,19 @@ Summary only — **full layers, open questions, and cross-cutting tracks** live 
 
 GitOps-lite: this repo is the source of truth. The Pi pulls container images from a registry. No manual SSH-and-edit drift.
 
+### Layer 0 — Deploy on the Pi (minimum path)
+
+Track A smallest loop — **no mise, no private registry, no CI** required to prove Compose + DNS:
+
+1. **Prerequisites:** [Docker](https://docs.docker.com/engine/install/debian/) and [Compose](https://docs.docker.com/compose/install/linux/) on the Pi; [stable LAN IP](docs/maintainers/research/layer-0-foundation/research-stage-1-stable-addressing.md) (reservation or static).
+2. **Repo:** `git clone` (first time) or `git pull` in the project directory on the Pi.
+3. **Secrets:** Create **`.env`** next to `docker-compose.yml` with at least `FTLCONF_webserver_api_password=…` (see [`docker-compose.yml`](docker-compose.yml)). `.env` is gitignored — never commit it.
+4. **Volumes:** `mkdir -p etc-pihole etc-dnsmasq.d` in the repo root on the Pi if the directories do not exist yet.
+5. **Run:** `docker compose pull` (optional when changing image tags) then `docker compose up -d`.
+6. **Check:** `docker compose ps`, open `http://<Pi_IP>/admin/`, point **one** test client at the Pi for DNS ([Stage 1 checklist](docs/maintainers/research/layer-0-foundation/research-stage-1-stable-addressing.md)).
+
+**Images:** First bring-up may use `latest`; after things work, pin **`pihole/pihole`** to a [date tag or digest](https://docs.pi-hole.net/docker/) and prefer a [cached local image](https://docs.docker.com/dhi/core-concepts/digests/) on rebuild — see [NFR-2](docs/maintainers/research/layer-0-foundation/requirements.md) and [Stage 4 research](docs/maintainers/research/layer-0-foundation/research-stage-4-minimum-deploy.md). **Upgrades:** [Pi-hole Docker upgrading](https://docs.pi-hole.net/docker/upgrading/).
+
 ---
 
 ## Project Structure
@@ -111,4 +124,4 @@ cat start.md
 
 **Last Updated:** 2026-04-17  
 **Status:** Layer 0 — Foundation  
-**Next:** Static IP configuration + Pi-Hole Docker Compose setup
+**Next:** Consolidate Layer 0 research → decisions; pin image in Compose after verified deploy

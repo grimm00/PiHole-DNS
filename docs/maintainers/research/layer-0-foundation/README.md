@@ -1,7 +1,7 @@
 # Layer 0 — Foundation — Research Hub
 
 **Purpose:** Research supporting MVP: stable addressing, Pi-hole in Compose, opt-in DNS, safety, minimal deploy.  
-**Status:** 🔴 Research (Stages 0–3 complete; Stage 4 pending)  
+**Status:** 🟡 Ready to consolidate (Stages 0–4 complete)  
 **Created:** 2026-04-17  
 **Last Updated:** 2026-04-17  
 **Sources:** [Exploration](../../explorations/layer-0-foundation/exploration.md), [research-topics](../../explorations/layer-0-foundation/research-topics.md), [roadmap](../../../roadmap.md)
@@ -18,7 +18,7 @@ Work proceeds in **stages**. **Stage 0** is the customary opening: **prior art a
 | **1** | Stable addressing & “Layer 0 done” | [research-stage-1-stable-addressing.md](research-stage-1-stable-addressing.md) | ✅ Complete |
 | **2** | Pi-hole on Docker Compose | [research-stage-2-pihole-compose.md](research-stage-2-pihole-compose.md) | ✅ Complete |
 | **3** | Safety, rollback, household risk | [research-stage-3-safety-rollback.md](research-stage-3-safety-rollback.md) | ✅ Complete |
-| **4** | Minimum deploy path (Track A) | [research-stage-4-minimum-deploy.md](research-stage-4-minimum-deploy.md) | 🔴 Not started |
+| **4** | Minimum deploy path (Track A) | [research-stage-4-minimum-deploy.md](research-stage-4-minimum-deploy.md) | ✅ Complete |
 
 ---
 
@@ -34,4 +34,4 @@ Work proceeds in **stages**. **Stage 0** is the customary opening: **prior art a
 
 Layer 0 research validates how to reach a **verifiable** MVP: Pi reachable at a stable address, Pi-hole running from this repo’s Compose, at least one client using Pi-hole by choice, with sane backup/rollback and a minimal git-to-Pi workflow.
 
-**Next:** Conduct **Stage 4** (minimum deploy path).
+**Next:** **`/research layer-0-foundation --consolidate`** → **`/decision layer-0-foundation --from-research`**
