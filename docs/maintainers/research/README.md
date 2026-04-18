@@ -10,7 +10,7 @@
 
 ### Active Research
 
-- **[layer-0-foundation](layer-0-foundation/README.md)** — Layer 0 MVP (stages 0–4; requirements **Final**). (🟡 Decision)
+- **[layer-0-foundation](layer-0-foundation/README.md)** — Layer 0 MVP (stages 0–4; requirements **Final**). (🟡 [Decisions](../decisions/layer-0-foundation/README.md) in progress)
 
 ---
 

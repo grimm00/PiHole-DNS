@@ -89,7 +89,7 @@ See [requirements.md](requirements.md) (**Final**).
 
 ## Next steps
 
-1. **`/decision layer-0-foundation --from-research`**
+1. [Decision interview](../../decisions/layer-0-foundation/decision-interview.md) → ADRs → implementation.
 
 ---
 

@@ -80,7 +80,7 @@
 
 ## Next steps
 
-1. **`/decision layer-0-foundation --from-research`** — ADRs from consolidated requirements.  
+1. [Decision interview](../../decisions/layer-0-foundation/decision-interview.md) → ADRs from consolidated requirements.  
 2. Update [roadmap](../../../roadmap.md) Layer 0 status when MVP criteria are met.
 
 ---
