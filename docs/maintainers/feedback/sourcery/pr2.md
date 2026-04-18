@@ -28,8 +28,8 @@ Total individual comments: **0** · Overall comments: **2**
 
 | Comment | Priority | Impact | Effort | Action |
 |---------|----------|--------|--------|--------|
-| Overall 1 — `docker compose pull` context in quickstart | 🟢 LOW | 🟢 LOW | 🟢 LOW | **Defer** — doc polish; optional before marking PR ready |
-| Overall 2 — link FR/ADR refs in `docs/README.md` | 🟡 MEDIUM | 🟡 MEDIUM | 🟢 LOW | **Defer** — improves discoverability; quick follow-up |
+| Overall 1 — `docker compose pull` context in quickstart | 🟢 LOW | 🟢 LOW | 🟢 LOW | **Defer** — optional polish before merge |
+| Overall 2 — link FR/ADR refs in `docs/README.md` | 🟡 MEDIUM | 🟡 MEDIUM | 🟢 LOW | **Defer** — quick follow-up if desired |
 
 ### Per-comment detail
 
@@ -38,14 +38,14 @@ Total individual comments: **0** · Overall comments: **2**
 **Priority:** LOW 🟢  
 **Impact:** LOW 🟢  
 **Effort:** LOW 🟢  
-**Action:** Defer to next docs pass or address when finalizing the PR for merge.
+**Action:** Defer or address when finalizing PR title/description for merge.
 
 **Overall 2**
 
 **Priority:** MEDIUM 🟡  
 **Impact:** MEDIUM 🟡  
 **Effort:** LOW 🟢  
-**Action:** Defer to same batch as other cross-linking; link targets should match paths under `docs/maintainers/` / design docs.
+**Action:** Defer; link to requirements/ADR paths under `docs/maintainers/`.
 
 ### Priority reference
 
@@ -56,4 +56,4 @@ Total individual comments: **0** · Overall comments: **2**
 
 ---
 
-**Last updated:** 2026-04-19
+**Last updated:** 2026-04-19 (PR validation refresh)
