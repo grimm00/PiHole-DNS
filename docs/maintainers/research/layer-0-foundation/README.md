@@ -34,4 +34,4 @@ Work proceeds in **stages**. **Stage 0** is the customary opening: **prior art a
 
 Layer 0 research validates how to reach a **verifiable** MVP: Pi reachable at a stable address, Pi-hole running from this repo’s Compose, at least one client using Pi-hole by choice, with sane backup/rollback and a minimal git-to-Pi workflow.
 
-**Next:** [Decisions hub](../../decisions/layer-0-foundation/README.md) — complete [decision-interview.md](../../decisions/layer-0-foundation/decision-interview.md), then accept ADRs.
+**Next:** [Decisions](../../decisions/layer-0-foundation/README.md) complete — implement [runbooks](../../../runbooks/README.md) + digest pin per ADRs.

@@ -2,9 +2,9 @@
 
 **Purpose:** Capture operator choices and confirmations before ADRs are marked **Accepted**. Same *shape* as [`start.md`](../../../../start.md) (sectioned interview log → derived decisions). Aligns with dev-infra’s direction on **agentic workflow modernization**: structured prompts for explore / research / **decision** so humans and agents share a clear checklist.
 
-**Status:** 🟡 Interview in progress — **§1–2 complete**; §3–6 pending  
+**Status:** 🟡 Interview — **§1–5 complete**; §6 complete (ready to close)  
 **Created:** 2026-04-18  
-**Last Updated:** 2026-04-18  
+**Last Updated:** 2026-04-19  
 
 **Feeds:** [requirements.md](../../research/layer-0-foundation/requirements.md) (Final) → ADRs in this directory.
 
@@ -93,7 +93,7 @@ Answers go under each prompt. Add rationale (“why”) where it affects ADRs or
 
 **4.2 — Confirm deferral of mise / private registry / ghcr for Layer 0** unless a trigger from Stage 4 applies (multi-host, air-gap, team).
 
-> I will confirm. 
+> I confirm. 
 
 **4.3 — Where do operators find the “minimum deploy” steps** (same doc as 3.1 or dedicated)?
 
@@ -111,11 +111,11 @@ Answers go under each prompt. Add rationale (“why”) where it affects ADRs or
 
 **5.1 — Tracks A–D: anything you want explicitly called out for Layer 0 ADRs** (e.g. Track D family-risk, Track A pin timing)?
 
-> *[Answer]*
+> Not now. 
 
 **5.2 — Any quality attribute from dev-infra’s catalog you want as an explicit acceptance criterion for implementation review?**
 
-> *[Answer]*
+> Not now. I think we are actually in a good spot for Layer 0 so far. Other parts of the Roadmap will provide cover for other quality attributes. 
 
 ---
 
@@ -125,17 +125,15 @@ Answers go under each prompt. Add rationale (“why”) where it affects ADRs or
 
 **6.1 — Ready to mark ADR-001 … ADR-004 **Accepted** after wording pass, or any ADR to split/merge?**
 
-> *[Answer]*
+> Yes — **ADR-001** through **ADR-004** accepted as written after this pass; no split/merge.
 
 **6.2 — Feedback for dev-infra** (pipeline fit, this interview format): one bullet.
 
-> *[Answer]*
+> Structured interview after research consolidated requirements worked well; [quality-attributes.md](../../quality-attributes.md) gave §5 a local anchor without duplicating the full catalog.
 
 ---
 
 ## Derived decisions (post-interview)
-
-*Add remaining DD* entries after §3–6. §1–2 map below.*
 
 ### DD1: Stable LAN via DHCP reservation (FR-1)
 
@@ -144,6 +142,18 @@ Operator uses **DHCP reservation** on the home router; Pi is verified at **192.1
 ### DD2: Compose baseline unchanged for Layer 0 (FR-2)
 
 Operator accepts the researched **Pi-hole v6** Compose baseline **as in repo** (§2.1). External-drive partitioning for **OurFileServer** does not alter Pi-hole bind mounts for Layer 0 (**ADR-002**); any relocation of Pi-hole data paths is deferred to design / later layers unless explicitly decided.
+
+### DD3: Runbooks under `docs/runbooks/`, Teleporter required (FR-3)
+
+Layer 0 backup/rollback content lives under **`docs/runbooks/`** (see [runbooks README](../../../runbooks/README.md)). **Teleporter** is **required** in the operator process, not optional only (**ADR-003**). Extra family/scheduling ideas deferred to later cycles.
+
+### DD4: Digest pin + docs deploy path (FR-4, NFR-1)
+
+Pin **`pihole/pihole`** by **digest** after verify; **mise/ghcr/private registry** deferred for Layer 0. Minimum deploy documentation under **`docs/`**, initially aligned with **`docs/runbooks/`**; layout may be refined later (**ADR-004**).
+
+### DD5: Tracks × quality — Layer 0 sufficient for now
+
+No extra track callouts or dev-infra catalog acceptance criteria for Layer 0 (§5); later roadmap layers cover additional quality attributes.
 
 ---
 
@@ -159,4 +169,4 @@ Operator accepts the researched **Pi-hole v6** Compose baseline **as in repo** (
 
 ---
 
-**Last Updated:** 2026-04-18
+**Last Updated:** 2026-04-19

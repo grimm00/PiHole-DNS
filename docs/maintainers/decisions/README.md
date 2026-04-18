@@ -2,7 +2,7 @@
 
 **Purpose:** Central hub for documenting architectural decisions  
 **Status:** ✅ Active  
-**Last Updated:** 2026-04-18
+**Last Updated:** 2026-04-19
 
 ---
 
@@ -10,7 +10,7 @@
 
 ### Architecture Decision Records (ADRs)
 
-- **[layer-0-foundation](layer-0-foundation/README.md)** — Layer 0 MVP (interview + ADRs; 🔴 In progress)
+- **[layer-0-foundation](layer-0-foundation/README.md)** — Layer 0 MVP (ADR-001 … ADR-004 **Accepted**)
 
 ---
 
@@ -72,6 +72,6 @@ This creates:
 
 ---
 
-**Last Updated:** 2026-04-18  
+**Last Updated:** 2026-04-19  
 **Status:** ✅ Active
 

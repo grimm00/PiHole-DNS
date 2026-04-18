@@ -1,7 +1,7 @@
 # Research summary — Layer 0 — Foundation
 
 **Purpose:** Cross-stage synthesis for Layer 0 research.  
-**Status:** ✅ Consolidated — [requirements.md](requirements.md) **Final**; ready for **`/decision`**  
+**Status:** ✅ Consolidated — requirements **Final**; [Layer 0 ADRs](../../decisions/layer-0-foundation/README.md) **Accepted**  
 **Created:** 2026-04-17  
 **Last Updated:** 2026-04-18  
 
@@ -73,8 +73,9 @@ Research runs in **stages** (see [hub README](README.md)). Stage 0 is the **prio
 ## Recommendations
 
 - [x] **`/research layer-0-foundation --consolidate`** — completed 2026-04-18 (merged v6 NFR into **FR-2**; renumbered pin/cache to **NFR-1**).  
-- [ ] **`/decision layer-0-foundation --from-research`** → ADRs.  
-- [ ] Pin **`pihole/pihole`** in Compose after a verified deploy (implements **NFR-1**).
+- [x] **Decisions** — ADR-001 … ADR-004 **Accepted** (see [decisions hub](../../decisions/layer-0-foundation/README.md)).  
+- [ ] Pin **`pihole/pihole`** by **digest** in Compose after verify (**ADR-004** / **NFR-1**).  
+- [ ] Author **[runbooks](../../../runbooks/README.md)** per **ADR-003** / **ADR-004**.
 
 ---
 
@@ -89,8 +90,9 @@ See [requirements.md](requirements.md) (**Final**).
 
 ## Next steps
 
-1. [Decision interview](../../decisions/layer-0-foundation/decision-interview.md) → ADRs → implementation.
+1. Implement runbooks + minimum deploy docs under [`docs/runbooks/`](../../../runbooks/README.md).  
+2. Digest-pin `pihole/pihole` in Compose.
 
 ---
 
-**Last Updated:** 2026-04-18
+**Last Updated:** 2026-04-19

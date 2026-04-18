@@ -80,9 +80,9 @@
 
 ## Next steps
 
-1. [Decision interview](../../decisions/layer-0-foundation/decision-interview.md) → ADRs from consolidated requirements.  
+1. [Layer 0 ADRs](../../decisions/layer-0-foundation/README.md) **Accepted** — implement [runbooks](../../../runbooks/README.md) and deploy steps.  
 2. Update [roadmap](../../../roadmap.md) Layer 0 status when MVP criteria are met.
 
 ---
 
-**Last Updated:** 2026-04-18
+**Last Updated:** 2026-04-19
