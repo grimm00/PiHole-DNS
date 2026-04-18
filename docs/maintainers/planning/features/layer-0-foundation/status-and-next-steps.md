@@ -1,7 +1,15 @@
 # Status & next steps — Layer 0 — Foundation
 
 **Status:** 🟠 In Progress  
-**Last updated:** 2026-04-17  
+**Last updated:** 2026-04-18  
+
+---
+
+## Merged to `main`
+
+| PR | Merged | What shipped |
+|----|--------|--------------|
+| [#1](https://github.com/grimm00/PiHole-DNS/pull/1) | 2026-04-18 | Runbooks group (Tasks 1–4): `docs/runbooks/` index, backup/restore, minimum deploy, digest workflow; planning updates; Sourcery review capture [`pr1.md`](../../../feedback/sourcery/pr1.md) |
 
 ---
 
@@ -22,7 +30,7 @@
 
 1. **Task 5** — Operator quickstart in root `README.md` + runbook links (`/task 5` or `/task next`).
 2. Expand group 2 if needed — `/transition-plan layer-0-foundation --expand --group 2`.
-3. Implement — `/task next` on branch `feat/layer-0-foundation`.
+3. Implement — `/task next` on a **new branch from `main`** (e.g. `feat/layer-0-foundation` or `feat/layer-0-entry-points`).
 
 ---
 
@@ -33,4 +41,4 @@
 
 ---
 
-**Last updated:** 2026-04-17
+**Last updated:** 2026-04-18

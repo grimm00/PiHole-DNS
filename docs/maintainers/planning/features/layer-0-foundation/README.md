@@ -2,6 +2,7 @@
 
 **Purpose:** Track implementation of Layer 0 MVP docs and Compose after [ADRs](../../../../decisions/layer-0-foundation/README.md) and [design](../../../../design/layer-0-foundation/design-layer-0.md).  
 **Status:** 🟠 In progress — **4/9** tasks (see [status-and-next-steps](status-and-next-steps.md))  
+**Last merged:** [PR #1](https://github.com/grimm00/PiHole-DNS/pull/1) to `main` (2026-04-18) — runbooks Tasks 1–4  
 **Last updated:** 2026-04-18  
 
 ---
@@ -20,4 +21,4 @@ Delivers operator runbooks, README quickstart, and digest-pinned Pi-hole image p
 
 ---
 
-**Last updated:** 2026-04-19
+**Last updated:** 2026-04-18
