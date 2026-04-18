@@ -1,7 +1,7 @@
 # Status & next steps — Layer 0 — Foundation
 
 **Status:** 🟠 In Progress  
-**Last updated:** 2026-04-18  
+**Last updated:** 2026-04-19  
 
 ---
 
@@ -30,15 +30,16 @@
 
 1. **Task 5** — Operator quickstart in root `README.md` + runbook links (`/task 5` or `/task next`).
 2. Expand group 2 if needed — `/transition-plan layer-0-foundation --expand --group 2`.
-3. Implement — `/task next` on a **new branch from `main`** (e.g. `feat/layer-0-foundation` or `feat/layer-0-entry-points`).
+3. Implement — `/task next` on a **feature branch from `develop`** (e.g. `feat/layer-0-foundation`); open PRs against **`develop`**.
 
 ---
 
 ## Notes
 
+- **Git workflow:** Branch from **`develop`**, merge via PR into **`develop`** (dev-infra–style integration). **`main`** may track releases; PR #1 landed on `main` before `develop` existed.
 - Plan generated from ADRs `docs/maintainers/decisions/layer-0-foundation/`, requirements, and [design-layer-0.md](../../../design/layer-0-foundation/design-layer-0.md) on 2026-04-19.
 - **After Layer 0 closes:** run the short retrospective in [notes-post-cycle-design-retrospective.md](notes-post-cycle-design-retrospective.md) (what belonged in design before implementation vs only in transition-plan tasks).
 
 ---
 
-**Last updated:** 2026-04-18
+**Last updated:** 2026-04-19

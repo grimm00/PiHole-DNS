@@ -15,8 +15,8 @@
 
 ## After merge
 
-- Continue implementation with **Tasks 5–9** on a new branch from `main` (see [status & next steps](../../status-and-next-steps.md)).
+- Continue implementation with **Tasks 5–9** on a feature branch from **`develop`** (see [status & next steps](../../status-and-next-steps.md)).
 
 ---
 
-**Last updated:** 2026-04-18
+**Last updated:** 2026-04-19
