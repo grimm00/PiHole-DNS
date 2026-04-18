@@ -1,7 +1,7 @@
 # Status & next steps — Layer 0 — Foundation
 
 **Status:** 🟠 In Progress  
-**Last updated:** 2026-04-19  
+**Last updated:** 2026-04-17  
 
 ---
 
@@ -29,7 +29,8 @@
 ## Notes
 
 - Plan generated from ADRs `docs/maintainers/decisions/layer-0-foundation/`, requirements, and [design-layer-0.md](../../../design/layer-0-foundation/design-layer-0.md) on 2026-04-19.
+- **After Layer 0 closes:** run the short retrospective in [notes-post-cycle-design-retrospective.md](notes-post-cycle-design-retrospective.md) (what belonged in design before implementation vs only in transition-plan tasks).
 
 ---
 
-**Last updated:** 2026-04-19
+**Last updated:** 2026-04-17
