@@ -54,6 +54,8 @@ Deploy from this directory so paths like `./etc-pihole` match [`docker-compose.y
 
 3. **Never commit `.env`.** It is listed in [`.gitignore`](../../.gitignore). Do not paste real passwords into issues or public docs.
 
+4. **Validate Compose (optional):** With `.env` in place, `docker compose config` should exit **0**. **Do not share** that output publicly — it includes **interpolated secrets** (e.g. the web password).
+
 ---
 
 ## Prepare bind-mount directories
@@ -180,3 +182,4 @@ Run on the **Pi** from the repository root (where `docker-compose.yml` lives).
 ---
 
 **Last updated:** 2026-04-19
+

@@ -2,8 +2,8 @@
 
 **Feature:** layer-0-foundation  
 **Group:** Compose and image pin  
-**Status:** ✅ Expanded  
-**Last updated:** 2026-04-17  
+**Status:** ✅ Complete  
+**Last updated:** 2026-04-19  
 
 ---
 
@@ -85,9 +85,9 @@
 
 ## Completion criteria
 
-- [ ] `docker compose config` succeeds for the Layer 0 stack with documented env inputs.  
-- [ ] `image:` uses `pihole/pihole@sha256:…` after Pi verification (**Task 7**).  
-- [ ] No regression to published ports or volumes from **ADR-002**.
+- [x] `docker compose config` succeeds for the Layer 0 stack with documented env inputs.  
+- [x] `image:` uses `pihole/pihole@sha256:…` after Pi verification (**Task 7**).  
+- [x] No regression to published ports or volumes from **ADR-002**.
 
 ---
 

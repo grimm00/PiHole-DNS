@@ -15,21 +15,21 @@
 
 ## Progress summary
 
-**Overall:** 6/9 tasks complete
+**Overall:** 8/9 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
 | Runbooks — operator procedures | ✅ Complete | 4/4 tasks | Tasks 1–4 done |
 | Repository entry points | ✅ Complete | 2/2 tasks | Tasks 5–6 done |
-| Compose and image pin | 🔴 Not Started | 0/2 tasks | |
+| Compose and image pin | ✅ Complete | 2/2 tasks | Digest pinned in repo; verified on Pi (`docker compose config`, restart) |
 | Layer 0 closure | 🔴 Not Started | 0/1 tasks | Optional roadmap update |
 
 ---
 
 ## Next steps
 
-1. **Task 7** — Pull image on Pi and set `pihole/pihole@sha256:…` in `docker-compose.yml` (`/task 7` or `/task next`).
-2. Implement — `/task next` on a **feature branch from `develop`** (e.g. `feat/layer-0-foundation`); open PRs against **`develop`**.
+1. **Task 9** — When MVP criteria are met: refresh [roadmap](../../../../roadmap.md) Layer 0 line and this file; run [design retrospective](notes-post-cycle-design-retrospective.md) if closing the cycle.
+2. Merge Layer 0 work via PR into **`develop`** (and **`main`** when you cut a release), per your branching policy.
 
 ---
 

@@ -66,8 +66,8 @@ Implement Layer 0 MVP **operator documentation** and **reproducible Compose** pe
 
 ### Compose and image pin
 
-- [ ] Task 7: Pull image on Pi and set `pihole/pihole@sha256:…` in `docker-compose.yml`
-- [ ] Task 8: Validate Compose (`docker compose config`) and note any env prerequisites
+- [x] Task 7: Pull image on Pi and set `pihole/pihole@sha256:…` in `docker-compose.yml`
+- [x] Task 8: Validate Compose (`docker compose config`) and note any env prerequisites
 
 ### Layer 0 closure
 
