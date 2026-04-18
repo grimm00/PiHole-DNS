@@ -38,16 +38,23 @@ Deploy from this directory so paths like `./etc-pihole` match [`docker-compose.y
 
 ## Secrets (`.env`)
 
-1. At the **repository root**, create a file named `.env` (same folder as `docker-compose.yml`).
-2. Set at least:
+1. At the **repository root**, create a file named `.env` (same folder as `docker-compose.yml`). You can copy the committed template:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Set at least (edit `.env` with a strong password):
 
    ```bash
    FTLCONF_webserver_api_password=your-secure-password-here
    ```
 
-   Add any other variables your Compose file references.
+   See [`.env.example`](../../.env.example) for the same layout. Add any other variables your Compose file references.
 
 3. **Never commit `.env`.** It is listed in [`.gitignore`](../../.gitignore). Do not paste real passwords into issues or public docs.
+
+4. **Validate Compose (optional):** With `.env` in place, `docker compose config` should exit **0**. **Do not share** that output publicly — it includes **interpolated secrets** (e.g. the web password).
 
 ---
 
@@ -174,4 +181,5 @@ Run on the **Pi** from the repository root (where `docker-compose.yml` lives).
 
 ---
 
-**Last updated:** 2026-04-17
+**Last updated:** 2026-04-19
+

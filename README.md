@@ -2,8 +2,8 @@
 
 **Purpose:** Pi-Hole DNS server on Raspberry Pi with observability, local DNS management, and a custom wrapper application  
 **Version:** v0.0.1  
-**Last Updated:** 2026-04-17  
-**Status:** 🟡 Layer 0 — Foundation
+**Last Updated:** 2026-04-19  
+**Status:** 🟢 Layer 0 complete — Layer 1 (Usable) next
 
 ---
 
@@ -20,14 +20,30 @@ A personal infrastructure project running [Pi-Hole](https://pi-hole.net/) on a R
 
 ---
 
+## Operator quickstart
+
+Run Pi-hole from this repo on the Pi (**Track A** — no mise, private registry, or CI required for the minimum path):
+
+1. **Clone** — `git clone https://github.com/grimm00/PiHole-DNS.git` · `git pull` for updates.
+2. **Secrets** — Copy [`.env.example`](.env.example) to **`.env`** and set `FTLCONF_webserver_api_password` (see [`docker-compose.yml`](docker-compose.yml)). Never commit `.env`.
+3. **Volumes** — `mkdir -p etc-pihole etc-dnsmasq.d` in the repo root on first run.
+4. **Up** — `docker compose pull` (optional) then `docker compose up -d`.
+5. **Verify** — `docker compose ps`, open the Pi-hole admin UI, point **one** test client at the Pi for DNS.
+
+**Prerequisites:** Stable LAN IP ([DHCP reservation or static](docs/maintainers/research/layer-0-foundation/research-stage-1-stable-addressing.md)); [Docker](https://docs.docker.com/engine/install/debian/) and [Compose](https://docs.docker.com/compose/install/linux/) on the Pi.
+
+**Full procedures** (backup, Teleporter, rollback order, digest pin): **[Runbooks](docs/runbooks/README.md)** — start with [Minimum deploy](docs/runbooks/minimum-deploy.md) and [Backup and restore](docs/runbooks/backup-and-restore.md). **Documentation map:** [`docs/README.md`](docs/README.md).
+
+---
+
 ## Roadmap
 
 Summary only — **full layers, open questions, and cross-cutting tracks** live in [`docs/roadmap.md`](docs/roadmap.md).
 
 | Layer | Name | Description | Status |
 |-------|------|-------------|--------|
-| 0 | **Foundation (MVP)** | Static IP, Pi-Hole in Docker Compose, DNS working for one device | 🟡 Current |
-| 1 | Usable | Custom local DNS records, OurFileServer in same Compose stack | Planned |
+| 0 | **Foundation (MVP)** | Static IP, Pi-Hole in Docker Compose, DNS working for one device | ✅ Complete |
+| 1 | Usable | Custom local DNS records, OurFileServer in same Compose stack | 🟡 Next |
 | 2 | Observable | Platform monitoring (container health, Pi resources) + Pi-Hole analytics | Planned |
 | 3 | Application | Custom wrapper app/dashboard tying everything together | Future |
 | — | K3s Migration | Migrate from Docker Compose to K3s (lightweight Kubernetes) | Future |
@@ -52,18 +68,9 @@ Summary only — **full layers, open questions, and cross-cutting tracks** live 
 
 GitOps-lite: this repo is the source of truth. The Pi pulls container images from a registry. No manual SSH-and-edit drift.
 
-### Layer 0 — Deploy on the Pi (minimum path)
+### Layer 0 — Deploy and operate
 
-Track A smallest loop — **no mise, no private registry, no CI** required to prove Compose + DNS:
-
-1. **Prerequisites:** [Docker](https://docs.docker.com/engine/install/debian/) and [Compose](https://docs.docker.com/compose/install/linux/) on the Pi; [stable LAN IP](docs/maintainers/research/layer-0-foundation/research-stage-1-stable-addressing.md) (reservation or static).
-2. **Repo:** `git clone` (first time) or `git pull` in the project directory on the Pi.
-3. **Secrets:** Create **`.env`** next to `docker-compose.yml` with at least `FTLCONF_webserver_api_password=…` (see [`docker-compose.yml`](docker-compose.yml)). `.env` is gitignored — never commit it.
-4. **Volumes:** `mkdir -p etc-pihole etc-dnsmasq.d` in the repo root on the Pi if the directories do not exist yet.
-5. **Run:** `docker compose pull` (optional when changing image tags) then `docker compose up -d`.
-6. **Check:** `docker compose ps`, open `http://<Pi_IP>/admin/`, point **one** test client at the Pi for DNS ([Stage 1 checklist](docs/maintainers/research/layer-0-foundation/research-stage-1-stable-addressing.md)).
-
-**Images:** First bring-up may use `latest`; after things work, pin **`pihole/pihole`** to a [date tag or digest](https://docs.pi-hole.net/docker/) and prefer a [cached local image](https://docs.docker.com/dhi/core-concepts/digests/) on rebuild — see [NFR-1](docs/maintainers/research/layer-0-foundation/requirements.md) and [Stage 4 research](docs/maintainers/research/layer-0-foundation/research-stage-4-minimum-deploy.md). **Upgrades:** [Pi-hole Docker upgrading](https://docs.pi-hole.net/docker/upgrading/).
+Use **[Operator quickstart](#operator-quickstart)** above for the short loop. Detailed steps (verification, image digest pinning, upgrades) live in **`docs/runbooks/`** — see the [runbooks index](docs/runbooks/README.md), [Minimum deploy](docs/runbooks/minimum-deploy.md), and [Backup and restore](docs/runbooks/backup-and-restore.md). Upstream reference: [Pi-hole — Docker upgrading](https://docs.pi-hole.net/docker/upgrading/).
 
 ---
 
@@ -76,6 +83,7 @@ PiHole-DNS/
 ├── .cursor/commands/        # Dev-infra workflow commands
 ├── docs/
 │   ├── roadmap.md           # Canonical roadmap (layers + horizontal tracks)
+│   ├── runbooks/            # Operator procedures (deploy, backup, digest pin)
 │   └── maintainers/         # Explorations, research, decisions, workflow docs
 ├── scripts/                 # Automation and deployment scripts
 └── tests/                   # Infrastructure validation tests
@@ -115,6 +123,8 @@ cat start.md
 
 ## Quick Links
 
+- **[Runbooks](docs/runbooks/README.md)** — Deploy, backup, restore, digest pin (Layer 0)
+- **[Documentation](docs/README.md)** — Roadmap, runbooks, maintainers hub
 - [Project Seed](start.md) — Interview-driven project definition
 - [Roadmap](docs/roadmap.md) — Delivery layers, cross-cutting tracks, open questions
 - [Maintainers Guide](docs/maintainers/README.md) — Explorations, research, decisions, workflow
@@ -122,6 +132,6 @@ cat start.md
 
 ---
 
-**Last Updated:** 2026-04-17  
+**Last Updated:** 2026-04-19  
 **Status:** Layer 0 — Foundation  
-**Next:** Consolidate Layer 0 research → decisions; pin image in Compose after verified deploy
+**Next:** Pin `pihole/pihole` with a digest in Compose after a verified deploy on the Pi (`implementation-plan` Tasks 7–8)
