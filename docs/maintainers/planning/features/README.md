@@ -2,7 +2,7 @@
 
 **Purpose:** Feature-based planning and tracking using hub-and-spoke documentation  
 **Status:** ✅ Active  
-**Last Updated:** [Date]
+**Last Updated:** 2026-04-19
 
 ---
 
@@ -10,8 +10,7 @@
 
 ### Active Features
 
-- **[Feature Name 1](feature-name-1/README.md)** - [Brief description] (🟠 In Progress)
-- **[Feature Name 2](feature-name-2/README.md)** - [Brief description] (🟡 Planned)
+- **[layer-0-foundation](layer-0-foundation/README.md)** — Layer 0 MVP implementation (runbooks, README, digest pin) (🔴 Not started)
 
 ---
 
@@ -223,6 +222,6 @@ tasks_files:
 
 ---
 
-**Last Updated:** [Date]  
+**Last Updated:** 2026-04-19  
 **Status:** ✅ Active  
 **Next:** [Next feature planning task]
