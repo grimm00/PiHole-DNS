@@ -2,7 +2,7 @@
 
 **Purpose:** Central hub for maintainer-facing documentation and project management  
 **Status:** ✅ Active  
-**Last Updated:** [Date]
+**Last Updated:** 2026-04-18
 
 ---
 
@@ -25,6 +25,7 @@
 ### Core Management
 
 - **[Roadmap](../roadmap.md)** - Delivery layers, horizontal tracks, open questions (canonical project shape)
+- **[Quality attributes](quality-attributes.md)** - Cross-cutting “-ilities,” track × attribute table, Layer 0 mapping (for decision interview §5)
 - **[Explorations](explorations/README.md)** - Explorations and proof of concepts (before research)
 - **[Research](research/README.md)** - Research and requirements
 - **[Decisions](decisions/)** - Architecture decision records (ADRs)
@@ -133,7 +134,7 @@ docs/maintainers/
 
 ---
 
-**Last Updated:** [Date]  
+**Last Updated:** 2026-04-18  
 **Status:** ✅ Active  
 **Next:** [Next maintainer task]
 

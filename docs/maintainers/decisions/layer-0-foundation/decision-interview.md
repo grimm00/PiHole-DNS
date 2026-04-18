@@ -71,15 +71,15 @@ Answers go under each prompt. Add rationale (“why”) where it affects ADRs or
 
 **3.1 — Where will the Layer 0 runbook live** (e.g. `README.md`, `docs/…`, separate `RUNBOOK.md`)?
 
-> *[Answer]*
+> docs/runbooks/
 
 **3.2 — Teleporter: optional only, or required in your household process?**
 
-> *[Answer]*
+> Let's make this required. 
 
 **3.3 — Anything to add beyond FR-3** (scheduling, reminders, family-facing steps)?
 
-> *[Answer]*
+> No, but ideas can be captured for later dev cycles. 
 
 ---
 
@@ -89,15 +89,15 @@ Answers go under each prompt. Add rationale (“why”) where it affects ADRs or
 
 **4.1 — After first successful deploy, what is your concrete pin strategy for `pihole/pihole`:** date tag, digest, or “record digest in docs after pull”?
 
-> *[Answer]*
+> A digest just because I'm trying to get into the practice of matching what I do for work. 
 
 **4.2 — Confirm deferral of mise / private registry / ghcr for Layer 0** unless a trigger from Stage 4 applies (multi-host, air-gap, team).
 
-> *[Answer]*
+> I will confirm. 
 
 **4.3 — Where do operators find the “minimum deploy” steps** (same doc as 3.1 or dedicated)?
 
-> *[Answer]*
+> In docs. I actually have a fuzzy idea of a better place but for now, this is good. 
 
 ---
 
@@ -106,6 +106,8 @@ Answers go under each prompt. Add rationale (“why”) where it affects ADRs or
 <a id="section-5"></a>
 
 *Not every quality attribute needs an answer here. Use this section to note which [roadmap tracks](../../../../roadmap.md#horizontal-tracks-cross-cutting) this Layer 0 decision set touches and any extra assurance you want documented.*
+
+**Reference — quality attributes in this repo:** [quality-attributes.md](../../quality-attributes.md) (track × attribute table, Layer 0 FR/NFR mapping, optional ISO 25010 checklist).
 
 **5.1 — Tracks A–D: anything you want explicitly called out for Layer 0 ADRs** (e.g. Track D family-risk, Track A pin timing)?
 
