@@ -5,13 +5,14 @@
 
 ---
 
-## Merged to `main`
+## Merged
 
-| PR | Merged | What shipped |
-|----|--------|--------------|
-| [#1](https://github.com/grimm00/PiHole-DNS/pull/1) | 2026-04-18 | Runbooks group (Tasks 1–4): `docs/runbooks/` index, backup/restore, minimum deploy, digest workflow; planning updates; Sourcery review capture [`pr1.md`](../../../feedback/sourcery/pr1.md) |
+| PR | Base | Merged | What shipped |
+|----|------|--------|--------------|
+| [#1](https://github.com/grimm00/PiHole-DNS/pull/1) | `main` | 2026-04-18 | Runbooks group (Tasks 1–4): `docs/runbooks/` index, backup/restore, minimum deploy, digest workflow; planning updates; Sourcery [`pr1.md`](../../../feedback/sourcery/pr1.md) |
+| [#2](https://github.com/grimm00/PiHole-DNS/pull/2) | `develop` | 2026-04-18 | Tasks 5–9: README / `docs/` entry points, `.env.example`, `docker-compose.yml` digest pin, roadmap + planning closure; Sourcery [`pr2.md`](../../../feedback/sourcery/pr2.md) |
 
-Layer 0 **Tasks 5–9** (entry points, Compose digest pin, closure) are on branch **`feat/layer-0-foundation`** / PR to **`develop`** — merge when ready.
+Layer 0 MVP is **landed on `develop`** via PR #2. Promote or cherry-pick to **`main`** when you cut a release.
 
 ---
 
@@ -30,15 +31,15 @@ Layer 0 **Tasks 5–9** (entry points, Compose digest pin, closure) are on branc
 
 ## Next steps
 
-1. **Merge** open Layer 0 PR into **`develop`** (and to **`main`** when you tag a release), per your branching policy.
-2. **Optional:** Run the short [design retrospective](notes-post-cycle-design-retrospective.md) after merge (what belonged in design before implementation vs only in transition-plan tasks).
-3. **Layer 1 — Usable:** See [roadmap](../../../../roadmap.md); exploration [`layer-0-foundation`](../../../explorations/layer-0-foundation/README.md) scope shifts to local DNS + stack merge when you start.
+1. **Optional:** Run the short [design retrospective](notes-post-cycle-design-retrospective.md) (what belonged in design before implementation vs only in transition-plan tasks).
+2. **Layer 1 — Usable:** See [roadmap](../../../../roadmap.md); start planning or exploration for local DNS + stack merge when ready.
+3. **Deferred doc polish:** [PR #2 follow-up hub](fix/pr2/README.md) (Sourcery overall comments — low priority).
 
 ---
 
 ## Notes
 
-- **Git workflow:** Branch from **`develop`**, merge via PR into **`develop`**. **`main`** may track releases; PR #1 landed on `main` before `develop` existed.
+- **Git workflow:** Feature branches merge into **`develop`**; **`main`** may track releases. PR #1 predates `develop` and landed on `main` first.
 - Plan generated from ADRs `docs/maintainers/decisions/layer-0-foundation/`, requirements, and [design-layer-0.md](../../../design/layer-0-foundation/design-layer-0.md) on 2026-04-19.
 
 ---

@@ -2,7 +2,7 @@
 
 **Purpose:** Track implementation of Layer 0 MVP docs and Compose after [ADRs](../../../../decisions/layer-0-foundation/README.md) and [design](../../../../design/layer-0-foundation/design-layer-0.md).  
 **Status:** ✅ Complete — **9/9** tasks (see [status-and-next-steps](status-and-next-steps.md))  
-**Last merged:** [PR #1](https://github.com/grimm00/PiHole-DNS/pull/1) to `main` (2026-04-18) — runbooks Tasks 1–4; Tasks 5–9 on `feat/layer-0-foundation` / PR to `develop`  
+**Last merged:** [PR #2](https://github.com/grimm00/PiHole-DNS/pull/2) to `develop` (2026-04-18) — Tasks 5–9 (entry points, compose digest, closure); [PR #1](https://github.com/grimm00/PiHole-DNS/pull/1) to `main` (2026-04-18) — Tasks 1–4 runbooks  
 **Last updated:** 2026-04-19  
 
 ---

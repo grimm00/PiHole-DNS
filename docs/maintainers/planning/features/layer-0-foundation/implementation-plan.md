@@ -25,6 +25,7 @@ tasks_files:
 **Status:** ✅ Complete  
 **Created:** 2026-04-19  
 **Last Updated:** 2026-04-19  
+**Merged:** [PR #2](https://github.com/grimm00/PiHole-DNS/pull/2) → `develop` (2026-04-18)  
 
 **Source:** [ADR-001 … ADR-004](../../../../decisions/layer-0-foundation/README.md), [requirements](../../../../research/layer-0-foundation/requirements.md), [design](../../../../design/layer-0-foundation/design-layer-0.md)
 
