@@ -22,7 +22,7 @@ tasks_files:
 
 # Implementation Plan — Layer 0 — Foundation
 
-**Status:** 🟠 In Progress  
+**Status:** ✅ Complete  
 **Created:** 2026-04-19  
 **Last Updated:** 2026-04-19  
 
@@ -71,16 +71,16 @@ Implement Layer 0 MVP **operator documentation** and **reproducible Compose** pe
 
 ### Layer 0 closure
 
-- [ ] Task 9: Update roadmap Layer 0 status when MVP criteria are met; refresh `status-and-next-steps.md`
+- [x] Task 9: Update roadmap Layer 0 status when MVP criteria are met; refresh `status-and-next-steps.md`
 
 ---
 
 ## Definition of done
 
-- [ ] All tasks above complete
-- [ ] Runbooks cover rollback order: client DNS → compose → restore (`FR-3`)
-- [ ] No secrets committed; public docs omit sensitive LAN identifiers (`A-5`, design redaction)
-- [ ] CI still passes if applicable (markdown/compose checks if added later)
+- [x] All tasks above complete
+- [x] Runbooks cover rollback order: client DNS → compose → restore (`FR-3`)
+- [x] No secrets committed; public docs omit sensitive LAN identifiers (`A-5`, design redaction)
+- [x] CI still passes if applicable (markdown/compose checks if added later)
 
 ---
 

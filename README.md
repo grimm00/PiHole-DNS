@@ -3,7 +3,7 @@
 **Purpose:** Pi-Hole DNS server on Raspberry Pi with observability, local DNS management, and a custom wrapper application  
 **Version:** v0.0.1  
 **Last Updated:** 2026-04-19  
-**Status:** 🟡 Layer 0 — Foundation
+**Status:** 🟢 Layer 0 complete — Layer 1 (Usable) next
 
 ---
 
@@ -42,8 +42,8 @@ Summary only — **full layers, open questions, and cross-cutting tracks** live 
 
 | Layer | Name | Description | Status |
 |-------|------|-------------|--------|
-| 0 | **Foundation (MVP)** | Static IP, Pi-Hole in Docker Compose, DNS working for one device | 🟡 Current |
-| 1 | Usable | Custom local DNS records, OurFileServer in same Compose stack | Planned |
+| 0 | **Foundation (MVP)** | Static IP, Pi-Hole in Docker Compose, DNS working for one device | ✅ Complete |
+| 1 | Usable | Custom local DNS records, OurFileServer in same Compose stack | 🟡 Next |
 | 2 | Observable | Platform monitoring (container health, Pi resources) + Pi-Hole analytics | Planned |
 | 3 | Application | Custom wrapper app/dashboard tying everything together | Future |
 | — | K3s Migration | Migrate from Docker Compose to K3s (lightweight Kubernetes) | Future |
