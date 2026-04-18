@@ -40,6 +40,18 @@ Requirements discovered during Layer 0 research. Populate from stage documents a
 
 ---
 
+### FR-3: Backup scope and rollback runbook (Layer 0)
+
+**Description:** The project must document a **minimal** operator runbook for conservative home use: (1) **what to back up** — at least the host directory bind-mounted to **`/etc/pihole`** (`./etc-pihole`), and **`./etc-dnsmasq.d`** if customized; optional **Teleporter** export for a portable settings archive. (2) **when** — before material Compose/image changes or destructive edits. (3) **rollback** — in order: revert **opt-in client DNS** to router or prior resolvers; **`docker compose down`** if the stack must stop; restore **`./etc-pihole`** from a copy or use **Teleporter** restore per [Pi-hole Docker upgrading](https://docs.pi-hole.net/docker/upgrading/); then **`docker compose up -d`**. (4) **factory reset** — optional note that deleting volume data and recreating the container yields a fresh Pi-hole (acceptable for lab recovery).
+
+**Source:** [research-stage-3-safety-rollback.md](research-stage-3-safety-rollback.md)
+
+**Priority:** Medium
+
+**Status:** 🔴 Pending
+
+---
+
 ## Non-functional requirements
 
 ### NFR-1: Pi-hole v6–compatible configuration
@@ -99,6 +111,14 @@ Requirements discovered during Layer 0 research. Populate from stage documents a
 **Description:** No other host service permanently binds **0.0.0.0:53** (or the address Docker maps) in a way that prevents the Pi-hole container from publishing DNS. On Raspberry Pi OS Bookworm, **`systemd-resolved`** stub on **127.0.0.53** is often absent; if **`docker compose up`** fails on port **53**, diagnose with **`ss`/`lsof`** before applying Ubuntu-specific **`resolved`** workarounds.
 
 **Source:** [research-stage-2-pihole-compose.md](research-stage-2-pihole-compose.md)
+
+---
+
+### A-4: Opt-in clients can fall back without router-only dependency
+
+**Description:** For Layer 0, **non-participating devices** continue to use normal router/DHCP DNS. **Opted-in** test clients can revert DNS settings locally without requiring a router reconfiguration, so rollback does not depend on a single network chokepoint beyond “use Pi-hole IP or don’t.”
+
+**Source:** [research-stage-3-safety-rollback.md](research-stage-3-safety-rollback.md)
 
 ---
 

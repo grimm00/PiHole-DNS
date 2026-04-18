@@ -61,6 +61,8 @@ Research is scaffolded under [`docs/maintainers/research/layer-0-foundation/`](.
 
 **Suggested approach:** Short runbook: revert DNS on test device; restore volumes or reinstall Compose; when to stop and use router DNS again.
 
+**Research:** ✅ [research-stage-3-safety-rollback.md](../../research/layer-0-foundation/research-stage-3-safety-rollback.md)
+
 ---
 
 ### Topic 4 — Stage 4: Minimum deploy path from repo (Track A)
