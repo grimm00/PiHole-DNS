@@ -20,7 +20,9 @@
 
 This topic’s design translates **FR-1 … FR-4**, **NFR-1**, and **ADR-001 … ADR-004** into concrete repo layout and operator-facing artifacts. It does **not** change requirements or ADRs; it guides implementation and docs.
 
-**Next:** Author runbook markdown under `docs/runbooks/`, pin `pihole/pihole` by digest in [`docker-compose.yml`](../../../../docker-compose.yml), link from root [README.md](../../../../README.md).
+**Implementation plan:** [layer-0-foundation](../../../planning/features/layer-0-foundation/implementation-plan.md) (`/transition-plan` scaffolding).
+
+**Next:** Work through task groups; author runbooks; pin image; update READMEs.
 
 ---
 
