@@ -25,7 +25,7 @@ A personal infrastructure project running [Pi-Hole](https://pi-hole.net/) on a R
 Run Pi-hole from this repo on the Pi (**Track A** — no mise, private registry, or CI required for the minimum path):
 
 1. **Clone** — `git clone https://github.com/grimm00/PiHole-DNS.git` · `git pull` for updates.
-2. **Secrets** — Create **`.env`** next to `docker-compose.yml` with at least `FTLCONF_webserver_api_password=…` (see [`docker-compose.yml`](docker-compose.yml)). Never commit `.env`.
+2. **Secrets** — Copy [`.env.example`](.env.example) to **`.env`** and set `FTLCONF_webserver_api_password` (see [`docker-compose.yml`](docker-compose.yml)). Never commit `.env`.
 3. **Volumes** — `mkdir -p etc-pihole etc-dnsmasq.d` in the repo root on first run.
 4. **Up** — `docker compose pull` (optional) then `docker compose up -d`.
 5. **Verify** — `docker compose ps`, open the Pi-hole admin UI, point **one** test client at the Pi for DNS.
