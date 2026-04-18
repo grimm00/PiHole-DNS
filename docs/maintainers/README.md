@@ -28,6 +28,7 @@
 - **[Quality attributes](quality-attributes.md)** - Cross-cutting “-ilities,” track × attribute table, Layer 0 mapping (for decision interview §5)
 - **[Explorations](explorations/README.md)** - Explorations and proof of concepts (before research)
 - **[Research](research/README.md)** - Research and requirements
+- **[Design](design/README.md)** - Solution design after ADRs (docs layout, compose shape, operator IA)
 - **[Decisions](decisions/)** - Architecture decision records (ADRs)
 - **[Planning Hub](planning/README.md)** - Feature planning, releases, and project phases
 - **[Feedback](feedback/)** - External code reviews and feedback
@@ -55,6 +56,7 @@ docs/maintainers/
 ├── README.md          # 📍 HUB - This file
 ├── explorations/      # 📡 SPOKE - Explorations (explore → research → decision)
 ├── research/          # 📡 SPOKE - Research and requirements
+├── design/            # 📡 SPOKE - Design after ADRs (implementation shape)
 ├── decisions/         # 📡 SPOKE - Architecture decisions (ADRs)
 ├── planning/          # 📡 SPOKE - Project planning hub
 │   ├── features/      # Feature-based planning
@@ -116,11 +118,12 @@ docs/maintainers/
 
 ## 📚 Related Documentation
 
-### Discovery (explore → research → decision)
+### Discovery (explore → research → decision → design)
 
 - [Explorations](explorations/README.md) - Explorations and proof of concepts
 - [Research](research/README.md) - Research and requirements
 - [Architecture Decisions](decisions/) - ADR index
+- [Design](design/README.md) - Solution design (post-ADR)
 
 ### Planning
 
@@ -134,7 +137,7 @@ docs/maintainers/
 
 ---
 
-**Last Updated:** 2026-04-18  
+**Last Updated:** 2026-04-19  
 **Status:** ✅ Active  
 **Next:** [Next maintainer task]
 

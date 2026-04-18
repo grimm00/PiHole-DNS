@@ -11,7 +11,7 @@
 
 - **[Decision interview](decision-interview.md)** — Structured prompts (`start.md` style); complete before accepting ADRs.  
 - **[Decisions summary](decisions-summary.md)** — ADR index and status.  
-- **[Research hub](../../research/layer-0-foundation/README.md)** · **[Requirements](../../research/layer-0-foundation/requirements.md)**  
+- **[Research hub](../../research/layer-0-foundation/README.md)** · **[Requirements](../../research/layer-0-foundation/requirements.md)** · **[Design](../../design/layer-0-foundation/README.md)**  
 - **[Roadmap](../../../../roadmap.md)** — Layers and horizontal tracks.
 
 ---
