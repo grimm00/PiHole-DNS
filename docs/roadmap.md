@@ -2,8 +2,8 @@
 
 **Purpose:** Canonical, amendable map of what the project is building, in what order, and what is still open. The [root README](../README.md) keeps a one-screen summary; this file holds nuance and cross-cutting tracks.
 
-**Status:** 🟡 Active — Layer 0 in progress  
-**Last updated:** 2026-04-17  
+**Status:** 🟢 Active — Layer 0 complete; Layer 1 next  
+**Last updated:** 2026-04-19  
 
 **Sources:** [`start.md`](../start.md) (interview), exploration [`pihole-dns-from-seed`](maintainers/explorations/pihole-dns-from-seed/README.md).
 
@@ -21,8 +21,8 @@
 
 | Layer | Name | Focus | Status |
 |-------|------|--------|--------|
-| 0 | **Foundation (MVP)** | Stable addressing, Pi-hole in Compose, DNS for at least one opt-in device | 🟡 Current |
-| 1 | **Usable** | Local DNS names (`files.home`, `pihole.home`), OurFileServer in the same Compose stack | Planned |
+| 0 | **Foundation (MVP)** | Stable addressing, Pi-hole in Compose, DNS for at least one opt-in device | ✅ Complete |
+| 1 | **Usable** | Local DNS names (`files.home`, `pihole.home`), OurFileServer in the same Compose stack | 🟡 Next |
 | 2 | **Observable** | Platform monitoring + Pi-hole analytics beyond stock admin | Planned |
 | 3 | **Application** | Custom wrapper app / dashboard tying the stack together | Future |
 | — | **K3s migration** | Move from Compose to K3s when it pays off | Future |
@@ -125,4 +125,4 @@ Derived from the seed exploration; answers should land in research docs and ADRs
 
 ---
 
-**Next:** Layer 0 research and implementation; amend this file when a layer’s scope or status changes.
+**Next:** Layer 1 (Usable) planning and implementation; amend this file when a layer’s scope or status changes.

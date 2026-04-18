@@ -2,7 +2,7 @@
 
 **Purpose:** Central hub for maintainer-facing documentation and project management  
 **Status:** ✅ Active  
-**Last Updated:** 2026-04-18
+**Last Updated:** 2026-04-19
 
 ---
 
@@ -21,6 +21,10 @@
 - **[Example Research](examples/example-research.md)** - Sample research document
 - **[Example ADR](examples/example-adr.md)** - Sample architecture decision record
 - **[Example Feature Plan](examples/example-feature-plan.md)** - Sample feature plan
+
+### Operators (Layer 0)
+
+- **[Runbooks](../runbooks/README.md)** - Deploy, backup, restore, digest pin (`docs/runbooks/`)
 
 ### Core Management
 

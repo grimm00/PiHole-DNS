@@ -9,7 +9,8 @@
 | PR | Hub |
 |----|--------|
 | [#1](pr1/README.md) | Post-merge notes and deferred issues |
+| [#2](pr2/README.md) | Post-merge notes and deferred issues |
 
 ---
 
-**Last updated:** 2026-04-18
+**Last updated:** 2026-04-19

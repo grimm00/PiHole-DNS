@@ -2,16 +2,15 @@
 
 **Feature:** layer-0-foundation  
 **Group:** Layer 0 closure  
-**Status:** 🔴 Scaffolding (needs expansion)  
+**Status:** ✅ Complete  
+**Completed:** 2026-04-19  
 **Last updated:** 2026-04-19  
 
 ---
 
 ## Tasks
 
-> ⚠️ **Scaffolding:** Run `/transition-plan layer-0-foundation --expand --group 4` to add detailed implementation notes.
-
-- [ ] Task 9: Update roadmap Layer 0 status when MVP criteria are met; refresh `status-and-next-steps.md`  
+- [x] Task 9: Update roadmap Layer 0 status when MVP criteria are met; refresh `status-and-next-steps.md`  
   - When Pi-hole is live, opt-in client works, runbooks are accurate: set [roadmap](../../../../../roadmap.md) Layer 0 to complete (or equivalent).  
   - **Deliverable:** Roadmap + this feature’s status doc reflect completion; `implementation-plan.md` checkboxes updated.
 
@@ -26,7 +25,7 @@
 
 ## Completion criteria
 
-- [ ] Research/design/decision artifacts remain source of truth; only status tables and planning docs change.
+- [x] Research/design/decision artifacts remain source of truth; only status tables and planning docs change.
 
 ---
 

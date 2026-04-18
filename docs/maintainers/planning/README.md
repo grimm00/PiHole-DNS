@@ -14,6 +14,7 @@
 - **[Releases](releases/README.md)** - Release management and versioning
 - **[Phases](phases/README.md)** - Development phase tracking
 - **[Notes](notes/README.md)** - Planning insights and decisions
+- **[Opportunities & learnings](opportunities/README.md)** - Internal workflow learnings (e.g. Layer 0)
 
 ### CI/CD Planning
 
