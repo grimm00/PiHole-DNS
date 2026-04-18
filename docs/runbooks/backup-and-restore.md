@@ -29,7 +29,7 @@ Store Teleporter exports and directory copies **outside** this git repository (e
 At minimum, back up (directories + Teleporter export) **before**:
 
 - `docker compose pull` or any image tag/digest change
-- Major edits to `FTLCONF_*` or other environment-driven settings in [`.env`](../../.env) / Compose
+- Major edits to `FTLCONF_*` or other environment-driven settings in `.env` (repo root, beside `docker-compose.yml`) / Compose
 - Deleting or replacing volume data under `./etc-pihole` or `./etc-dnsmasq.d`
 
 You may also run Teleporter on a calendar schedule if that fits how you maintain the network.
