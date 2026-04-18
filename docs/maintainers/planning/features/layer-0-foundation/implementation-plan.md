@@ -22,7 +22,7 @@ tasks_files:
 
 # Implementation Plan — Layer 0 — Foundation
 
-**Status:** 🔴 Not Started  
+**Status:** 🟠 In Progress  
 **Created:** 2026-04-19  
 **Last Updated:** 2026-04-19  
 **Source:** [ADR-001 … ADR-004](../../../../decisions/layer-0-foundation/README.md), [requirements](../../../../research/layer-0-foundation/requirements.md), [design](../../../../design/layer-0-foundation/design-layer-0.md)
@@ -53,7 +53,7 @@ Implement Layer 0 MVP **operator documentation** and **reproducible Compose** pe
 
 ### Runbooks — operator procedures
 
-- [ ] Task 1: Extend `docs/runbooks/README.md` with links to new runbook pages
+- [x] Task 1: Extend `docs/runbooks/README.md` with links to new runbook pages
 - [ ] Task 2: Author backup, restore, and Teleporter workflow (`FR-3`, `ADR-003`)
 - [ ] Task 3: Author minimum deploy on the Pi and verification steps (`FR-4`, `ADR-004`)
 - [ ] Task 4: Document image digest bump workflow in runbooks (`NFR-1`, `ADR-004`)

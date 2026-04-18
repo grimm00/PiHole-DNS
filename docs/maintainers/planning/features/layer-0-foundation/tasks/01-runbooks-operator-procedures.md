@@ -2,7 +2,7 @@
 
 **Feature:** layer-0-foundation  
 **Group:** Runbooks — operator procedures  
-**Status:** ✅ Expanded  
+**Status:** 🟠 In Progress  
 **Last updated:** 2026-04-19  
 
 ---
@@ -17,7 +17,7 @@
 
 ## Tasks
 
-- [ ] **Task 1:** Extend `docs/runbooks/README.md` with links to new runbook pages  
+- [x] **Task 1:** Extend `docs/runbooks/README.md` with links to new runbook pages  
 
   - **Purpose:** Give operators a single index under `docs/runbooks/` that matches [ADR-003](../../../../decisions/layer-0-foundation/adr-003-backup-rollback-runbook.md) (runbooks live here) and avoids dead links once Tasks 2–4 add files.
 
