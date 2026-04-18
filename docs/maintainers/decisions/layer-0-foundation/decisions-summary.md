@@ -1,7 +1,7 @@
 # Decisions summary — Layer 0 — Foundation
 
 **Purpose:** Index of ADRs for this topic.  
-**Status:** 🔴 Pending interview completion  
+**Status:** 🟡 ADR-001, ADR-002 accepted; ADR-003, ADR-004 pending interview §3–4  
 **Created:** 2026-04-18  
 **Last Updated:** 2026-04-18  
 
@@ -13,8 +13,8 @@ Decisions are driven by [requirements.md](../../research/layer-0-foundation/requ
 
 | ADR | Decision | Status |
 |-----|----------|--------|
-| [ADR-001](adr-001-stable-lan-addressing.md) | Stable LAN addressing for the Pi | 🔴 Proposed |
-| [ADR-002](adr-002-pihole-compose-layer0-baseline.md) | Pi-hole Compose baseline (Layer 0) | 🔴 Proposed |
+| [ADR-001](adr-001-stable-lan-addressing.md) | Stable LAN addressing for the Pi | ✅ Accepted |
+| [ADR-002](adr-002-pihole-compose-layer0-baseline.md) | Pi-hole Compose baseline (Layer 0) | ✅ Accepted |
 | [ADR-003](adr-003-backup-rollback-runbook.md) | Backup & rollback runbook | 🔴 Proposed |
 | [ADR-004](adr-004-minimum-deploy-and-image-pinning.md) | Minimum deploy & image pinning | 🔴 Proposed |
 

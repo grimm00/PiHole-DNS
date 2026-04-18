@@ -2,7 +2,7 @@
 
 **Purpose:** Capture operator choices and confirmations before ADRs are marked **Accepted**. Same *shape* as [`start.md`](../../../../start.md) (sectioned interview log → derived decisions). Aligns with dev-infra’s direction on **agentic workflow modernization**: structured prompts for explore / research / **decision** so humans and agents share a clear checklist.
 
-**Status:** 🔴 Interview in progress  
+**Status:** 🟡 Interview in progress — **§1–2 complete**; §3–6 pending  
 **Created:** 2026-04-18  
 **Last Updated:** 2026-04-18  
 
@@ -35,15 +35,17 @@ Answers go under each prompt. Add rationale (“why”) where it affects ADRs or
 
 **1.1 — Which mechanism do you commit to for Layer 0: DHCP reservation (router) or static IP on the Pi (e.g. NetworkManager)?**
 
-> *[Answer]*
+> I've already reserved an IP address for the pi.
+>
+> **Recorded for ADR-001:** Layer 0 uses **DHCP reservation on the home router** so the Pi receives a **fixed LAN IPv4** on Ethernet. *(If your setup were instead a **static IP configured only on the Pi** via NetworkManager, update this line and ADR-001.)*
 
 **1.2 — Document the chosen facts for the runbook: Pi MAC (if reservation), reserved IP, interface name (Ethernet), and how you’ll verify after reboot.**
 
-> *[Answer]*
+> Verification is done: **192.168.50.2** is shown on **eth0** when using `ip address` (or `ip addr`). Also confirmed by reaching the file server at that IP (correct port) and **SSH**. Omit **MAC** or other identifiers from public docs if needed; keep full facts in private operator notes.
 
 **1.3 — Any constraint from your router or LAN that overrides Stage 1 assumptions (e.g. no DHCP reservation UI)?**
 
-> *[Answer]*
+> Nothing that I've run into so far. 
 
 ---
 
@@ -53,11 +55,13 @@ Answers go under each prompt. Add rationale (“why”) where it affects ADRs or
 
 **2.1 — Confirm acceptance of the researched Compose baseline** (`FTLCONF_dns_listeningMode`, password env, `./etc-pihole` persistence, `./etc-dnsmasq.d` if used). Anything you want **explicitly different** from [docker-compose.yml](../../../../docker-compose.yml) for Layer 0?
 
-> *[Answer]*
+> No, not that I can think of. 
 
 **2.2 — If bind-mount paths or env names change, list them here so ADR-002 and implementation stay aligned.**
 
-> *[Answer]*
+> May be a question that ultimately gets answered during the design step. For my file server, I use a partition on an external drive connected to the pi.
+>
+> **Recorded for ADR-002:** That layout applies to the **existing file-server stack**, not a Layer 0 change to Pi-hole. For Layer 0, Pi-hole keeps **repo-relative** bind mounts as in [`docker-compose.yml`](../../../../docker-compose.yml) (`./etc-pihole`, `./etc-dnsmasq.d`). Moving Pi-hole volume roots (e.g. onto another disk) is **out of scope for this ADR** unless/until a later design or layer explicitly changes it.
 
 ---
 
@@ -129,15 +133,15 @@ Answers go under each prompt. Add rationale (“why”) where it affects ADRs or
 
 ## Derived decisions (post-interview)
 
-*Fill after the log is complete. Each bullet should map to one or more ADRs and, if needed, updates to [requirements.md](../../research/layer-0-foundation/requirements.md) (rare — requirements are already Final).*
+*Add remaining DD* entries after §3–6. §1–2 map below.*
 
-### DD1: [Title]
+### DD1: Stable LAN via DHCP reservation (FR-1)
 
-*[Synthesis]*
+Operator uses **DHCP reservation** on the home router; Pi is verified at **192.168.50.2** on **eth0** (see §1). **ADR-001** documents the choice and verification approach; sensitive identifiers stay out of public docs.
 
-### DD2: [Title]
+### DD2: Compose baseline unchanged for Layer 0 (FR-2)
 
-*[Synthesis]*
+Operator accepts the researched **Pi-hole v6** Compose baseline **as in repo** (§2.1). External-drive partitioning for **OurFileServer** does not alter Pi-hole bind mounts for Layer 0 (**ADR-002**); any relocation of Pi-hole data paths is deferred to design / later layers unless explicitly decided.
 
 ---
 

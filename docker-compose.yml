@@ -3,7 +3,7 @@
 # Layer 1 (planned): Add OurFileServer, local DNS records
 #
 # Prerequisites:
-#   - Static IP configured on the Pi
+#   - Stable LAN IPv4 for the Pi (e.g. router DHCP reservation — see ADR-001)
 #   - Docker and Docker Compose installed
 #
 # Usage:
