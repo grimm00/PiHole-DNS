@@ -2,7 +2,7 @@
 
 **Feature:** layer-0-foundation  
 **Group:** Repository entry points  
-**Status:** ✅ Expanded  
+**Status:** 🟠 In Progress  
 **Last updated:** 2026-04-19  
 
 ---
@@ -19,7 +19,7 @@
 
 ## Tasks
 
-- [ ] **Task 5:** Add operator quickstart to root `README.md` and link to runbooks  
+- [x] **Task 5:** Add operator quickstart to root `README.md` and link to runbooks  
 
   - **Purpose:** Satisfy design §2.1 — root **[README.md](../../../../../../README.md)** is the first stop for operators; it must surface a **short** loop (clone, `.env`, bind-mount dirs, `docker compose up`, verify) and **delegate** full procedures to **`docs/runbooks/`** instead of duplicating them.
 

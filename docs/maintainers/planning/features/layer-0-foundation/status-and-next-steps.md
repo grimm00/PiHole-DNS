@@ -15,12 +15,12 @@
 
 ## Progress summary
 
-**Overall:** 4/9 tasks complete
+**Overall:** 5/9 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
 | Runbooks — operator procedures | ✅ Complete | 4/4 tasks | Tasks 1–4 done |
-| Repository entry points | 🔴 Not Started | 0/2 tasks | |
+| Repository entry points | 🟠 In Progress | 1/2 tasks | Task 5 done |
 | Compose and image pin | 🔴 Not Started | 0/2 tasks | |
 | Layer 0 closure | 🔴 Not Started | 0/1 tasks | Optional roadmap update |
 
@@ -28,9 +28,8 @@
 
 ## Next steps
 
-1. **Task 5** — Operator quickstart in root `README.md` + runbook links (`/task 5` or `/task next`).
-2. Expand group 2 if needed — `/transition-plan layer-0-foundation --expand --group 2`.
-3. Implement — `/task next` on a **feature branch from `develop`** (e.g. `feat/layer-0-foundation`); open PRs against **`develop`**.
+1. **Task 6** — Align `docs/README.md` with runbook and design links (`/task 6` or `/task next`).
+2. Implement — `/task next` on a **feature branch from `develop`** (e.g. `feat/layer-0-foundation`); open PRs against **`develop`**.
 
 ---
 
