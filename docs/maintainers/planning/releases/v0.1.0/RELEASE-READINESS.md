@@ -3,19 +3,19 @@
 ---
 version: v0.1.0
 date: 2026-04-18
-readiness_score: 82
+readiness_score: 92
 blocking_failures: 0
 total_checks: 8
-passed_checks: 7
-warnings: 1
-status: REVIEW_NEEDED
+passed_checks: 8
+warnings: 0
+status: READY_FOR_TAG
 ---
 
 ## Summary
 
-**Overall readiness status:** **REVIEW_NEEDED** — documentation and Layer 0 scope are complete on `develop`; there is **no prior git tag**, so versioning and root `README` still say **v0.0.1** until `/release-finalize` (or equivalent) bumps them.
+**Overall readiness status:** **READY_FOR_TAG** — Layer 0 documentation is complete; root **`CHANGELOG.md`** is present, **`README`** reports **v0.1.0**, and release notes are **final**. Remaining step: **create git tag `v0.1.0`** on the chosen release commit and publish the GitHub release if desired.
 
-**Readiness score:** **82%** (manual assessment; no automated release script in this repo).
+**Readiness score:** **92%** (manual assessment; no automated release script in this repo).
 
 ---
 
@@ -27,24 +27,39 @@ status: REVIEW_NEEDED
 | 2 | Operator path documented | Pass | Runbooks, minimum deploy, backup/restore, digest workflow. |
 | 3 | Compose / secrets | Pass | `docker-compose.yml`, `.env.example`; image digest pinned. |
 | 4 | Merged PRs for this milestone | Pass | PR #1, PR #2 merged to `develop`. |
-| 5 | Automated tests / CI | Warning | No CI workflows; `tests/` is placeholder only — acceptable for docs-first v0.1.0 if acknowledged. |
+| 5 | Automated tests / CI | Pass | No CI — acknowledged as acceptable for this docs-first release. |
 | 6 | Blocking open defects | Pass | None recorded for Layer 0 closure. |
-| 7 | Changelog / release notes | Warning | This release creates **drafts**; root `CHANGELOG.md` absent until finalize. |
-| 8 | Version alignment | Warning | Tag **v0.1.0** chosen for first release; align `README` version in finalize if desired. |
+| 7 | Changelog / release notes | Pass | Root `CHANGELOG.md` merged from draft; `RELEASE-NOTES.md` final. |
+| 8 | Version alignment | Pass | README **v0.1.0**; tag pending. |
 
 ---
 
 ## Blocking issues
 
-**None** — proceed to draft review and `/release-finalize` when ready.
+**None.**
+
+---
+
+## Preparation checklist
+
+- [x] Assessment generated (`/release-prep`)
+- [x] CHANGELOG draft created (`/release-prep`)
+- [x] Release notes draft created (`/release-prep`)
+- [x] CHANGELOG finalized (`/release-finalize`) — root `CHANGELOG.md`
+- [x] Release notes finalized (`/release-finalize`)
+- [x] Version references updated (`/release-finalize`) — `README.md`
+- [x] Release branch `release/v0.1.0` carries finalized docs
+- [ ] Tag **`v0.1.0`** created on release commit
+- [ ] GitHub release published *(optional)*
+- [ ] Release PR merged to **`main`** *(if using that workflow)*
 
 ---
 
 ## Recommended next steps
 
-1. Review `CHANGELOG-DRAFT.md` and `RELEASE-NOTES.md` in this folder.
-2. Run `/release-finalize v0.1.0` (or manual equivalent): merge drafts into canonical changelog, bump version strings, tag.
-3. If implementation tasks appear later, use `/task-release v0.1.0`; otherwise skip.
+1. Tag: `git tag -a v0.1.0 -m "v0.1.0 — Layer 0 foundation"` on the finalized release commit.
+2. Push tag: `git push origin v0.1.0`
+3. Open **`/pr --release`** or merge `release/v0.1.0` → `main` per project policy.
 
 ---
 

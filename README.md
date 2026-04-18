@@ -1,8 +1,8 @@
 # PiHole-DNS
 
 **Purpose:** Pi-Hole DNS server on Raspberry Pi with observability, local DNS management, and a custom wrapper application  
-**Version:** v0.0.1  
-**Last Updated:** 2026-04-19  
+**Version:** v0.1.0  
+**Last Updated:** 2026-04-18  
 **Status:** 🟢 Layer 0 complete — Layer 1 (Usable) next
 
 ---

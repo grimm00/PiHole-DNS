@@ -7,12 +7,14 @@
 
 ## In preparation
 
-| Version | Folder | Status |
-|---------|--------|--------|
-| v0.1.0 | [v0.1.0/](v0.1.0/) | Draft — review drafts, then finalize |
+*(None.)*
 
 ---
 
 ## Released
 
-*(None yet — first tag pending.)*
+| Version | Folder | Released |
+|---------|--------|----------|
+| v0.1.0 | [v0.1.0/](v0.1.0/) | 2026-04-18 — finalized; **tag pending** |
+
+**Canonical changelog:** [`CHANGELOG.md`](../../../../CHANGELOG.md) (repository root).

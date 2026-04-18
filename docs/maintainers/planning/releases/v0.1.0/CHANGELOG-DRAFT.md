@@ -1,12 +1,13 @@
 # CHANGELOG Draft — v0.1.0
 
 **Draft created:** 2026-04-18  
-**Status:** Draft — needs review  
-**Baseline:** No previous release tag; history below reflects work on `develop` through Layer 0 completion and follow-up doc fixes.
+**Status:** Merged — content lives in the repository root [`CHANGELOG.md`](../../../../../CHANGELOG.md) as of `/release-finalize` (2026-04-18).
 
 ---
 
-## [0.1.0] - TBD
+## [0.1.0] - 2026-04-18
+
+*(Superseded by root `CHANGELOG.md` — kept for release-prep traceability.)*
 
 ### Added
 
@@ -43,10 +44,10 @@ Post-merge on `develop`: doc nits for Sourcery overall comments (no additional P
 
 ## Review checklist
 
-- [ ] All notable changes since repo inception are represented (or consciously out of scope).
-- [ ] Sections (Added / Changed / Fixed / Documentation) match project conventions once `CHANGELOG.md` exists at repo root.
-- [ ] Release date set when tagging (replace **TBD** in the version header).
-- [ ] Breaking changes: none expected — confirm.
+- [x] All notable changes since repo inception are represented (or consciously out of scope).
+- [x] Sections (Added / Changed / Fixed / Documentation) match project conventions in root `CHANGELOG.md`.
+- [x] Release date set when tagging (**2026-04-18** in `CHANGELOG.md`).
+- [x] Breaking changes: none — confirmed.
 
 ---
 
