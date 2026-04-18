@@ -1,0 +1,85 @@
+# Requirements — Layer 0 — Foundation
+
+**Source:** Research ([research-summary.md](research-summary.md))  
+**Status:** Draft  
+**Created:** 2026-04-17  
+
+---
+
+## Overview
+
+Requirements discovered during Layer 0 research. Populate from stage documents as findings solidify.
+
+**Stages:** [0](research-stage-0-prior-art.md) · [1](research-stage-1-stable-addressing.md) · [2](research-stage-2-pihole-compose.md) · [3](research-stage-3-safety-rollback.md) · [4](research-stage-4-minimum-deploy.md)
+
+---
+
+## Functional requirements
+
+### FR-1: Stable LAN IPv4 for the Pi
+
+**Description:** The Raspberry Pi that hosts Pi-hole must have a **stable, documented IPv4 address** on the home LAN for the duration of Layer 0 operation, obtained either by **DHCP reservation** (router assigns fixed IP to the Pi’s MAC) or **manual static configuration** on the Pi (e.g. NetworkManager on Raspberry Pi OS Bookworm). The address must not change unexpectedly across reboots under normal conditions.
+
+**Source:** [research-stage-1-stable-addressing.md](research-stage-1-stable-addressing.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+## Non-functional requirements
+
+### NFR-1: Pi-hole v6–compatible configuration
+
+**Description:** Docker Compose and environment variables for `pihole/pihole` must match **Pi-hole v6** expectations (e.g. web password via `FTLCONF_webserver_api_password` or documented secret-file mechanism), not legacy v5-only variable names.
+
+**Source:** [research-stage-0-prior-art.md](research-stage-0-prior-art.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
+### NFR-2: Pin and cache container images (project-wide)
+
+**Description:** For **every** container base image used in this project (Pi-hole, file services, future stacks): (1) obtain the image from the upstream tag (prefer **immutable date tags** or record **digest** after verify); (2) on subsequent deploys or rebuilds, **prefer a cached copy**—either the image already present in the local Docker store or an image stored in a **private registry** / offline artifact—so rebuilds do not silently re-resolve `latest` from the public internet. Initial Layer 0 bring-up may use `latest` or a single explicit pull; this NFR is **fully satisfied** when Stage 4 documents the operational workflow and Compose pins references accordingly.
+
+**Source:** [research-stage-4-minimum-deploy.md](research-stage-4-minimum-deploy.md) (to be validated in Stage 4 conduct); operator direction 2026-04-17.
+
+**Priority:** Medium (high for long-term reproducibility; after Stages 1–2 stable runtime)
+
+**Status:** 🔴 Pending
+
+---
+
+## Constraints
+
+### C-1: Upstream documentation as primary reference
+
+**Description:** Host port conflicts (especially **53**), upgrade paths, and dnsmasq volume behavior must be resolved using **[Pi-hole Docker documentation](https://docs.pi-hole.net/docker/)** before relying on third-party tutorials.
+
+**Source:** [research-stage-0-prior-art.md](research-stage-0-prior-art.md)
+
+---
+
+## Assumptions
+
+### A-1: Prior homelab stack pattern
+
+**Description:** Deployment may follow the same **Compose + bind mounts + restart policy** pattern already used for **OurFileServer** on the Pi, extended with Pi-hole-specific ports and volumes.
+
+**Source:** [research-stage-0-prior-art.md](research-stage-0-prior-art.md)
+
+---
+
+### A-2: Router may participate in stable addressing
+
+**Description:** If **DHCP reservation** is chosen, the home router (or DHCP server) supports assigning a fixed IP to the Pi’s **MAC address**. If the router cannot, manual static IP on the Pi remains valid per Stage 1.
+
+**Source:** [research-stage-1-stable-addressing.md](research-stage-1-stable-addressing.md)
+
+---
+
+**Last Updated:** 2026-04-17

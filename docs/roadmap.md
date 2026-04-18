@@ -41,6 +41,8 @@
 
 **Exploration (scoped):** [`layer-0-foundation`](maintainers/explorations/layer-0-foundation/README.md) — research topics and spikes for this layer only.
 
+**Research:** [`layer-0-foundation`](maintainers/research/layer-0-foundation/README.md) — staged research (Stage 0 = prior art opening; Stages 1–4 = exploration topics).
+
 ---
 
 ### Layer 1 — Usable
@@ -79,7 +81,7 @@ These are **not** separate “layers”: they apply across the roadmap. Work her
 
 | Track | Intent | Mainly touches | Open / inherited |
 |-------|--------|----------------|------------------|
-| **A — Deployment & GitOps-lite** | Repo as source of truth; Pi consumes defined artifacts; avoid SSH-and-edit drift; optional registry (e.g. ghcr.io) and tooling (e.g. mise) when they earn their keep. | All layers; **minimal path** for L0 | Secret handling (`WEBPASSWORD`, tokens); when registry/mise kick in vs plain `git pull`; parity with OurFileServer patterns |
+| **A — Deployment & GitOps-lite** | Repo as source of truth; Pi consumes defined artifacts; avoid SSH-and-edit drift; optional registry (e.g. ghcr.io) and tooling (e.g. mise) when they earn their keep. **Image policy:** pin by **date tag or digest** after first pull; prefer **locally cached** or **private-registry** copies on rebuild; same rule for **all** base images in the stack (see Layer 0 Stage 4 research). | All layers; **minimal path** for L0 | Secret handling (`WEBPASSWORD`, tokens); when registry/mise kick in vs plain `git pull`; parity with OurFileServer patterns; NFR-2 in `research/layer-0-foundation/requirements.md` |
 | **B — Observability & engagement** | Stay engaged after setup: Pi-hole metrics + platform signals; bridge from “toy” to “habit.” | L2–L3 strongest; **intent** from L0 | Minimum viable metrics after L0; what ships in L2 vs the wrapper in L3 |
 | **C — Workflow, CI, and engineering practice** | Feature branches, PRs, AI review; infra-appropriate CI; explore/research/decision under `docs/maintainers/`; seed → roadmap dogfooding for dev-infra. | All layers | Minimal CI gates for this repo; what feedback goes upstream to dev-infra |
 | **D — Household safety & operations** | Per-device opt-in, rollback, backups, failure modes; grow OS/network skills without turning every layer into a networking course. | All layers; **tone** set in L0 | Backup scope for Pi-hole config; rollback when DNS is wrong; firewall/port 53 pitfalls |
@@ -117,7 +119,8 @@ Derived from the seed exploration; answers should land in research docs and ADRs
 | [`start.md`](../start.md) | Original interview seed |
 | [`docs/maintainers/explorations/pihole-dns-from-seed/`](maintainers/explorations/pihole-dns-from-seed/README.md) | Seed exploration that informed this roadmap |
 | [`docs/maintainers/explorations/layer-0-foundation/`](maintainers/explorations/layer-0-foundation/README.md) | Layer 0 scoped exploration (current delivery focus) |
-| [`docs/maintainers/research/`](maintainers/research/README.md) | Evidence and requirements |
+| [`docs/maintainers/research/layer-0-foundation/`](maintainers/research/layer-0-foundation/README.md) | Layer 0 staged research (Stage 0 = prior art) |
+| [`docs/maintainers/research/`](maintainers/research/README.md) | Research hub (all topics) |
 | [`docs/maintainers/decisions/`](maintainers/decisions/README.md) | ADRs |
 
 ---
