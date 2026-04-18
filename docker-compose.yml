@@ -19,7 +19,8 @@ services:
       - "53:53/udp"
       - "80:80/tcp"
     environment:
-      TZ: 'America/New_York'
+      # US Central (Chicago). Set to another IANA time zone if your Pi is elsewhere.
+      TZ: 'America/Chicago'
       # Pi-hole v6: use FTLCONF_* (see docs/maintainers/research/layer-0-foundation/research-stage-2-pihole-compose.md)
       FTLCONF_dns_listeningMode: 'ALL'
       FTLCONF_misc_etc_dnsmasq_d: 'true'
