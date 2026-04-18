@@ -128,9 +128,9 @@ Create transition plan and feature plan from decisions:
 **Command:** `/explore [topic]`
 
 **What it creates:**
-- `planning/explorations/[topic]/exploration.md` - Main exploration document
-- `planning/explorations/[topic]/research-topics.md` - List of research questions
-- `planning/explorations/[topic]/README.md` - Exploration hub
+- `explorations/[topic]/exploration.md` - Main exploration document
+- `explorations/[topic]/research-topics.md` - List of research questions
+- `explorations/[topic]/README.md` - Exploration hub
 
 **Key activities:**
 1. **Describe the idea** - What are you exploring?

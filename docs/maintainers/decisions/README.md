@@ -66,7 +66,7 @@ This creates:
 
 ## 📚 Related Documentation
 
-- **[Explorations Hub](../planning/explorations/README.md)** - Explorations and proof of concepts
+- **[Explorations Hub](../explorations/README.md)** - Explorations and proof of concepts
 - **[Research Hub](../research/README.md)** - Research documents and analysis
 - **[Feature Planning](../planning/features/README.md)** - Feature planning and implementation
 

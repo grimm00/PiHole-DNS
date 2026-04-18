@@ -141,7 +141,7 @@ cp docs/maintainers/research/requirements-template.md \
 
 ## 📚 Related Documentation
 
-- **[Explorations Hub](../planning/explorations/README.md)** - Explorations and proof of concepts
+- **[Explorations Hub](../explorations/README.md)** - Explorations and proof of concepts
 - **[Decisions Hub](../decisions/README.md)** - Architecture Decision Records (ADRs)
 - **[Feature Planning](../planning/features/README.md)** - Feature planning and implementation
 

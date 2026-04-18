@@ -2,7 +2,7 @@
 
 **Purpose:** Active explorations and proof of concepts  
 **Status:** ✅ Active  
-**Last Updated:** [DATE]
+**Last Updated:** 2026-04-17
 
 ---
 
@@ -10,13 +10,14 @@
 
 ### Active Explorations
 
-*No active explorations yet. Use `/explore [topic]` to start a new exploration.*
+- **[layer-0-foundation](layer-0-foundation/README.md)** — Roadmap Layer 0 only: addressing, Pi-hole Compose, safety/rollback, minimal deploy path. (✅ Ready for research)
+- **[pihole-dns-from-seed](pihole-dns-from-seed/README.md)** — Seed interview distilled into themes and research topics; enriched single pass (no separate conduct). (✅ Ready for research)
 
 ---
 
 ## 🎯 Overview
 
-This directory contains active explorations, proof of concepts, and abstract ideas being explored before research and decision phases.
+This directory contains active explorations, proof of concepts, and abstract ideas being explored before research and decision phases. It sits alongside **[research](../research/README.md)** and **[decisions](../decisions/README.md)** under `docs/maintainers/`. The **[project roadmap](../../roadmap.md)** defines vertical layers and cross-cutting tracks; scoped explorations often take a **section of that roadmap** as input.
 
 **Workflow:**
 1. `/explore [topic]` - Start exploration
@@ -29,7 +30,7 @@ This directory contains active explorations, proof of concepts, and abstract ide
 ## 📁 Directory Structure
 
 ```
-docs/maintainers/planning/explorations/
+docs/maintainers/explorations/
 ├── README.md                    # 📍 HUB - This file
 └── [topic]/                    # Topic-specific exploration (created by /explore command)
     ├── README.md               # Topic exploration hub
@@ -50,7 +51,7 @@ Use the `/explore` command to start a new exploration:
 ```
 
 This creates:
-- `docs/maintainers/planning/explorations/[topic]/` directory
+- `docs/maintainers/explorations/[topic]/` directory
 - `exploration.md` - Main exploration document
 - `research-topics.md` - Research topics identified
 - `README.md` - Topic exploration hub
@@ -66,12 +67,11 @@ This creates:
 
 ## 📚 Related Documentation
 
-- **[Research Hub](../../research/README.md)** - Research documents and analysis
-- **[Decisions Hub](../../decisions/README.md)** - Architecture Decision Records (ADRs)
-- **[Feature Planning](../features/README.md)** - Feature planning and implementation
+- **[Research Hub](../research/README.md)** - Research documents and analysis
+- **[Decisions Hub](../decisions/README.md)** - Architecture Decision Records (ADRs)
+- **[Feature Planning](../planning/features/README.md)** - Feature planning and implementation
 
 ---
 
-**Last Updated:** [DATE]  
+**Last Updated:** 2026-04-17  
 **Status:** ✅ Active
-

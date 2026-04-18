@@ -2,7 +2,7 @@
 
 **Purpose:** Pi-Hole DNS server on Raspberry Pi with observability, local DNS management, and a custom wrapper application  
 **Version:** v0.0.1  
-**Last Updated:** 2026-04-16  
+**Last Updated:** 2026-04-17  
 **Status:** 🟡 Layer 0 — Foundation
 
 ---
@@ -22,6 +22,8 @@ A personal infrastructure project running [Pi-Hole](https://pi-hole.net/) on a R
 
 ## Roadmap
 
+Summary only — **full layers, open questions, and cross-cutting tracks** live in [`docs/roadmap.md`](docs/roadmap.md).
+
 | Layer | Name | Description | Status |
 |-------|------|-------------|--------|
 | 0 | **Foundation (MVP)** | Static IP, Pi-Hole in Docker Compose, DNS working for one device | 🟡 Current |
@@ -39,7 +41,7 @@ A personal infrastructure project running [Pi-Hole](https://pi-hole.net/) on a R
 - **Hardware:** Raspberry Pi 5
 - **OS:** Raspberry Pi OS
 - **Container runtime:** Docker + Docker Compose
-- **Network:** Wi-Fi (Ethernet planned), static IP required
+- **Network:** Wi‑Fi only (Ethernet not connected); static IP required
 - **Storage:** SD card (OS) + external drive (data)
 
 ### Existing Services
@@ -60,7 +62,8 @@ PiHole-DNS/
 ├── start.md                 # Project seed (interview-driven initialization)
 ├── .cursor/commands/        # Dev-infra workflow commands
 ├── docs/
-│   └── maintainers/         # Planning, research, decisions, workflow docs
+│   ├── roadmap.md           # Canonical roadmap (layers + horizontal tracks)
+│   └── maintainers/         # Explorations, research, decisions, workflow docs
 ├── scripts/                 # Automation and deployment scripts
 └── tests/                   # Infrastructure validation tests
 ```
@@ -100,11 +103,12 @@ cat start.md
 ## Quick Links
 
 - [Project Seed](start.md) — Interview-driven project definition
-- [Maintainers Guide](docs/maintainers/README.md) — Planning, research, and decisions
+- [Roadmap](docs/roadmap.md) — Delivery layers, cross-cutting tracks, open questions
+- [Maintainers Guide](docs/maintainers/README.md) — Explorations, research, decisions, workflow
 - [Workflow Overview](docs/maintainers/WORKFLOW-OVERVIEW.md) — Development workflow reference
 
 ---
 
-**Last Updated:** 2026-04-16  
+**Last Updated:** 2026-04-17  
 **Status:** Layer 0 — Foundation  
 **Next:** Static IP configuration + Pi-Hole Docker Compose setup

@@ -24,8 +24,11 @@
 
 ### Core Management
 
-- **[Planning Hub](planning/README.md)** - Feature planning, releases, and project phases
+- **[Roadmap](../roadmap.md)** - Delivery layers, horizontal tracks, open questions (canonical project shape)
+- **[Explorations](explorations/README.md)** - Explorations and proof of concepts (before research)
+- **[Research](research/README.md)** - Research and requirements
 - **[Decisions](decisions/)** - Architecture decision records (ADRs)
+- **[Planning Hub](planning/README.md)** - Feature planning, releases, and project phases
 - **[Feedback](feedback/)** - External code reviews and feedback
 - **[Archived](archived/)** - Historical documentation
 
@@ -49,11 +52,13 @@ The maintainers directory serves as the central coordination point for project m
 ```
 docs/maintainers/
 ├── README.md          # 📍 HUB - This file
+├── explorations/      # 📡 SPOKE - Explorations (explore → research → decision)
+├── research/          # 📡 SPOKE - Research and requirements
+├── decisions/         # 📡 SPOKE - Architecture decisions (ADRs)
 ├── planning/          # 📡 SPOKE - Project planning hub
 │   ├── features/      # Feature-based planning
 │   ├── releases/      # Release management
 │   └── ci/            # CI/CD planning
-├── decisions/         # 📡 SPOKE - Architecture decisions (ADRs)
 ├── feedback/          # 📡 SPOKE - External code reviews
 └── archived/          # 📡 SPOKE - Historical documentation
 ```
@@ -110,15 +115,17 @@ docs/maintainers/
 
 ## 📚 Related Documentation
 
+### Discovery (explore → research → decision)
+
+- [Explorations](explorations/README.md) - Explorations and proof of concepts
+- [Research](research/README.md) - Research and requirements
+- [Architecture Decisions](decisions/) - ADR index
+
 ### Planning
 
 - [Planning Hub](planning/README.md) - Project planning overview
 - [Feature Planning](planning/features/README.md) - Feature development process
 - [Release Process](planning/releases/README.md) - Release management
-
-### Decisions
-
-- [Architecture Decisions](decisions/) - ADR index
 
 ### Feedback
 

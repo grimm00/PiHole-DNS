@@ -206,7 +206,7 @@ All workflows integrate with Cursor commands for automation:
 
 ### Where are documents created?
 
-- **Explorations:** `planning/explorations/[topic]/`
+- **Explorations:** `explorations/[topic]/`
 - **Research:** `research/[topic]/`
 - **Decisions:** `decisions/[topic]/`
 - **Features:** `planning/features/[feature-name]/`
