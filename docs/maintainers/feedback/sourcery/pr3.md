@@ -80,4 +80,4 @@ Total individual comments: **1** · Overall comments: **3**
 
 ---
 
-**Last updated:** 2026-04-18 (PR validation — `dt-review` + normalized file)
+**Last updated:** 2026-04-18 (PR validation — `dt-review` + normalized file; post-merge hub: [`fix/pr3/README.md`](../../planning/features/layer-0-foundation/fix/pr3/README.md))

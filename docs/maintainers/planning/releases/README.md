@@ -15,6 +15,6 @@
 
 | Version | Folder | Released |
 |---------|--------|----------|
-| v0.1.0 | [v0.1.0/](v0.1.0/) | 2026-04-18 — tagged **`v0.1.0`** |
+| v0.1.0 | [v0.1.0/](v0.1.0/) | 2026-04-18 — tagged **`v0.1.0`**; **`main`** via [PR #3](https://github.com/grimm00/PiHole-DNS/pull/3) |
 
 **Canonical changelog:** [`CHANGELOG.md`](../../../../CHANGELOG.md) (repository root).
