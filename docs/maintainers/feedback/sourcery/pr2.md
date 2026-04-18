@@ -56,4 +56,4 @@ Total individual comments: **0** · Overall comments: **2**
 
 ---
 
-**Last updated:** 2026-04-19 (PR validation refresh)
+**Last updated:** 2026-04-19 (PR validation — `dt-review` re-run; file normalized after tool overwrote header)
