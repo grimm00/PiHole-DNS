@@ -11,7 +11,7 @@
 **In scope**
 
 - Stable IP story for the Pi (DHCP reservation vs static configuration on Pi OS).  
-- Pi-hole running via this repo’s [`docker-compose.yml`](../../../../docker-compose.yml): ports, volumes, secrets (e.g. `WEBPASSWORD`), host firewall / port 53 conflicts.  
+- Pi-hole running via this repo’s [`docker-compose.yml`](../../../../docker-compose.yml): ports, volumes, secrets (e.g. `FTLCONF_webserver_api_password` via `.env`), host firewall / port 53 conflicts.  
 - Proof that **one device** uses Pi-hole for DNS **by choice** (not router-wide).  
 - Minimal **safety / rollback** posture for this layer: what to back up, what to do when DNS is wrong (Track D, L0-only slice).  
 - **Smallest viable** deploy-from-repo story (Track A): enough GitOps-lite that the Pi matches the repo (no one-off edits that drift from git) without overbuilding registry/mise before Compose works.
@@ -38,7 +38,7 @@
 
 **From the roadmap:** Pi-hole runs in Compose with persistent config and predictable ports.
 
-**Leave for research:** Official Pi-hole + Docker guidance; volume layout; port 53/80 and conflicts with `systemd-resolved` or other listeners; [`WEBPASSWORD`](../../../../docker-compose.yml) and env handling.
+**Leave for research:** Official Pi-hole + Docker guidance; volume layout; port 53/80 and conflicts with `systemd-resolved` or other listeners; v6 **`FTLCONF_*`** env handling.
 
 ---
 

@@ -20,7 +20,10 @@ services:
       - "80:80/tcp"
     environment:
       TZ: 'America/New_York'
-      # WEBPASSWORD: set in .env file
+      # Pi-hole v6: use FTLCONF_* (see docs/maintainers/research/layer-0-foundation/research-stage-2-pihole-compose.md)
+      FTLCONF_dns_listeningMode: 'ALL'
+      FTLCONF_misc_etc_dnsmasq_d: 'true'
+      FTLCONF_webserver_api_password: ${FTLCONF_webserver_api_password}
     volumes:
       - ./etc-pihole:/etc/pihole
       - ./etc-dnsmasq.d:/etc/dnsmasq.d

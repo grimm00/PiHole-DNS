@@ -28,6 +28,18 @@ Requirements discovered during Layer 0 research. Populate from stage documents a
 
 ---
 
+### FR-2: Pi-hole Compose — ports, v6 env, and persistence
+
+**Description:** The Layer 0 stack must run **`pihole/pihole`** with **published** host ports **53/tcp**, **53/udp**, and **80/tcp** (minimum for DNS + HTTP admin). Compose must set **Pi-hole v6–compatible** variables: at minimum **`FTLCONF_dns_listeningMode: 'ALL'`** for default bridge networking, **`FTLCONF_webserver_api_password`** (or **`WEBPASSWORD_FILE`**) for the web UI password, and **`FTLCONF_misc_etc_dnsmasq_d: 'true'`** if the repo bind-mounts **`./etc-dnsmasq.d`→`/etc/dnsmasq.d`** (v6 does not load that directory otherwise). Persist **`./etc-pihole`→`/etc/pihole`** for Pi-hole state.
+
+**Source:** [research-stage-2-pihole-compose.md](research-stage-2-pihole-compose.md)
+
+**Priority:** High
+
+**Status:** 🔴 Pending
+
+---
+
 ## Non-functional requirements
 
 ### NFR-1: Pi-hole v6–compatible configuration
@@ -79,6 +91,14 @@ Requirements discovered during Layer 0 research. Populate from stage documents a
 **Description:** If **DHCP reservation** is chosen, the home router (or DHCP server) supports assigning a fixed IP to the Pi’s **MAC address**. If the router cannot, manual static IP on the Pi remains valid per Stage 1.
 
 **Source:** [research-stage-1-stable-addressing.md](research-stage-1-stable-addressing.md)
+
+---
+
+### A-3: Host port 53 available for Docker publish
+
+**Description:** No other host service permanently binds **0.0.0.0:53** (or the address Docker maps) in a way that prevents the Pi-hole container from publishing DNS. On Raspberry Pi OS Bookworm, **`systemd-resolved`** stub on **127.0.0.53** is often absent; if **`docker compose up`** fails on port **53**, diagnose with **`ss`/`lsof`** before applying Ubuntu-specific **`resolved`** workarounds.
+
+**Source:** [research-stage-2-pihole-compose.md](research-stage-2-pihole-compose.md)
 
 ---
 

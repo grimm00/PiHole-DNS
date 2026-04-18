@@ -41,11 +41,13 @@ Research is scaffolded under [`docs/maintainers/research/layer-0-foundation/`](.
 
 **Question:** What host and container settings avoid common failures (port **53** conflicts, firewall, volume layout) for Pi-hole on Raspberry Pi OS?
 
-**Context:** [`docker-compose.yml`](../../../../docker-compose.yml); first-time Pi-hole; `WEBPASSWORD` via `.env`.
+**Context:** [`docker-compose.yml`](../../../../docker-compose.yml); first-time Pi-hole; `FTLCONF_webserver_api_password` (or `WEBPASSWORD_FILE`) via `.env`.
 
 **Priority:** High
 
 **Suggested approach:** Pi-hole Docker docs; Pi OS firewall references; define backup scope for `./etc-pihole` and `./etc-dnsmasq.d` mounts.
+
+**Research:** ✅ [research-stage-2-pihole-compose.md](../../research/layer-0-foundation/research-stage-2-pihole-compose.md)
 
 ---
 
