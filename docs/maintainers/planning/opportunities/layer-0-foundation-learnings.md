@@ -30,7 +30,7 @@ Layer 0 used the **uniform** planning layout (`implementation-plan.md` + `tasks/
 
 1. **`dt-review` output quality** — The tool sometimes prepends noise to the start of `docs/maintainers/feedback/sourcery/prN.md` and wipes a hand-maintained priority matrix. **Mitigation:** Re-normalize the file after each run, or adjust the wrapper script so stdout does not prepend to the markdown file.
 
-2. **PR body vs title** — Title stayed accurate after scope grew; refreshing the **body** from the plan (uniform `/pr` pattern) should be a explicit step before final review so reviewers see 9/9 groups, not an early draft.
+2. **PR body vs title** — Title stayed accurate after scope grew; refreshing the **body** from the plan (uniform `/pr` pattern) should be an explicit step before final review so reviewers see 9/9 groups, not an early draft.
 
 3. **`main` vs `develop` story** — When an early PR lands on `main` before `develop` exists, document the integration branch early in README/status so new contributors are not confused.
 

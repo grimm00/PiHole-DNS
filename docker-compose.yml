@@ -14,6 +14,7 @@ services:
   pihole:
     container_name: pihole
     # Pinned on Pi after verify (NFR-1 / ADR-004). Bump with backup + pull + new digest.
+    # When pinning or bumping, record which upstream pihole/pihole:<tag> this digest came from (commit message or runbook step — see minimum-deploy digest workflow).
     image: pihole/pihole@sha256:300cc8f9e966b00440358aafef21f91b32dfe8887e8bd9a6193ed1c4328655d4
     ports:
       - "53:53/tcp"
