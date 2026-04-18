@@ -28,8 +28,8 @@ Total individual comments: **0** · Overall comments: **2**
 
 | Comment | Priority | Impact | Effort | Action |
 |---------|----------|--------|--------|--------|
-| Overall 1 — `docker compose pull` context in quickstart | 🟢 LOW | 🟢 LOW | 🟢 LOW | **Defer** — optional polish before merge |
-| Overall 2 — link FR/ADR refs in `docs/README.md` | 🟡 MEDIUM | 🟡 MEDIUM | 🟢 LOW | **Defer** — quick follow-up if desired |
+| Overall 1 — `docker compose pull` context in quickstart | 🟢 LOW | 🟢 LOW | 🟢 LOW | **Addressed** — root README quickstart (2026-04-17) |
+| Overall 2 — link FR/ADR refs in `docs/README.md` | 🟡 MEDIUM | 🟡 MEDIUM | 🟢 LOW | **Addressed** — `docs/README.md` links (2026-04-17) |
 
 ### Per-comment detail
 
@@ -38,14 +38,14 @@ Total individual comments: **0** · Overall comments: **2**
 **Priority:** LOW 🟢  
 **Impact:** LOW 🟢  
 **Effort:** LOW 🟢  
-**Action:** Defer or address when finalizing PR title/description for merge.
+**Action:** Addressed on `develop` (2026-04-17).
 
 **Overall 2**
 
 **Priority:** MEDIUM 🟡  
 **Impact:** MEDIUM 🟡  
 **Effort:** LOW 🟢  
-**Action:** Defer; link to requirements/ADR paths under `docs/maintainers/`.
+**Action:** Addressed — links to requirements and ADRs under `docs/maintainers/` (2026-04-17).
 
 ### Priority reference
 

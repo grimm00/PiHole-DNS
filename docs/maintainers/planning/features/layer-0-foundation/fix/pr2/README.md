@@ -5,18 +5,16 @@
 
 ---
 
-## Deferred issues (Sourcery)
+## Sourcery overall comments (addressed)
 
 **Review file:** [`docs/maintainers/feedback/sourcery/pr2.md`](../../../../../feedback/sourcery/pr2.md)
 
-**Status:** **Deferred** — two overall comments (LOW / MEDIUM); safe to handle in a small docs follow-up PR.
+**Status:** **Addressed** on `develop` (2026-04-17) — root README quickstart clarifies when `docker compose pull` applies; `docs/README.md` links FR/ADR references.
 
 | ID | Summary | Priority | Effort |
 |----|---------|----------|--------|
 | Overall 1 | Clarify when `docker compose pull` is needed in root README quickstart | LOW | LOW |
 | Overall 2 | Link FR-3/FR-4/NFR-1 and ADR-003/ADR-004 in `docs/README.md` | MEDIUM | LOW |
-
-**Action:** Opportunistic docs PR or fold into Layer 1 work touching the same files.
 
 ---
 
@@ -26,4 +24,4 @@
 
 ---
 
-**Last updated:** 2026-04-19
+**Last updated:** 2026-04-17

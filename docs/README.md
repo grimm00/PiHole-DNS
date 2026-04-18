@@ -19,7 +19,7 @@ Layer 0 **documentation layout** (what lives where): [Design — Layer 0](mainta
 
 ## Structure
 
-- **[Runbooks](runbooks/README.md)** — Operator procedures: deploy, backup, rollback, image digest workflow (**FR-3**, **FR-4**, **NFR-1**; see ADR-003 / ADR-004 in repo decisions)
+- **[Runbooks](runbooks/README.md)** — Operator procedures: deploy, backup, rollback, image digest workflow ([**FR-3**](maintainers/research/layer-0-foundation/requirements.md#fr-3-backup-scope-and-rollback-runbook-layer-0), [**FR-4**](maintainers/research/layer-0-foundation/requirements.md#fr-4-documented-minimum-deploy-path-layer-0-track-a), [**NFR-1**](maintainers/research/layer-0-foundation/requirements.md#nfr-1-pin-and-cache-container-images-project-wide); [**ADR-003**](maintainers/decisions/layer-0-foundation/adr-003-backup-rollback-runbook.md), [**ADR-004**](maintainers/decisions/layer-0-foundation/adr-004-minimum-deploy-and-image-pinning.md))
 - **[Roadmap](roadmap.md)** — Delivery layers, horizontal tracks, open questions
 - **[Maintainers Guide](maintainers/README.md)** — Explorations, research, design, decisions, planning, workflow
 

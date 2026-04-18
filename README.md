@@ -27,7 +27,7 @@ Run Pi-hole from this repo on the Pi (**Track A** — no mise, private registry,
 1. **Clone** — `git clone https://github.com/grimm00/PiHole-DNS.git` · `git pull` for updates.
 2. **Secrets** — Copy [`.env.example`](.env.example) to **`.env`** and set `FTLCONF_webserver_api_password` (see [`docker-compose.yml`](docker-compose.yml)). Never commit `.env`.
 3. **Volumes** — `mkdir -p etc-pihole etc-dnsmasq.d` in the repo root on first run.
-4. **Up** — `docker compose pull` (optional) then `docker compose up -d`.
+4. **Up** — `docker compose pull` when you need images from the registry (first clone, after you change the `image:` line or digest in Compose, or when updating); skip if the images you want are already on the machine. Then `docker compose up -d`.
 5. **Verify** — `docker compose ps`, open the Pi-hole admin UI, point **one** test client at the Pi for DNS.
 
 **Prerequisites:** Stable LAN IP ([DHCP reservation or static](docs/maintainers/research/layer-0-foundation/research-stage-1-stable-addressing.md)); [Docker](https://docs.docker.com/engine/install/debian/) and [Compose](https://docs.docker.com/compose/install/linux/) on the Pi.
