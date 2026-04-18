@@ -41,7 +41,7 @@ Summary only — **full layers, open questions, and cross-cutting tracks** live 
 - **Hardware:** Raspberry Pi 5
 - **OS:** Raspberry Pi OS
 - **Container runtime:** Docker + Docker Compose
-- **Network:** Wi‑Fi only (Ethernet not connected); static IP required
+- **Network:** Pi on **Ethernet**; static IP (or DHCP reservation) required for stable DNS targeting
 - **Storage:** SD card (OS) + external drive (data)
 
 ### Existing Services

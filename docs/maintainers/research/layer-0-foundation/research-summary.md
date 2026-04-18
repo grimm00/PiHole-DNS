@@ -33,7 +33,7 @@ Research runs in **stages** (see [hub README](README.md)). Stage 0 is the **prio
 
 ### Stage 1: Stable addressing
 
-- **DHCP reservation** vs **manual static** on Pi: both valid; reservation often lower friction if router supports it; Bookworm uses **NetworkManager** (`nmtui` / `nmcli`), not `dhcpcd.conf`.  
+- **DHCP reservation** vs **manual static** on Pi: both valid; reservation often lower friction if router supports it; use the **Ethernet** MAC / wired NetworkManager profile; Bookworm uses **NetworkManager** (`nmtui` / `nmcli`), not `dhcpcd.conf`.  
 - **Layer 0 done** checklist: ping, IP stable after reboot, then (with Pi-hole) web UI + one opt-in client DNS + rollback path.
 
 **Source:** [research-stage-1-stable-addressing.md](research-stage-1-stable-addressing.md)
@@ -50,7 +50,7 @@ Research runs in **stages** (see [hub README](README.md)). Stage 0 is the **prio
 
 ## Recommendations
 
-- [x] Prefer router **DHCP reservation** when possible; else **nmcli/nmtui** static on `wlan0`.  
+- [x] Prefer router **DHCP reservation** when possible; else **nmcli/nmtui** static on the **wired** connection (e.g. `eth0`).  
 - [ ] Complete **Stage 2** next.
 
 ---

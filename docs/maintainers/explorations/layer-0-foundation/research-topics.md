@@ -27,7 +27,7 @@ Research is scaffolded under [`docs/maintainers/research/layer-0-foundation/`](.
 
 **Question:** How should the Pi obtain a **stable** address (DHCP reservation vs static config on Pi OS), and what **objective checks** prove Layer 0 is complete?
 
-**Context:** Wi‑Fi only; static reachability required before client DNS can target the Pi; per-device opt-in (not router-wide).
+**Context:** Pi on **Ethernet**; static reachability required before client DNS can target the Pi; per-device opt-in (not router-wide). Test clients may be wireless.
 
 **Priority:** High
 

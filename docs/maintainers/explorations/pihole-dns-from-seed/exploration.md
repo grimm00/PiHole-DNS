@@ -18,7 +18,7 @@ How the interview-captured intent for PiHole-DNS translates into concrete resear
 
 ### Theme 1: Layer 0 — network and MVP cut line
 
-**From the seed:** MVP is static IP on the Pi, Pi-Hole in Docker Compose, DNS working for at least one **opt-in** device. **Current:** Pi on Wi‑Fi only (Ethernet not in use). No Pi-Hole experience yet; conservative rollout to avoid breaking household DNS.
+**From the seed:** MVP is static IP on the Pi, Pi-Hole in Docker Compose, DNS working for at least one **opt-in** device. **Current:** Pi on **Ethernet**. No Pi-Hole experience yet; conservative rollout to avoid breaking household DNS.
 
 **Why it matters:** Everything else sits on a stable “DNS server is reachable at a known address” foundation. Per-device DNS defers router-level and family-wide risk until confidence exists.
 

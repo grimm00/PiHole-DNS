@@ -139,7 +139,7 @@ Full dev-infra pipeline (explore → research → decision → design → plan �
 
 ### D5: Immediate Prerequisites
 - [ ] Static IP for the Pi (required before DNS server is viable)
-- [ ] Ethernet connection (optional upgrade; improves DNS reliability — not in use as of 2026-04-17)
+- [x] Ethernet connection (in use for the Pi as of 2026-04-17 — improves DNS reliability vs Wi‑Fi on the server)
 - [ ] GitHub repo created and seed pushed
 
 ### D6: Template Cleanup Needed
@@ -157,7 +157,7 @@ This project serves as a real-world test of:
 
 Facts that change over time; the interview log above stays as-is.
 
-- **2026-04-17:** Raspberry Pi is **not** connected via Ethernet — network access is **Wi‑Fi only** for now.
+- **2026-04-17:** Raspberry Pi uses **Ethernet** for LAN access (updated from interview note that expected Wi‑Fi first). Interview section **3.4** remains historical.
 
 ---
 

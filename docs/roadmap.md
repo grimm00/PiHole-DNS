@@ -35,7 +35,7 @@
 
 **Outcome:** Pi has a **stable** address; Pi-hole runs in Docker Compose; at least one device uses Pi-hole for DNS **by choice** (not router-wide until confidence exists).
 
-**Context:** Pi is on **Wi‑Fi only** (Ethernet not in use on the Pi today). First-time Pi-hole operator; **conservative** rollout so household DNS is not put at risk. Moving to Ethernet later remains an option for stability.
+**Context:** Pi is on **Ethernet** (wired LAN). First-time Pi-hole operator; **conservative** rollout so household DNS is not put at risk. Opt-in DNS clients may be Wi‑Fi or wired.
 
 **Typical research / decisions:** DHCP reservation vs static IP; Pi OS networking; minimal “Layer 0 done” checklist; Compose ports, firewall, and volume layout for Pi-hole.
 

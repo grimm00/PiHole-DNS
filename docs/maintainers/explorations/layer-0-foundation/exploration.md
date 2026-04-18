@@ -20,7 +20,7 @@
 
 - Local service names (`*.home`), OurFileServer merge, observability stack, wrapper app, K3s.
 
-**Environment note:** Pi is **Wi‑Fi only** today; Ethernet is not required for Layer 0 but may affect stability assumptions in research.
+**Environment note:** Pi is on **Ethernet** (wired LAN). Opt-in **clients** may be Wi‑Fi (e.g. Steam Deck) as long as they reach the Pi’s LAN IP.
 
 ---
 
@@ -30,7 +30,7 @@
 
 **From the roadmap:** Layer 0 needs a **stable** way to reach the Pi before DNS clients can point at it reliably.
 
-**Leave for research:** Router DHCP reservation vs static IP on the Pi; validation checklist (“Layer 0 done”); Wi‑Fi–specific gotchas.
+**Leave for research:** Router DHCP reservation vs static IP on the Pi; validation checklist (“Layer 0 done”); **Ethernet** MAC / `nmcli` profile for the wired interface.
 
 ---
 
@@ -61,7 +61,7 @@
 ## Key questions
 
 1. What is the **smallest verifiable** “Layer 0 complete” checklist on a typical home LAN?  
-2. How should the Pi get a **stable address** given current **Wi‑Fi–only** attachment?  
+2. How should the Pi get a **stable address** on **Ethernet** (DHCP reservation vs host static)?  
 3. What Compose/host settings **must** hold for Pi-hole to serve DNS and admin UI reliably on Pi OS?  
 4. What **backup / rollback** steps match conservative household risk?  
 5. What is the **minimum** repo-to-Pi workflow for Layer 0 without front-loading registry/mise?

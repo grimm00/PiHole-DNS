@@ -16,9 +16,9 @@ How should the Pi obtain a **stable** address (DHCP reservation vs static config
 
 ## Context
 
-- Wi‑Fi only (Ethernet not in use on the Pi).  
+- **Pi on Ethernet** (wired LAN). Use the **Ethernet interface’s MAC** for DHCP reservations (on Raspberry Pi OS this is commonly `eth0`; confirm with `ip link` / `nmcli`).  
 - Per-device opt-in DNS; not router-wide until confidence exists.  
-- Test roles: e.g. Steam Deck vs Pi.
+- **Test clients** (e.g. Steam Deck) may be Wi‑Fi; they must still reach the Pi’s **LAN IP** on the same subnet.
 
 ---
 
@@ -26,7 +26,7 @@ How should the Pi obtain a **stable** address (DHCP reservation vs static config
 
 - [x] Compare DHCP reservation vs static IP on the Pi for this environment.  
 - [x] Define a minimal **Layer 0 done** checklist (reachability, Pi-hole UI, DNS on one client).  
-- [x] Note Wi‑Fi–specific stability considerations.
+- [x] Note **wired (Ethernet)** stability expectations vs wireless clients.
 
 ---
 
@@ -50,8 +50,8 @@ Router documentation (generic); Raspberry Pi OS **Bookworm** networking (replace
 
 | Approach | How it works | Pros | Cons |
 |----------|----------------|------|------|
-| **DHCP reservation** (router) | Router ties the Pi’s **MAC** (Wi‑Fi or Ethernet) to a fixed LAN IP from the DHCP pool. | Single place to manage IPs; fewer typos on device; Pi still uses normal DHCP client — good defaults for gateway/DNS from router during setup. | Depends on router UI and reliability; if DHCP/lease DB resets, address could change unless reservation reapplied; Pi must use DHCP on that interface (not manual static on device). |
-| **Manual static on the Pi** | Configure **IPv4 manual** on `wlan0` (Bookworm: **NetworkManager** via `nmtui` or `nmcli`). | Works even if router has no reservation feature; predictable if subnet/mask/gateway correct. | Easy to misconfigure (wrong gateway, duplicate IP, wrong subnet); SSH session drops if you change IP live; you must coordinate an IP **outside** or **inside** DHCP range per your design. |
+| **DHCP reservation** (router) | Router ties the Pi’s **Ethernet MAC** to a fixed LAN IP from the DHCP pool. | Single place to manage IPs; fewer typos on device; Pi still uses normal DHCP client — good defaults for gateway/DNS from router during setup. | Depends on router UI and reliability; if DHCP/lease db resets, address could change unless reservation reapplied; Pi must use DHCP on that interface (not manual static on device). |
+| **Manual static on the Pi** | Configure **IPv4 manual** on the **wired** connection (Bookworm: **NetworkManager** via `nmtui` or `nmcli`; profile usually bound to `eth0` or “Wired connection”). | Works even if router has no reservation feature; predictable if subnet/mask/gateway correct. | Easy to misconfigure (wrong gateway, duplicate IP, wrong subnet); SSH session drops if you change IP live; you must coordinate an IP **outside** or **inside** DHCP range per your design. |
 
 **Source:** Industry summaries (e.g. [network-switch.com DHCP vs static](https://network-switch.com/ms/blogs/networking/dhcp-vs-static-ip)); homelab practice.
 
@@ -59,12 +59,12 @@ Router documentation (generic); Raspberry Pi OS **Bookworm** networking (replace
 
 ---
 
-### Finding 2: Raspberry Pi OS Bookworm and Wi‑Fi static addressing
+### Finding 2: Raspberry Pi OS Bookworm and Ethernet static addressing
 
-**Summary:** On **Raspberry Pi OS Bookworm**, legacy **`/etc/dhcpcd.conf`** guidance is **obsolete** for default images; **NetworkManager** controls interfaces. Typical approaches:
+**Summary:** On **Raspberry Pi OS Bookworm**, legacy **`/etc/dhcpcd.conf`** guidance is **obsolete** for default images; **NetworkManager** controls interfaces. Typical approaches for **wired** Ethernet:
 
-- **Interactive:** `sudo nmtui` → edit the Wi‑Fi connection → IPv4 **Manual** → address/CIDR, gateway, DNS → apply; then `sudo systemctl restart NetworkManager` or bounce the connection ([Jeff Geerling](https://www.jeffgeerling.com/blog/2024/set-static-ip-address-nmtui-on-raspberry-pi-os-12-bookworm/)).
-- **CLI:** `nmcli connection modify '<profile>' ipv4.method manual ipv4.addresses '192.168.x.y/24' ipv4.gateway '192.168.x.1' ipv4.dns ...` then `nmcli connection down/up` the profile (see [gist example](https://gist.github.com/hivian/590b44885940aa927e3bfcd388615a49)).
+- **Interactive:** `sudo nmtui` → select the **Ethernet** / wired connection → IPv4 **Manual** → address/CIDR, gateway, DNS → apply; then restart NetworkManager or bounce the connection ([Jeff Geerling](https://www.jeffgeerling.com/blog/2024/set-static-ip-address-nmtui-on-raspberry-pi-os-12-bookworm/)).
+- **CLI:** `nmcli connection modify '<wired-profile>' ipv4.method manual ipv4.addresses '192.168.x.y/24' ipv4.gateway '192.168.x.1' ipv4.dns ...` then `nmcli connection down/up` the profile (see [gist example](https://gist.github.com/hivian/590b44885940aa927e3bfcd388615a49)).
 
 **Caution:** Changing IPv4 over SSH **drops the session** if the new address is wrong or unreachable—use console, `screen`, or plan IP carefully.
 
@@ -74,15 +74,15 @@ Router documentation (generic); Raspberry Pi OS **Bookworm** networking (replace
 
 ---
 
-### Finding 3: Wi‑Fi–specific considerations
+### Finding 3: Ethernet on the Pi vs wireless test clients
 
-- **Stability:** Wi‑Fi is more variable than Ethernet (latency, brief drops). For DNS, brief drops can cause client timeouts; **Ethernet later** (per roadmap) reduces this class of issue.  
-- **RSSI / band:** Weak signal increases retries; place Pi reasonably or note in runbook.  
-- **Client testing:** Steam Deck (or laptop) as opt-in DNS client is valid; ensure it’s on the **same L2/L3** path to reach the Pi’s LAN IP.
+- **Pi (server):** **Ethernet** avoids Wi‑Fi–specific jitter and drops for the DNS host; link is typically stable for homelab DNS.  
+- **Clients:** Opt-in devices (e.g. Steam Deck on Wi‑Fi) are fine; ensure they can reach the Pi’s **same-LAN IPv4** (routing/firewall).  
+- **Cable/link:** Note physical connection in runbook (which port, working link).
 
-**Source:** General wireless networking practice.
+**Source:** General networking practice.
 
-**Relevance:** Does not block Layer 0; informs expectations and future “move to Ethernet” motivation.
+**Relevance:** Stage 1 framing: **stable IP on the wired Pi**; client wireless vs wired does not change the checklist as long as L3 reachability holds.
 
 ---
 
@@ -98,8 +98,8 @@ Router documentation (generic); Raspberry Pi OS **Bookworm** networking (replace
 
 ## Recommendations
 
-- [x] **Prefer DHCP reservation** on the home router **if** it supports MAC-based reservation and you can document the reserved IP — lowest error rate for many homelabs.  
-- [x] **Otherwise** use **NetworkManager static IPv4** on `wlan0` with correct **CIDR, gateway, and DNS** (during setup, DNS on the Pi can still point upstream until Pi-hole is ready—avoid circular dependency per Pi-hole [host DNS docs](https://docs.pi-hole.net/docker/tips-and-tricks/)).  
+- [x] **Prefer DHCP reservation** on the home router **if** it supports MAC-based reservation for the Pi’s **Ethernet MAC** and you can document the reserved IP — lowest error rate for many homelabs.  
+- [x] **Otherwise** use **NetworkManager static IPv4** on the **wired** connection (e.g. `eth0` profile) with correct **CIDR, gateway, and DNS** (during setup, DNS on the Pi can still point upstream until Pi-hole is ready—avoid circular dependency per Pi-hole [host DNS docs](https://docs.pi-hole.net/docker/tips-and-tricks/)).  
 - [x] Record the chosen IP in **this repo** (e.g. private notes or `.env.example` comments), not only on the router.
 
 ---

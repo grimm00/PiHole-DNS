@@ -13,7 +13,7 @@
 
 **Question:** How should the Pi obtain a **stable** address (DHCP reservation vs static config), and what objective checks prove Layer 0 is complete?
 
-**Context:** Seed flags static IP as prerequisite; Pi is on Wi‑Fi only (Ethernet not connected); operator wants per-device DNS first.
+**Context:** Seed flags static IP as prerequisite; Pi uses **Ethernet** (canonical as of Layer 0 research); operator wants per-device DNS first.
 
 **Priority:** High
 
