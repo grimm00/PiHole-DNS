@@ -107,11 +107,19 @@
 **Priority:** 🔴 High  
 **Effort:** Moderate  
 
-**Suggestion:** When starting **Layer 1 — Usable** ([roadmap](../../../../../roadmap.md)), open exploration/planning with **SSH/DNS access model** alongside local DNS names (`files.home`, `pihole.home`) so “desired access” and “desired names” evolve together.
+**Suggestion:** When starting **Layer 1 — Usable** ([roadmap](../../../../../roadmap.md)), open exploration/planning with **SSH/DNS access model** alongside local DNS naming so “desired access” and “desired names” evolve together.
+
+**Discussion notes (2026-04-19) — naming, URLs, proxy:**
+
+- **Subdomains over shared paths:** Prefer a **family apex** (e.g. `katdog.home`) with **one subdomain per service** (e.g. `dns.katdog.home` / `pihole.katdog.home`, `files.katdog.home`) instead of routing multiple apps under one hostname with path prefixes (`/dns/...`, `/files`). Same LAN IP can back all names; differentiation is by **Host** at a reverse proxy.
+- **Pi-hole web UI:** If DNS/Pi-hole lives on its own subdomain, keep Pi-hole’s usual **`/admin`** on that host — no requirement to remap to something like `/dns/admin` on a shared origin.
+- **Reverse proxy:** Plan to include a **reverse proxy in the Compose stack** (terminates HTTP/HTTPS, forwards to Pi-hole and file server backends on localhost ports).
+- **TLS:** Target **HTTPS eventually**; treat **how TLS terminates** (proxy vs per-container), **local trust**, and **cert material** as explicit Layer 1 learning/design topics, not an afterthought.
+- **Ports (operator clarity):** **53** = DNS protocol; **80/443** = web UIs and browser traffic. Same machine, different roles — document once in Layer 1 so “what do I type in a browser?” stays separate from “what port answers DNS queries?”
 
 **Next steps:**
 
-1. `/explore layer-1-usable` (or amend existing exploration) with themes: local DNS, Compose services, **operator access**.
+1. `/explore layer-1-usable` (or amend existing exploration) with themes: local DNS, Compose services, **operator access**, **subdomain naming**, **reverse proxy**, **TLS**.
 2. Add **Operator access (current vs desired)** to Layer 1 design when the shape is clear.
 
 **Related:** [`notes-post-cycle-design-retrospective.md`](../notes-post-cycle-design-retrospective.md), discussion on access path.
@@ -160,6 +168,7 @@
 ### Emerging
 
 - **Operator experience** (access, naming, auth) is the bridge between Layer 0 “it runs” and Layer 1 “it’s usable day-to-day.”
+- **Service naming:** Subdomain-per-service under a single LAN apex, **reverse proxy** in the stack, and **TLS** as a first-class design topic (see discussion notes under Layer 1 actionable suggestion above).
 
 ---
 
