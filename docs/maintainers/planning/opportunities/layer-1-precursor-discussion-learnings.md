@@ -57,7 +57,7 @@ The [post–v0.1.0 reflection](../features/layer-0-foundation/reflections/reflec
 
 | Follow-up | Where |
 |-----------|--------|
-| `/explore layer-1-usable` | Themes: SSH baseline + recovery, Pi-hole admin posture, runbook suite under same “operator experience” story |
+| `/explore layer-1-usable` | ✅ Exploration opened — [`docs/maintainers/explorations/layer-1-usable/exploration.md`](../../explorations/layer-1-usable/exploration.md) (themes: SSH baseline + recovery, Pi-hole admin posture, runbooks, **discovery ladder**) |
 | Layer 1 design | **Operator access (current vs desired)** + **recovery** when key-only SSH is assumed |
 | Runbooks | When touching minimum deploy / SSH, add **recovery** subsection or link once shape is fixed |
 

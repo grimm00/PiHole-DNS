@@ -49,7 +49,9 @@
 
 **Outcome:** Human-friendly local names for services; **OurFileServer** (or equivalent) runs in the **same** Compose stack as Pi-hole where it makes sense.
 
-**Typical research / decisions:** Ordering DNS-only work vs stack merge; blast radius when colocating services; alignment with existing [OurFileServer](https://github.com/grimm00/OurFileServer) deployment habits.
+**Typical research / decisions:** Ordering DNS-only work vs stack merge; blast radius when colocating services; alignment with existing [OurFileServer](https://github.com/grimm00/OurFileServer) deployment habits; reverse proxy/TLS; operator access and **runbook discovery** (how to find the Pi when IP/hostname is unknown).
+
+**Exploration:** [`layer-1-usable`](maintainers/explorations/layer-1-usable/README.md) — themes and inputs from the post–v0.1.0 reflection and [precursor learnings](maintainers/planning/opportunities/layer-1-precursor-discussion-learnings.md).
 
 ---
 
