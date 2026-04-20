@@ -2,6 +2,7 @@
 
 **Status:** 🟡 Themes captured — research pending  
 **Created:** 2026-04-19  
+**Amended:** 2026-04-19 — themes aligned to [roadmap Layer 1](../../../roadmap.md) (OurFileServer same-stack, ordering/blast radius, Track A parity)  
 **Sources:** [Roadmap](../../../roadmap.md) (Layer 1 — Usable); [post–v0.1.0 reflection](../../planning/features/layer-0-foundation/reflections/reflection-post-layer0-v0.1.0-2026-04-19.md); [Layer 1 precursor discussion learnings](../../planning/opportunities/layer-1-precursor-discussion-learnings.md)
 
 ---
@@ -14,7 +15,7 @@
 - **Operator access:** SSH baseline (e.g. key-only), **recovery** when network password login is off, and **clarity** between **SSH** (OS) vs **Pi-hole web UI** (application).  
 - **Runbooks as usability:** maintenance and security guidance that matches how the stack is actually operated — not only ad hoc fixes; Layer 1 delivers **sliced** task groups so “usability” stays bounded.  
 - **Discovery and canonical addressing:** how an operator (or **someone else**) finds the Pi when the IP or hostname is unknown — a **runbook ladder** (preferred paths first, scans/tools mid-chain, break-glass last).  
-- **OurFileServer** (or equivalent) in the **same** Compose stack where it fits the roadmap outcome.
+- **OurFileServer** (or equivalent) in the **same** Compose stack where it fits the roadmap outcome — including **ordering** (DNS-only milestones vs full stack merge), **blast radius** when colocating services, and **parity** with [OurFileServer](https://github.com/grimm00/OurFileServer) habits (Track A — deployment / GitOps-lite).
 
 **Out of scope** (defer to roadmap / later layers)
 
@@ -67,13 +68,57 @@
 
 ---
 
+### Theme 5: OurFileServer (or equivalent) — same Compose stack, ordering, blast radius
+
+**From the [roadmap](../../../roadmap.md) — Layer 1 outcome and “typical research / decisions”:** Local **human-friendly names** (table examples: `files.home`, `pihole.home`; exploration may use other apex names) plus **OurFileServer in the same Compose stack** as Pi-hole. This theme makes explicit what was only implied in scope:
+
+- **Ordering DNS-only work vs stack merge:** Ship local DNS / naming first, add file server second, or bring both together — tradeoffs for risk, testing, and rollback.  
+- **Blast radius when colocating services:** Shared host resources, port/proxy conflicts, failure modes when one container misbehaves; how rollback and **household safety** (Track D) stay coherent when the stack grows.  
+- **Alignment with existing OurFileServer deployment habits:** Image pulls, env/secrets, volumes, and GitOps-lite patterns so this repo does not fight upstream conventions without a reason.  
+- **Cross-layer:** Roadmap [open question #4](../../../roadmap.md) (ordering Layers 1–3 vs OurFileServer vs wrapper) — Layer 1 research should record decisions that **avoid** painting Layer 3 into a corner.
+
+**Leave for research:** Compose service order and dependencies; resource headroom on Pi; whether file server shares the reverse proxy from Theme 1; ADR candidates for colocation boundaries.
+
+---
+
+## Roadmap coverage (Layer 1)
+
+| Roadmap item ([Layer 1](../../../roadmap.md)) | Theme(s) |
+|-----------------------------------------------|----------|
+| **At a glance:** local DNS names (`files.home`, `pihole.home`) | 1 (naming); 5 (examples in outcome) |
+| **At a glance:** OurFileServer in same Compose stack | 5 |
+| **Outcome:** human-friendly names | 1, 4 |
+| **Outcome:** OurFileServer same stack | 5 |
+| **Typical:** ordering DNS-only vs stack merge | 5 |
+| **Typical:** blast radius when colocating | 5 |
+| **Typical:** OurFileServer deployment alignment | 5 |
+| **Typical:** reverse proxy / TLS | 1 |
+| **Typical:** operator access + runbook discovery | 2, 3, 4 |
+| **Track A** (GitOps-lite, parity, secrets, image policy) | 1, 5 (explicit OurFileServer parity); inherits L0 NFR-1 where relevant |
+| **Track D** (safety, rollback, backups) | 4, 5; inherits L0 runbooks |
+
+---
+
 ## Key questions
 
 1. What **hostname scheme** and **proxy layout** minimize Pi-hole and file-server integration pain?  
 2. What **TLS** approach matches homelab learning goals without blocking shipping?  
 3. What **SSH + web** posture and **recovery** steps belong in **Layer 1** runbooks vs deferred hardening?  
 4. What is the **minimum discovery ladder** every operator-facing runbook should link or repeat?  
-5. Where is the **canonical** “how to reach the Pi” truth (IP, name, reservation label) maintained for **future you and others**?
+5. Where is the **canonical** “how to reach the Pi” truth (IP, name, reservation label) maintained for **future you and others**?  
+6. In what **order** should we deliver **local DNS/naming** vs **OurFileServer in Compose**, and what **rollback** is acceptable at each step?  
+7. What **blast radius** and **failure modes** are acceptable when Pi-hole and the file server share a host, and how do **backups / rollback** (Track D) extend from Layer 0?
+
+---
+
+## Spike determination
+
+| Topic | Risk | Spike first? | Rationale |
+|-------|------|--------------|-----------|
+| Reverse proxy in front of Pi-hole + file server | Medium–high | Consider | vhost paths, WebSocket, TLS termination — validate with one proxy choice early |
+| OurFileServer + Pi-hole same host (resources, ports) | Medium–high | Consider | Disk, RAM, port 80/443 sharing; ordering vs merge |
+| TLS on LAN (trust model) | Medium | Optional | Research may suffice; spike if cert automation blocks |
+| Local DNS / Pi-hole records for new names | Medium | No | Straightforward once naming scheme fixed |
 
 ---
 
@@ -83,6 +128,7 @@
 |----------|------|
 | [Reflection post–Layer 0 v0.1.0](../../planning/features/layer-0-foundation/reflections/reflection-post-layer0-v0.1.0-2026-04-19.md) | Naming, proxy, TLS, `/explore` theme list |
 | [Layer 1 precursor discussion learnings](../../planning/opportunities/layer-1-precursor-discussion-learnings.md) | SSH recovery, UI vs SSH, planning shape |
+| [Roadmap — Layer 1](../../../roadmap.md) | Outcome, typical decisions, tracks A/D — **coverage matrix** above |
 
 ---
 
