@@ -12,6 +12,7 @@
 | Document | Scope |
 |----------|--------|
 | [Layer 0 — Foundation learnings](layer-0-foundation-learnings.md) | Uniform plan, PR #1/`main` vs PR #2/`develop`, Sourcery/`dt-review`, post-pr, operator debugging |
+| [Layer 1 — Precursor discussion learnings](layer-1-precursor-discussion-learnings.md) | SSH key-only vs recovery, Pi-hole UI vs SSH surfaces, planning shape (ad hoc / 0.5 / Layer 1 umbrella); complements the post–v0.1.0 reflection |
 
 ---
 
