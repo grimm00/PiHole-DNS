@@ -11,7 +11,7 @@
 This document rolls up key findings across Layer 1 research topics as they are completed.
 
 **Stages/topics:** 8 (Stage 0 + 7 topics)  
-**Complete:** 2/8
+**Complete:** 3/8
 
 ---
 
@@ -23,6 +23,8 @@ This document rolls up key findings across Layer 1 research topics as they are c
   - Source: [`research-stage-0-prior-art.md`](research-stage-0-prior-art.md)
 - **Topic 1 (local DNS + names):** Keep a small curated set of service names in **Pi-hole’s local DNS UI/API** as the canonical source; treat conditional forwarding as optional coupling to the router/DHCP.  
   - Source: [`research-local-dns-names.md`](research-local-dns-names.md)
+- **Topic 2 (reverse proxy + TLS):** nginx + host-based routing (subdomains) is a low-fragility proxy direction; avoid hiding `/admin` behind subpaths; stage TLS so it doesn’t block shipping (mkcert/local CA later).  
+  - Source: [`research-reverse-proxy-tls.md`](research-reverse-proxy-tls.md)
 
 ---
 
@@ -37,7 +39,7 @@ See [`requirements.md`](requirements.md). Requirements are drafted during topic 
 | # | Topic | Status |
 |---:|------|--------|
 | 1 | Local DNS + names | ✅ Complete |
-| 2 | Reverse proxy + TLS | 🔴 Not Started |
+| 2 | Reverse proxy + TLS | ✅ Complete |
 | 3 | Operator access | 🔴 Not Started |
 | 4 | Discovery ladder | 🔴 Not Started |
 | 5 | Compose stack — OurFileServer | 🔴 Not Started |

@@ -23,6 +23,7 @@ Requirements will be discovered during research topic conduct and reconciled dur
 
 - **NFR-1:** Operator UX should avoid brittle reverse-proxy path rewriting (prefer vhosts/subdomains when exposing multiple services).
 - **NFR-2:** Naming choices must be documented as deliberate (domain choice + escape hatch) to reduce future migration cost. **Updated after:** `research-local-dns-names.md`
+- **NFR-3:** Reverse proxy configuration must be low-fragility (prefer host-based routing; minimal path rewriting). **Updated after:** `research-reverse-proxy-tls.md`
 
 ---
 
@@ -30,6 +31,7 @@ Requirements will be discovered during research topic conduct and reconciled dur
 
 - **C-1:** DNS on port **53** must remain directly reachable on the LAN even if web UI traffic is reverse proxied.
 - **C-2:** Avoid `.local` for the primary homenet domain because it overlaps with mDNS behavior. **Updated after:** `research-local-dns-names.md`
+- **C-3:** TLS is not a Layer 1 blocker; the system must be usable over HTTP while TLS is staged. **Updated after:** `research-reverse-proxy-tls.md`
 
 ---
 
