@@ -14,6 +14,8 @@ Treat **operator experience** as a maintained “product,” where:
 
 This is meta work: it should reduce cognitive load and prevent “truth in five places,” especially as the stack grows beyond Pi-hole.
 
+It also serves as the place to **log and reason about project restructures** (doc tree moves, skill/command migrations, conventions), so those changes don’t get lost across unrelated layer work.
+
 ---
 
 ## Scope
@@ -24,6 +26,7 @@ This is meta work: it should reduce cognitive load and prevent “truth in five 
 - A **runbook contract** (what every runbook must state) so operator docs stay consistent.
 - An **operator model** for this homelab: access, discovery, storage/persistence, backup/restore, and break-glass paths.
 - Repo structure conventions that keep the above easy to find and update.
+- A lightweight way to **record restructures and migrations** (what changed, why, and how to navigate the new shape).
 
 **Out of scope**
 
@@ -54,9 +57,10 @@ Grounded in the Layer 0 retrospective prompts:
 - **Discovery ladder**: name/reservation → router → scan/analyzer → break-glass.
 - **Storage and paths**: what is persistent (host bind mounts / volumes), where backups live, restore invariants.
 
-### Theme 4: Repo conventions that support the factory
+### Theme 4: Repo conventions and restructure log
 
 - Keep “maintainer surfaces” coherent: explorations/research/decisions/planning/runbooks.
+- Treat restructures (directory moves, skill/command migrations, naming conventions) as first-class maintenance work: record **what changed**, **why**, and **upgrade notes** for future you.
 - Skills/commands should match the repo’s directory shape (avoid tools that assume `admin/services/...` when the repo uses `docs/maintainers/...`).
 - Prefer small, linkable docs over sprawling omnibus pages.
 
@@ -69,6 +73,7 @@ Grounded in the Layer 0 retrospective prompts:
 3. What is the canonical “operator model” doc surface (and what must be duplicated vs linked)?
 4. Which invariants must be decided once (storage paths, backup scope, recovery) so layers don’t re-learn them?
 5. What is the smallest meta structure that helps today without importing dev-infra’s multi-service overhead?
+6. How should we log restructures so future navigation is easy (changelog vs ADR vs dedicated ‘restructure log’ doc)?
 
 ---
 
@@ -79,6 +84,7 @@ Grounded in the Layer 0 retrospective prompts:
 | Maintenance cadence checklist | Low | No | Can iterate safely; easiest to validate by doing |
 | Runbook contract/template | Medium | No | Needs taste + iteration; not a hard-to-pivot decision |
 | Operator model doc surface | Medium | Consider | Cross-cuts many docs; risk of duplication if wrong home |
+| Restructure log location/shape | Low | No | Can start simple and evolve without risk |
 
 ---
 

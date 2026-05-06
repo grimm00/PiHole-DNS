@@ -46,6 +46,16 @@
 
 ---
 
+## Topic 5 — Restructure log / migrations
+
+**Question:** Where should repo restructures and workflow migrations be recorded (and in what format) so future navigation and maintenance stays easy?
+
+**Context:** This repo will likely continue adopting workflow changes from dev-infra (skills/commands, directory conventions). Without a consistent log, changes become oral tradition.
+
+**Priority:** Medium
+
+---
+
 ## Next step
 
 When ready:
