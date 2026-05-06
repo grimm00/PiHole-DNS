@@ -11,6 +11,7 @@
 ### Active Research
 
 - **[layer-0-foundation](layer-0-foundation/README.md)** — Layer 0 MVP (research complete; [ADRs](../decisions/layer-0-foundation/README.md) **Accepted**)
+- **[layer-1-usable](layer-1-usable/README.md)** — Layer 1 outcomes (local names, proxy/TLS, operator access/discovery, OurFileServer colocation). (🔴 Setup only)
 
 ---
 
