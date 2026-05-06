@@ -10,6 +10,7 @@
 
 ### Active Explorations
 
+- **[meta-ops-factory](meta-ops-factory/README.md)** — Meta: maintainer factory for runbooks, cadence, operator model, and repo conventions (Tracks A/C/D). (🟡 Exploration opened — research pending)
 - **[layer-1-usable](layer-1-usable/README.md)** — Roadmap Layer 1: local names, proxy/TLS, operator access, runbooks, **discovery ladder**; input from reflection + precursor learnings. (🟡 Exploration opened — research pending)
 - **[layer-0-foundation](layer-0-foundation/README.md)** — Roadmap Layer 0 only: addressing, Pi-hole Compose, safety/rollback, minimal deploy path. (✅ Ready for research)
 - **[pihole-dns-from-seed](pihole-dns-from-seed/README.md)** — Seed interview distilled into themes and research topics; enriched single pass (no separate conduct). (✅ Ready for research)
