@@ -11,7 +11,7 @@
 This document rolls up key findings across Layer 1 research topics as they are completed.
 
 **Stages/topics:** 8 (Stage 0 + 7 topics)  
-**Complete:** 1/8
+**Complete:** 2/8
 
 ---
 
@@ -21,6 +21,8 @@ This document rolls up key findings across Layer 1 research topics as they are c
   - Source: [`research-stage-0-prior-art.md`](research-stage-0-prior-art.md)
 - **Stage 0 (prior art):** Consider **`home.arpa`** as the standards-backed homenet domain (RFC 8375) vs a personalized `.home` apex; treat the choice as explicit.  
   - Source: [`research-stage-0-prior-art.md`](research-stage-0-prior-art.md)
+- **Topic 1 (local DNS + names):** Keep a small curated set of service names in **Pi-hole’s local DNS UI/API** as the canonical source; treat conditional forwarding as optional coupling to the router/DHCP.  
+  - Source: [`research-local-dns-names.md`](research-local-dns-names.md)
 
 ---
 
@@ -34,7 +36,7 @@ See [`requirements.md`](requirements.md). Requirements are drafted during topic 
 
 | # | Topic | Status |
 |---:|------|--------|
-| 1 | Local DNS + names | 🔴 Not Started |
+| 1 | Local DNS + names | ✅ Complete |
 | 2 | Reverse proxy + TLS | 🔴 Not Started |
 | 3 | Operator access | 🔴 Not Started |
 | 4 | Discovery ladder | 🔴 Not Started |
