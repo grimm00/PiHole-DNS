@@ -8,17 +8,20 @@
 
 ---
 
-## Research topics (setup)
+## Research stages
 
-| # | Topic | Document | Status |
-|---:|------|----------|--------|
-| 1 | Local DNS + names | [research-local-dns-names.md](research-local-dns-names.md) | 🔴 Not Started |
-| 2 | Reverse proxy + TLS | [research-reverse-proxy-tls.md](research-reverse-proxy-tls.md) | 🔴 Not Started |
-| 3 | Operator access | [research-operator-access.md](research-operator-access.md) | 🔴 Not Started |
-| 4 | Discovery ladder | [research-discovery-ladder.md](research-discovery-ladder.md) | 🔴 Not Started |
-| 5 | Compose stack — OurFileServer | [research-compose-ourfileserver.md](research-compose-ourfileserver.md) | 🔴 Not Started |
-| 6 | Upstream parity (Track A) | [research-upstream-parity-track-a.md](research-upstream-parity-track-a.md) | 🔴 Not Started |
-| 7 | Safety when colocating (Track D) | [research-safety-colocation-track-d.md](research-safety-colocation-track-d.md) | 🔴 Not Started |
+Work proceeds in **stages**. **Stage 0** is the customary opening: **prior art and existing patterns** before diving into open questions. Stages 1–7 map to the exploration’s candidate topics.
+
+| Stage | Focus | Document | Status |
+|------:|-------|----------|--------|
+| **0** | Prior art & existing patterns | [research-stage-0-prior-art.md](research-stage-0-prior-art.md) | 🔴 Not Started |
+| **1** | Local DNS + names | [research-local-dns-names.md](research-local-dns-names.md) | 🔴 Not Started |
+| **2** | Reverse proxy + TLS | [research-reverse-proxy-tls.md](research-reverse-proxy-tls.md) | 🔴 Not Started |
+| **3** | Operator access | [research-operator-access.md](research-operator-access.md) | 🔴 Not Started |
+| **4** | Discovery ladder | [research-discovery-ladder.md](research-discovery-ladder.md) | 🔴 Not Started |
+| **5** | Compose stack — OurFileServer | [research-compose-ourfileserver.md](research-compose-ourfileserver.md) | 🔴 Not Started |
+| **6** | Upstream parity (Track A) | [research-upstream-parity-track-a.md](research-upstream-parity-track-a.md) | 🔴 Not Started |
+| **7** | Safety when colocating (Track D) | [research-safety-colocation-track-d.md](research-safety-colocation-track-d.md) | 🔴 Not Started |
 
 ---
 
