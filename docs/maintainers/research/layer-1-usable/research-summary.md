@@ -1,6 +1,6 @@
 # Research summary — Layer 1 — Usable
 
-**Status:** 🔴 Setup only — no findings yet  
+**Status:** 🟡 In progress — Stage 0 complete  
 **Created:** 2026-05-05  
 **Last updated:** 2026-05-05
 
@@ -10,14 +10,17 @@
 
 This document rolls up key findings across Layer 1 research topics as they are completed.
 
-**Topics:** 7  
-**Complete:** 0/7
+**Stages/topics:** 8 (Stage 0 + 7 topics)  
+**Complete:** 1/8
 
 ---
 
 ## Key findings (to be filled)
 
-- _None yet._
+- **Stage 0 (prior art):** Prefer **hostname-per-service** (subdomains) over path-prefix routing for Pi-hole; `/admin` path assumptions make shared-hostname subpaths brittle.  
+  - Source: [`research-stage-0-prior-art.md`](research-stage-0-prior-art.md)
+- **Stage 0 (prior art):** Consider **`home.arpa`** as the standards-backed homenet domain (RFC 8375) vs a personalized `.home` apex; treat the choice as explicit.  
+  - Source: [`research-stage-0-prior-art.md`](research-stage-0-prior-art.md)
 
 ---
 
