@@ -104,6 +104,13 @@ These are the genuine "can it work?" unknowns. Each could later become its own r
 - **Task 1 complete:** Required metrics/panel themes for both dashboards derived from the done-signal and Q3 incident candidates. Lists tagged **incident-critical** vs **nice-to-have** in [`docs/maintainers/planning/features/layer-2-observable/spike-outcomes.md`](../docs/maintainers/planning/features/layer-2-observable/spike-outcomes.md) § Dashboards (Pi-hole: P1–P8; platform: H1–H9). Exporter mapping intentionally deferred to Tasks 2–3.
 - **Design note:** Requirements cover all four Q3 candidates so picking the incident later does not force a metrics rework.
 
+### 2026-06-02 (Task 2 — Mosher-Labs verification)
+
+- **Decision:** Spike uses **wholesale** `Mosher-Labs/pihole6-exporter` (digest-pinned at deploy); **official Layer 2 follow-up** = thin in-repo exporter using v6 session patterns, not long-term dependency on low-activity upstreams. Rationale: learning goal is incident-time **operations**, not exporter authorship this week.
+- **Mapping (P1–P3):** All **covered** per README + source (`pihole_query_*_1m`, `pihole_query_upstream_count`, Prometheus `up`). Table in [`spike-outcomes.md`](../docs/maintainers/planning/features/layer-2-observable/spike-outcomes.md) § Exporter decisions.
+- **Maintainership:** Mosher-Labs / nbx3 / alantoch all lightly maintained; no swap for activity alone. nbx3 reserved if Pi panels show weak P3 signal.
+- **Evidence:** [Mosher-Labs README metrics](https://github.com/Mosher-Labs/pihole6-exporter#metrics); last meaningful commits Jan 2026 (session management).
+
 *(Append daily: what got tried, what worked, what surprised, what didn't work. Cite evidence — command output, observed dashboard panel, error text — not vibes.)*
 
 ---

@@ -2,7 +2,7 @@
 
 **Status:** 🟡 In progress — distill from `notes/spike-l2.md` as decisions land  
 **Created:** 2026-06-02  
-**Last updated:** 2026-06-02 (Task 1 — dashboard metrics)  
+**Last updated:** 2026-06-02 (Task 2 — Mosher-Labs mapping)  
 **Posture:** Learning-week spike, not roadmap reorder. Layer 1 remains the project's official next layer after the week ends.
 
 **Purpose:** Curated decisions and carry-forward context for when Layer 2 becomes official on the roadmap. Raw evidence, daily noise, and screenshots stay in [`notes/spike-l2.md`](../../../../../notes/spike-l2.md).
@@ -24,13 +24,44 @@
 
 ---
 
-## Exporter decisions (fill as Group 1 completes)
+## Exporter decisions (Group 1 in progress)
+
+### Strategy (Task 2)
+
+| Horizon | Approach | Rationale |
+|---------|----------|-----------|
+| **Learning spike (this week)** | Run **third-party exporter wholesale**; pin image by digest on Pi deploy | Optimizes for operating under incident pressure (Task 18), not maintainer hygiene |
+| **Official Layer 2 (follow-up)** | **Thin in-repo exporter** copying v6 session-auth *patterns* (API paths + metrics for P1–P3 only) | Small projects (Mosher-Labs, nbx3, alantoch) are lightly maintained; owning ~5 series limits upgrade risk |
+
+**Maintainership snapshot (desk check 2026-06-02):** All three v6 exporters are small/solo-maintained. Mosher-Labs had a focused burst Jan 2026 (session teardown, `api_seats_exceeded` retry). nbx3 publishes tagged releases + Grafana dashboard. alantoch runs scheduled Docker Hub builds from OpenAPI. None are “set and forget forever”; spike mitigates with **digest pin** + Layer 0 Pi-hole pin.
 
 ### Pi-hole side
 
-- **Lean:** `Mosher-Labs/pihole6-exporter` — see [`notes/spike-l2.md`](../../../../../notes/spike-l2.md) learning log 2026-06-02.
-- **Locked:** _pending Task 4_
-- **Fallbacks considered:** `alantoch/pihole-exporter`, `nbx3/pihole-exporter`
+- **Spike choice (Task 2):** `ghcr.io/mosher-labs/pihole6-exporter` — covers P1–P3; v6 session handling aligned with pinned Pi-hole.
+- **Locked for compose (Task 4):** _pending — spike image above unless Pi validation fails_
+- **Fallbacks if Pi fails:** `nbx3/pihole-exporter` (richest upstream metrics), then `alantoch/pihole-exporter` (OpenAPI-generated, scheduled releases)
+
+#### Task 2 — Mosher-Labs metric mapping (P1–P3)
+
+Source: [Mosher-Labs/pihole6-exporter README](https://github.com/Mosher-Labs/pihole6-exporter) metrics list + [`pihole6_exporter`](https://github.com/Mosher-Labs/pihole6-exporter/blob/main/pihole6_exporter) (`stats/summary`, `stats/upstreams`, `queries?from=&until=` for 1m windows).
+
+| Req | Requirement | Prometheus metric(s) | Status | Panel / alert note |
+|-----|-------------|----------------------|--------|-------------------|
+| **P1** | DNS query rate | `sum(pihole_query_type_1m)` or `sum(pihole_query_status_1m)`; 24h fallback `pihole_query_count{category="total"}` | **covered** | Prefer `_1m` series for incident windows; alert on `rate()` near zero |
+| **P2** | Pi-hole / scrape up | `up{job="pihole"}` (Prometheus scrape of `:9617/metrics`) | **covered** | Auth/API failure may yield `up==1` with stale gauges — pair with P1 |
+| **P3** | Upstream / forwarding health | `pihole_query_upstream_count{ip,name,port}`; per-minute `pihole_query_upstream_1m{query_upstream}` | **covered** | Blocked :53 should show upstream drop or `None-*` upstream labels in `_1m` |
+
+**No incident-critical GAP** for Mosher-Labs on paper. **Pi validation still required** (Task 16 scrape + dashboard check).
+
+#### Fallback comparison (desk only — not selected)
+
+| Req | nbx3 | alantoch |
+|-----|------|----------|
+| P1 | `pihole_dns_queries_total` | `pihole_summary_queries_total` |
+| P2 | `pihole_exporter_scrape_success` + `up` | `pihole_exporter_scrape_success` + `up` |
+| P3 | `pihole_upstream_queries{upstream,name}`, `pihole_upstream_response_time_seconds` | `pihole_upstreams_forwarded_queries`, `pihole_upstreams_total_queries` |
+
+nbx3 wins on labeled upstream detail if Mosher-Labs P3 panels are ambiguous after Pi deploy.
 
 ### Platform / container side
 

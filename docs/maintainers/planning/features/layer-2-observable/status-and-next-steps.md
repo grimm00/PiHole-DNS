@@ -7,11 +7,11 @@
 
 ## 📊 Progress Summary
 
-**Overall:** 1/18 tasks complete
+**Overall:** 2/18 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
-| Dashboards and Exporter Fit | 🟠 In Progress | 1/4 tasks | Task 1 done — metrics in [`spike-outcomes.md`](spike-outcomes.md); next Task 2 (Mosher-Labs verification). |
+| Dashboards and Exporter Fit | 🟠 In Progress | 2/4 tasks | Task 2 done — Mosher-Labs covers P1–P3; next Task 3 (node + docker-exporter). |
 | Compose and Services | 🔴 Not Started | 0/5 tasks | Spike compose = `{prometheus, grafana, node-exporter, pihole-exporter, docker-exporter}`, not the starter stack. |
 | Incident and Alerting | 🔴 Not Started | 0/4 tasks | Resolves Q3 (incident shape) and Q4 (alert delivery — Grafana UI lean). |
 | Deploy and Incident Walkthrough | 🔴 Not Started | 0/5 tasks | The simulated-incident moment is the spike's deliverable (Task 18). |
@@ -21,7 +21,7 @@
 ## 🚀 Next Steps
 
 1. **Review scaffolding** — verify the 4-group / 18-task breakdown against `notes/spike-l2.md` framing before expanding. Adjust if anything is off.
-2. **Execute Group 1** — Task 1 complete; run **Task 2** (verify Mosher-Labs metric set against P1–P3 in `spike-outcomes.md`).
+2. **Execute Group 1** — Tasks 1–2 complete; run **Task 3** (node-exporter + docker-exporter vs H1–H6).
 3. **Daily learning log** — append to `notes/spike-l2.md` as work happens. Cite evidence (command output, observed panel state, error text), not vibes.
 4. **Start implementation** — Group 1 first, then sequentially through Group 4. The order is deliberate: dashboard metrics drive exporter choice → compose wires the chosen exporters → incident+alert design against the wired stack → Pi deployment + the simulated-incident moment.
 

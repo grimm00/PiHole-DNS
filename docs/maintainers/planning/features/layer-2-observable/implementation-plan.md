@@ -56,7 +56,7 @@ Learning spike to move the observability competency from familiar-with-help to i
 
 ### Dashboards and Exporter Fit
 - [x] Task 1: Derive required metrics for the two dashboards from the done-signal
-- [ ] Task 2: Verify Mosher-Labs/pihole6-exporter metric set against PiHole-dashboard requirements
+- [x] Task 2: Verify Mosher-Labs/pihole6-exporter metric set against PiHole-dashboard requirements
 - [ ] Task 3: Verify docker-exporter + node-exporter coverage against platform-dashboard requirements
 - [ ] Task 4: Lock in exporter choices; log any swap from the current lean
 
