@@ -64,7 +64,7 @@ Learning spike to move the observability competency from familiar-with-help to i
 ### Compose and Services
 - [x] Task 5: Decide extend-existing-compose vs separate-compose-file (resolves Q5 from `spike-l2.md`)
 - [x] Task 6: Add Prometheus service + draft scrape config for all 5 exporters
-- [ ] Task 7: Add Grafana service + provisioning (datasource + dashboard provisioning structure)
+- [x] Task 7: Add Grafana service + provisioning (datasource + dashboard provisioning structure)
 - [ ] Task 8: Add node-exporter + pihole-exporter + docker-exporter services to compose
 - [ ] Task 9: Update `.env.example` for new secrets (Grafana admin password; reuse of `FTLCONF_webserver_api_password` by pihole-exporter)
 
