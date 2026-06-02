@@ -20,7 +20,7 @@
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
 | Dashboards and Exporter Fit | ✅ Complete | 4/4 tasks | Exporters locked in [`spike-outcomes.md`](spike-outcomes.md) § Group 2 handoff. |
-| Compose and Services | 🟠 Ready | 0/5 tasks | Group 2 ✅ Expanded — `/task 5` (Q5 compose layout) when ready. |
+| Compose and Services | 🟠 In Progress | 0/5 tasks | Task 5 (Q5 layout) in progress. |
 | Incident and Alerting | 🔴 Not Started | 0/4 tasks | Resolves Q3 (incident shape) and Q4 (alert delivery — Grafana UI lean). |
 | Deploy and Incident Walkthrough | 🔴 Not Started | 0/5 tasks | The simulated-incident moment is the spike's deliverable (Task 18). |
 
