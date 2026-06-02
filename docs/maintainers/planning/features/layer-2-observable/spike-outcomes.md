@@ -2,7 +2,7 @@
 
 **Status:** 🟡 In progress — distill from `notes/spike-l2.md` as decisions land  
 **Created:** 2026-06-02  
-**Last updated:** 2026-06-02 (Task 2 — Mosher-Labs mapping)  
+**Last updated:** 2026-06-02 (Task 3 — platform exporter mapping)  
 **Posture:** Learning-week spike, not roadmap reorder. Layer 1 remains the project's official next layer after the week ends.
 
 **Purpose:** Curated decisions and carry-forward context for when Layer 2 becomes official on the roadmap. Raw evidence, daily noise, and screenshots stay in [`notes/spike-l2.md`](../../../../../notes/spike-l2.md).
@@ -65,8 +65,34 @@ nbx3 wins on labeled upstream detail if Mosher-Labs P3 panels are ambiguous afte
 
 ### Platform / container side
 
-- **Lean:** `dlepaux/docker-exporter` + `node-exporter` (not cAdvisor on Pi 5 — memory metrics bug).
-- **Locked:** _pending Task 4_
+- **Lean:** `prom/node-exporter` (host) + `ghcr.io/dlepaux/docker-exporter` (containers on `:9713`).
+- **cAdvisor:** **Out** for this spike — [cAdvisor#2523](https://github.com/google/cadvisor/issues/2523) reports zero `container_memory_working_set_bytes` / `container_memory_rss` on Pi 5 + cgroup v2 + ARM64; dashboards silently lie. Revisit only if docker-exporter fails Task 16 regression on the Pi.
+- **Locked for compose (Task 4):** _pending — lean above unless Pi validation fails_
+
+#### Task 3 — node-exporter + docker-exporter mapping (H1–H6 incident-critical)
+
+**node-exporter** — default collectors on Linux cover host metrics ([node_exporter](https://github.com/prometheus/node_exporter)). Scrape `:9100/metrics`.
+
+| Req | Requirement | Metric(s) | Status | Panel / alert note |
+|-----|-------------|-----------|--------|-------------------|
+| **H1** | Host CPU utilization | `rate(node_cpu_seconds_total{mode!="idle"}[5m])` or `node_load1` / `node_load5` | **covered** | Prefer derived CPU % from `node_cpu_seconds_total`; load averages as corroboration |
+| **H2** | Host memory available / used | `node_memory_MemAvailable_bytes`, `node_memory_MemTotal_bytes` (or `MemFree` + caches per preference) | **covered** | Alert on low `MemAvailable` during spike / OOM pressure |
+| **H3** | Host disk space | `node_filesystem_avail_bytes{mountpoint="/",fstype!="rootfs"}` | nice-to-have (Task 1) | — |
+| **H4** | Host uptime | `node_time_seconds - node_boot_time_seconds` | nice-to-have (Task 1) | — |
+
+**docker-exporter** — cAdvisor-compatible metric names; scrape `:9713/metrics`. Source: [dlepaux/docker-exporter readme](https://github.com/dlepaux/docker-exporter/blob/main/readme.md).
+
+| Req | Requirement | Metric(s) | Status | Panel / alert note |
+|-----|-------------|-----------|--------|-------------------|
+| **H5** | Pi-hole container running state | `container_state{name=~".*pihole.*",state="running"}` (1 = running, 0 otherwise) | **covered** | Stopped containers still exported with `state=0`; filter by compose `container_name` on Pi |
+| **H6** | Pi-hole container memory (trustworthy on Pi 5) | `container_memory_working_set_bytes{name=~".*pihole.*"}` | **covered** | Use **working set**, not raw `container_memory_usage_bytes`; validate non-zero on Pi (Task 16) |
+| **H7** | Pi-hole container CPU | `rate(container_cpu_usage_seconds_total{name=~".*pihole.*"}[5m])` | nice-to-have | Counter — use `rate()` |
+| **H8** | Observability containers running | `container_state{name=~".*prometheus.*|.*grafana.*|.*exporter.*"}` | nice-to-have | — |
+| **H9** | Per-container CPU (full stack) | `container_cpu_usage_seconds_total` by `name` | nice-to-have | — |
+
+**Cross-check (stop-container incident):** **H5** + **H6** on platform dashboard should align with **P1/P2** on Pi-hole dashboard — if Pi-hole panels go quiet and `container_state==0`, story is “container down” without SSH.
+
+**No incident-critical GAP** on paper. **Pi validation still required** (Task 16: docker-exporter memory vs `docker stats`, scrape `up` for both targets).
 
 ---
 
@@ -105,7 +131,7 @@ nbx3 wins on labeled upstream detail if Mosher-Labs P3 panels are ambiguous afte
 | H8 | **Observability containers** (prometheus, grafana, exporters): running state | nice-to-have | Distinguishes “can’t see DNS” because observability stack died vs Pi-hole |
 | H9 | **Per-container CPU** for full spike compose set | nice-to-have | Week-1 depth; H5–H6 sufficient for incident drill |
 
-**Exporter mapping:** deferred to Tasks 2–3 (no exporter names locked in Task 1).
+**Exporter mapping:** Pi-hole (Task 2) + platform (Task 3) — see § Exporter decisions. Task 4 locks images/digests for compose.
 
 ---
 

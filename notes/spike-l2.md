@@ -111,6 +111,12 @@ These are the genuine "can it work?" unknowns. Each could later become its own r
 - **Maintainership:** Mosher-Labs / nbx3 / alantoch all lightly maintained; no swap for activity alone. nbx3 reserved if Pi panels show weak P3 signal.
 - **Evidence:** [Mosher-Labs README metrics](https://github.com/Mosher-Labs/pihole6-exporter#metrics); last meaningful commits Jan 2026 (session management).
 
+### 2026-06-02 (Task 3 — platform exporters)
+
+- **Task 3 complete:** **node-exporter** covers H1–H2 (host CPU, memory); **docker-exporter** covers H5–H6 (`container_state`, `container_memory_working_set_bytes` with Pi 5–safe working set). **cAdvisor explicitly out** — cAdvisor#2523.
+- **No incident-critical GAP** on desk review. Container name filters (`name=~".*pihole.*"`) to be matched to actual Compose `container_name` on Pi.
+- **Evidence:** [dlepaux/docker-exporter readme — Metrics](https://github.com/dlepaux/docker-exporter/blob/main/readme.md#metrics); [node_exporter](https://github.com/prometheus/node_exporter).
+
 *(Append daily: what got tried, what worked, what surprised, what didn't work. Cite evidence — command output, observed dashboard panel, error text — not vibes.)*
 
 ---
