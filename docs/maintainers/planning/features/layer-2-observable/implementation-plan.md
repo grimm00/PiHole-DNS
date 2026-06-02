@@ -58,7 +58,7 @@ Learning spike to move the observability competency from familiar-with-help to i
 - [x] Task 1: Derive required metrics for the two dashboards from the done-signal
 - [x] Task 2: Verify Mosher-Labs/pihole6-exporter metric set against PiHole-dashboard requirements
 - [x] Task 3: Verify docker-exporter + node-exporter coverage against platform-dashboard requirements
-- [ ] Task 4: Lock in exporter choices; log any swap from the current lean
+- [x] Task 4: Lock in exporter choices; log any swap from the current lean
 
 ### Compose and Services
 - [ ] Task 5: Decide extend-existing-compose vs separate-compose-file (resolves Q5 from `spike-l2.md`)

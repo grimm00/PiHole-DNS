@@ -2,29 +2,73 @@
 
 **Status:** 🟡 In progress — distill from `notes/spike-l2.md` as decisions land  
 **Created:** 2026-06-02  
-**Last updated:** 2026-06-02 (Task 3 — platform exporter mapping)  
+**Last updated:** 2026-06-02 (Task 4 — exporter lock-in; Group 1 complete)  
 **Posture:** Learning-week spike, not roadmap reorder. Layer 1 remains the project's official next layer after the week ends.
 
 **Purpose:** Curated decisions and carry-forward context for when Layer 2 becomes official on the roadmap. Raw evidence, daily noise, and screenshots stay in [`notes/spike-l2.md`](../../../../../notes/spike-l2.md).
 
 ---
 
-## Stack shape (fill as Group 2 completes)
+## Stack shape (exporters locked — remainder in Group 2)
 
-| Service | Image / source | Port(s) | Notes |
-|---------|----------------|---------|-------|
-| Prometheus | TBD | TBD | |
-| Grafana | TBD | TBD | |
-| node-exporter | TBD | TBD | Pi host metrics |
-| pihole-exporter | TBD (lean: Mosher-Labs) | TBD | |
-| docker-exporter | TBD (lean: dlepaux) | TBD | Replaces cAdvisor on Pi 5 |
-| Pi-hole | existing compose | 53, 80 | Layer 0 substrate |
+| Service | Image (spike lock) | Port(s) | Notes |
+|---------|-------------------|---------|-------|
+| Prometheus | _Group 2_ | `9090` | Scrape all targets below |
+| Grafana | _Group 2_ | `3000` | LAN IP only (no Layer 1 names) |
+| node-exporter | `prom/node-exporter` (digest pin on Pi) | `9100` | Host metrics H1–H2 |
+| pihole-exporter | `ghcr.io/mosher-labs/pihole6-exporter` (digest pin on Pi) | `9617` | Pi-hole metrics P1–P3 |
+| docker-exporter | `ghcr.io/dlepaux/docker-exporter` (digest pin on Pi) | `9713` | Container metrics H5–H6; not cAdvisor |
+| Pi-hole | existing [`docker-compose.yml`](../../../../../docker-compose.yml) | `53`, `80` | `container_name: pihole` |
 
 **Compose layout (Q5):** _Not decided — extend existing `docker-compose.yml` vs separate compose file._
 
 ---
 
-## Exporter decisions (Group 1 in progress)
+## Group 2 handoff (from Task 4 lock-in)
+
+**Locked 2026-06-02** — no swap from desk lean (Tasks 2–3). Group 2 wires compose + Prometheus scrape from this list.
+
+### Images (pin by digest on Pi before production scrape — same discipline as Pi-hole)
+
+| Service | Image reference | Metrics path |
+|---------|-----------------|--------------|
+| pihole-exporter | `ghcr.io/mosher-labs/pihole6-exporter:latest` → pin `@sha256:…` on Pi | `/metrics` |
+| docker-exporter | `ghcr.io/dlepaux/docker-exporter:latest` → pin `@sha256:…` on Pi | `/metrics` |
+| node-exporter | `prom/node-exporter:latest` → pin `@sha256:…` on Pi | `/metrics` |
+
+### Prometheus scrape targets (static)
+
+| Job name | Target | Interval note |
+|----------|--------|----------------|
+| `pihole` | `pihole-exporter:9617` | default 15s OK |
+| `docker` | `docker-exporter:9713` | ≥15s; avoid under 5s (Docker stats API load) |
+| `node` | `node-exporter:9100` | default 15s OK |
+
+### pihole-exporter (Mosher-Labs)
+
+- **Reach Pi-hole:** same Compose network — host `pihole`, `--pihole-port 80`, `--protocol http` (or equivalent env).
+- **Auth:** `PIHOLE_API_TOKEN` = value of `FTLCONF_webserver_api_password` from `.env` (same secret as Pi-hole service).
+- **Dashboard labels:** `container_state{name="pihole"}` / `container_memory_working_set_bytes{name="pihole"}` (matches [`docker-compose.yml`](../../../../../docker-compose.yml) `container_name`).
+
+### docker-exporter
+
+- **Socket:** mount `/var/run/docker.sock:/var/run/docker.sock:ro`.
+- **Optional:** add container to `docker` group if socket permission issues on Pi (see upstream readme).
+
+### node-exporter
+
+- **Host PID/mounts:** standard `prom/node-exporter` compose pattern for Linux (proc/sys mounts) — detail in Group 2 Task 8.
+
+### If Pi validation fails (Task 16)
+
+| Failure | Fallback |
+|---------|----------|
+| Mosher-Labs P1–P3 weak/missing | `ghcr.io/nbx3/pihole-exporter` |
+| docker-exporter memory wrong | re-evaluate only after comparing to `docker stats`; cAdvisor still **out** on Pi 5 |
+
+---
+
+## Exporter decisions (Group 1 complete)
 
 ### Strategy (Task 2)
 
@@ -38,7 +82,7 @@
 ### Pi-hole side
 
 - **Spike choice (Task 2):** `ghcr.io/mosher-labs/pihole6-exporter` — covers P1–P3; v6 session handling aligned with pinned Pi-hole.
-- **Locked for compose (Task 4):** _pending — spike image above unless Pi validation fails_
+- **Locked (Task 4):** `ghcr.io/mosher-labs/pihole6-exporter` — **no swap** from desk lean.
 - **Fallbacks if Pi fails:** `nbx3/pihole-exporter` (richest upstream metrics), then `alantoch/pihole-exporter` (OpenAPI-generated, scheduled releases)
 
 #### Task 2 — Mosher-Labs metric mapping (P1–P3)
@@ -67,7 +111,7 @@ nbx3 wins on labeled upstream detail if Mosher-Labs P3 panels are ambiguous afte
 
 - **Lean:** `prom/node-exporter` (host) + `ghcr.io/dlepaux/docker-exporter` (containers on `:9713`).
 - **cAdvisor:** **Out** for this spike — [cAdvisor#2523](https://github.com/google/cadvisor/issues/2523) reports zero `container_memory_working_set_bytes` / `container_memory_rss` on Pi 5 + cgroup v2 + ARM64; dashboards silently lie. Revisit only if docker-exporter fails Task 16 regression on the Pi.
-- **Locked for compose (Task 4):** _pending — lean above unless Pi validation fails_
+- **Locked (Task 4):** `prom/node-exporter` + `ghcr.io/dlepaux/docker-exporter` — **no swap** from desk lean.
 
 #### Task 3 — node-exporter + docker-exporter mapping (H1–H6 incident-critical)
 
@@ -84,8 +128,8 @@ nbx3 wins on labeled upstream detail if Mosher-Labs P3 panels are ambiguous afte
 
 | Req | Requirement | Metric(s) | Status | Panel / alert note |
 |-----|-------------|-----------|--------|-------------------|
-| **H5** | Pi-hole container running state | `container_state{name=~".*pihole.*",state="running"}` (1 = running, 0 otherwise) | **covered** | Stopped containers still exported with `state=0`; filter by compose `container_name` on Pi |
-| **H6** | Pi-hole container memory (trustworthy on Pi 5) | `container_memory_working_set_bytes{name=~".*pihole.*"}` | **covered** | Use **working set**, not raw `container_memory_usage_bytes`; validate non-zero on Pi (Task 16) |
+| **H5** | Pi-hole container running state | `container_state{name="pihole",state="running"}` (1 = running, 0 otherwise) | **covered** | Matches Compose `container_name: pihole`; stopped containers export `state=0` |
+| **H6** | Pi-hole container memory (trustworthy on Pi 5) | `container_memory_working_set_bytes{name="pihole"}` | **covered** | Use **working set**, not raw `container_memory_usage_bytes`; validate non-zero on Pi (Task 16) |
 | **H7** | Pi-hole container CPU | `rate(container_cpu_usage_seconds_total{name=~".*pihole.*"}[5m])` | nice-to-have | Counter — use `rate()` |
 | **H8** | Observability containers running | `container_state{name=~".*prometheus.*|.*grafana.*|.*exporter.*"}` | nice-to-have | — |
 | **H9** | Per-container CPU (full stack) | `container_cpu_usage_seconds_total` by `name` | nice-to-have | — |

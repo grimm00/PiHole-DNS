@@ -117,6 +117,12 @@ These are the genuine "can it work?" unknowns. Each could later become its own r
 - **No incident-critical GAP** on desk review. Container name filters (`name=~".*pihole.*"`) to be matched to actual Compose `container_name` on Pi.
 - **Evidence:** [dlepaux/docker-exporter readme — Metrics](https://github.com/dlepaux/docker-exporter/blob/main/readme.md#metrics); [node_exporter](https://github.com/prometheus/node_exporter).
 
+### 2026-06-02 (Task 4 — exporter lock-in; Group 1 complete)
+
+- **Locked (no swap):** `ghcr.io/mosher-labs/pihole6-exporter`, `ghcr.io/dlepaux/docker-exporter`, `prom/node-exporter`. cAdvisor remains out (Pi 5).
+- **Group 2 handoff** in [`spike-outcomes.md`](../docs/maintainers/planning/features/layer-2-observable/spike-outcomes.md) § Group 2 handoff — ports 9617 / 9713 / 9100; `PIHOLE_API_TOKEN` from `FTLCONF_webserver_api_password`; scrape targets `pihole-exporter`, `docker-exporter`, `node-exporter`.
+- **Pause point:** Group 1 done — good time for sense-making before compose (Group 2).
+
 *(Append daily: what got tried, what worked, what surprised, what didn't work. Cite evidence — command output, observed dashboard panel, error text — not vibes.)*
 
 ---

@@ -2,7 +2,8 @@
 
 **Feature:** Layer 2 Observable (Training-Week Spike)  
 **Group:** Dashboards and Exporter Fit  
-**Status:** 🟠 In Progress  
+**Status:** ✅ Complete  
+**Completed:** 2026-06-02  
 **Last Updated:** 2026-06-02  
 
 ---
@@ -118,9 +119,9 @@
 ## ✅ Completion Criteria
 
 - [x] Required-metrics lists for both dashboards exist in [`spike-outcomes.md`](../spike-outcomes.md) (Task 1).
-- [ ] Each incident-critical metric is mapped to a specific exporter metric name or flagged GAP (Tasks 2–3).
-- [ ] Exporter choices locked in `spike-outcomes.md` § Exporter decisions (Task 4).
-- [ ] Learning log in [`notes/spike-l2.md`](../../../../../notes/spike-l2.md) references outcomes doc for the lock-in session.
+- [x] Each incident-critical metric is mapped to a specific exporter metric name or flagged GAP (Tasks 2–3).
+- [x] Exporter choices locked in `spike-outcomes.md` § Exporter decisions (Task 4).
+- [x] Learning log in [`notes/spike-l2.md`](../../../../../notes/spike-l2.md) references outcomes doc for the lock-in session.
 
 ---
 

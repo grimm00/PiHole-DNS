@@ -1,18 +1,18 @@
 # Status & Next Steps — Layer 2 Observable (Learning Spike)
 
-**Status:** 🟠 In Progress — Group 1 started
+**Status:** 🟠 In Progress — Group 1 complete; pause or start Group 2
 **Last Updated:** 2026-06-02
 
 ---
 
 ## 📊 Progress Summary
 
-**Overall:** 3/18 tasks complete
+**Overall:** 4/18 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
-| Dashboards and Exporter Fit | 🟠 In Progress | 3/4 tasks | Task 3 done — platform mapping in `spike-outcomes.md`; next Task 4 (lock all exporters). |
-| Compose and Services | 🔴 Not Started | 0/5 tasks | Spike compose = `{prometheus, grafana, node-exporter, pihole-exporter, docker-exporter}`, not the starter stack. |
+| Dashboards and Exporter Fit | ✅ Complete | 4/4 tasks | Exporters locked in [`spike-outcomes.md`](spike-outcomes.md) § Group 2 handoff. |
+| Compose and Services | 🔴 Not Started | 0/5 tasks | Next: Task 5 (Q5 compose layout) — expand Group 2 or `/task 5` when ready. |
 | Incident and Alerting | 🔴 Not Started | 0/4 tasks | Resolves Q3 (incident shape) and Q4 (alert delivery — Grafana UI lean). |
 | Deploy and Incident Walkthrough | 🔴 Not Started | 0/5 tasks | The simulated-incident moment is the spike's deliverable (Task 18). |
 
@@ -20,10 +20,10 @@
 
 ## 🚀 Next Steps
 
-1. **Review scaffolding** — verify the 4-group / 18-task breakdown against `notes/spike-l2.md` framing before expanding. Adjust if anything is off.
-2. **Execute Group 1** — Tasks 1–3 complete; run **Task 4** (lock exporter choices + Group 2 handoff). Optional **pause** for sense-making before Group 2.
-3. **Daily learning log** — append to `notes/spike-l2.md` as work happens. Cite evidence (command output, observed panel state, error text), not vibes.
-4. **Start implementation** — Group 1 first, then sequentially through Group 4. The order is deliberate: dashboard metrics drive exporter choice → compose wires the chosen exporters → incident+alert design against the wired stack → Pi deployment + the simulated-incident moment.
+1. **Optional pause (recommended)** — read [`spike-outcomes.md`](spike-outcomes.md) § Dashboards + § Group 2 handoff; sanity-check P1–P3 / H1–H6 against how you’d investigate one Q3 incident.
+2. **Group 2** — run `/write-plan-expand 2` if Group 2 tasks are still scaffolding, then `/task 5` (compose layout Q5).
+3. **Daily learning log** — append to `notes/spike-l2.md` with evidence as compose and Pi deploy proceed.
+4. **Anti-drift** — Group 2 is first **code** on the spike branch; keep scope on the five-service stack, not Layer 1 or production hardening.
 
 ---
 
