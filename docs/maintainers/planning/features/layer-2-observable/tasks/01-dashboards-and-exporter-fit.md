@@ -117,7 +117,7 @@
 
 ## ✅ Completion Criteria
 
-- [ ] Required-metrics lists for both dashboards exist in [`spike-outcomes.md`](../spike-outcomes.md) (Task 1).
+- [x] Required-metrics lists for both dashboards exist in [`spike-outcomes.md`](../spike-outcomes.md) (Task 1).
 - [ ] Each incident-critical metric is mapped to a specific exporter metric name or flagged GAP (Tasks 2–3).
 - [ ] Exporter choices locked in `spike-outcomes.md` § Exporter decisions (Task 4).
 - [ ] Learning log in [`notes/spike-l2.md`](../../../../../notes/spike-l2.md) references outcomes doc for the lock-in session.

@@ -2,7 +2,7 @@
 
 **Status:** 🟡 In progress — distill from `notes/spike-l2.md` as decisions land  
 **Created:** 2026-06-02  
-**Last updated:** 2026-06-02  
+**Last updated:** 2026-06-02 (Task 1 — dashboard metrics)  
 **Posture:** Learning-week spike, not roadmap reorder. Layer 1 remains the project's official next layer after the week ends.
 
 **Purpose:** Curated decisions and carry-forward context for when Layer 2 becomes official on the roadmap. Raw evidence, daily noise, and screenshots stay in [`notes/spike-l2.md`](../../../../../notes/spike-l2.md).
@@ -39,15 +39,42 @@
 
 ---
 
-## Dashboards (fill as Group 1 / 3 complete)
+## Dashboards (Task 1 complete — map to exporters in Tasks 2–3)
 
-### Pi-hole dashboard — required metrics
+**Done-signal:** Investigate a simulated incident using **only** dashboards (no SSH, `docker logs`, or `pihole` CLI). Each **incident-critical** row below must support answering: *what broke?*, *when did it start?*, *is it recovering?*
 
-_To be derived in Task 1; map to exporter in Tasks 2–4._
+**Q3 incident candidates** (not chosen yet): stop Pi-hole container · block outbound :53 to upstream · corrupt dnsmasq config · spike query load. Requirements below must cover **all four** so exporter verification (Tasks 2–3) is not blocked when Q3 is picked.
 
-### Platform health dashboard — required metrics
+### Pi-hole dashboard — metrics and panel themes
 
-_To be derived in Task 1; map to node-exporter + docker-exporter in Task 3._
+| # | Signal / panel theme | Priority | Supports investigation when… |
+|---|----------------------|----------|------------------------------|
+| P1 | **DNS query rate** (queries/sec or total over range) | **incident-critical** | DNS stops (container down, misconfig) or spikes (load test incident); primary “is DNS flowing?” signal |
+| P2 | **Pi-hole / exporter target up** (scrape success or status=up) | **incident-critical** | Container stopped or API unreachable; distinguishes “no queries” from “exporter blind” |
+| P3 | **Upstream / forwarding health** (forward success, upstream reachability, or proxy metric) | **incident-critical** | Outbound :53 blocked — local Pi-hole may look “up” but forwarding fails |
+| P4 | **DNS unique clients or active clients** (optional trend) | nice-to-have | Context during incident — “is it just my laptop or whole LAN?” |
+| P5 | **Block rate / percent blocked / blocked query volume** | nice-to-have | Context only — not sufficient alone to diagnose infra incidents |
+| P6 | **Top blocked domains / top queries** | nice-to-have | Engagement / policy context; not required for week-1 incident drill |
+| P7 | **Cache hit rate / reply time** | nice-to-have | Performance context after recovery |
+| P8 | **DHCP leases / DHCP active** | nice-to-have | Out of scope unless incident is DHCP-specific (not in Q3 list) |
+
+**Alert-oriented (Task 11 — design against P1/P2):** at least one rule must fire on **query rate near zero** and/or **target down** for the likely “stop container” or “DNS down” paths.
+
+### Platform health dashboard — metrics and panel themes
+
+| # | Signal / panel theme | Priority | Supports investigation when… |
+|---|----------------------|----------|------------------------------|
+| H1 | **Host CPU utilization** (% or load) | **incident-critical** | Query-spike incident; rules out “Pi pegged” vs DNS-only failure |
+| H2 | **Host memory available / used** | **incident-critical** | OOM or pressure during spike; context for stack stability |
+| H3 | **Host disk space (root or data volume)** | nice-to-have | Not in Q3 list; useful baseline panel |
+| H4 | **Host uptime** | nice-to-have | Context (“did the Pi reboot?”) |
+| H5 | **Pi-hole container: running state** (up/down, restart count if available) | **incident-critical** | **Stop container** incident — must show pihole absent or not running without SSH |
+| H6 | **Pi-hole container: memory working set / RSS** (non-zero, trustworthy on Pi 5) | **incident-critical** | Confirms container resource story; **must not** use cAdvisor on Pi 5 (see learning log) |
+| H7 | **Pi-hole container: CPU usage** | nice-to-have | Corroborates spike load incident |
+| H8 | **Observability containers** (prometheus, grafana, exporters): running state | nice-to-have | Distinguishes “can’t see DNS” because observability stack died vs Pi-hole |
+| H9 | **Per-container CPU** for full spike compose set | nice-to-have | Week-1 depth; H5–H6 sufficient for incident drill |
+
+**Exporter mapping:** deferred to Tasks 2–3 (no exporter names locked in Task 1).
 
 ---
 
