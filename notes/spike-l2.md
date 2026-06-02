@@ -129,6 +129,12 @@ These are the genuine "can it work?" unknowns. Each could later become its own r
 - **Sourcery:** H5/H6 label placement fixed pre-merge; no deferred review items ([`fix/pr4/README.md`](../docs/maintainers/planning/features/layer-2-observable/fix/pr4/README.md)).
 - **Next:** Group 2 compose — Q5 still open until Task 5; handoff § in `spike-outcomes.md` is the wiring spec.
 
+### 2026-06-02 (Task 7 — Grafana)
+
+- **Added:** `grafana` service (`:3000`); provisioning at `grafana/provisioning/` — Prometheus datasource (`http://prometheus:9090`), file dashboard provider + empty `json/` for Task 13.
+- **Secrets:** `GF_SECURITY_ADMIN_PASSWORD` from `.env` only (documented in Task 9 `.env.example`).
+- **Pi access:** `http://<pi-lan-ip>:3000` (no Layer 1 DNS names). UI validation deferred to Group 4.
+
 ### 2026-06-02 (Task 6 — Prometheus)
 
 - **Added:** `prometheus-config/prometheus.yml` (jobs: `prometheus`, `pihole`, `docker`, `node` → handoff targets); `prometheus` service in root `docker-compose.yml` (`9090`, config volume).
