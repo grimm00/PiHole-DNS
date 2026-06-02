@@ -13,7 +13,7 @@
 
 | Service | Image (spike lock) | Port(s) | Notes |
 |---------|-------------------|---------|-------|
-| Prometheus | _Group 2_ | `9090` | Scrape all targets below |
+| Prometheus | `prom/prometheus` (digest pin on Pi) | `9090` | Config: `prometheus-config/prometheus.yml` |
 | Grafana | _Group 2_ | `3000` | LAN IP only (no Layer 1 names) |
 | node-exporter | `prom/node-exporter` (digest pin on Pi) | `9100` | Host metrics H1–H2 |
 | pihole-exporter | `ghcr.io/mosher-labs/pihole6-exporter` (digest pin on Pi) | `9617` | Pi-hole metrics P1–P3 |

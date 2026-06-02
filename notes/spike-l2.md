@@ -129,6 +129,12 @@ These are the genuine "can it work?" unknowns. Each could later become its own r
 - **Sourcery:** H5/H6 label placement fixed pre-merge; no deferred review items ([`fix/pr4/README.md`](../docs/maintainers/planning/features/layer-2-observable/fix/pr4/README.md)).
 - **Next:** Group 2 compose — Q5 still open until Task 5; handoff § in `spike-outcomes.md` is the wiring spec.
 
+### 2026-06-02 (Task 6 — Prometheus)
+
+- **Added:** `prometheus-config/prometheus.yml` (jobs: `prometheus`, `pihole`, `docker`, `node` → handoff targets); `prometheus` service in root `docker-compose.yml` (`9090`, config volume).
+- **Digest:** `prom/prometheus:latest` on branch — pin `@sha256:…` on Pi before production scrape (same as Pi-hole).
+- **Pi validation:** Targets stay `down` until Task 8 exporters exist; `docker compose config` / `/-/healthy` on Pi.
+
 ### 2026-06-02 (Task 5 — Q5 compose layout)
 
 - **Decision:** **Extend** root `docker-compose.yml` (not a sibling `compose.observability.yml`).
