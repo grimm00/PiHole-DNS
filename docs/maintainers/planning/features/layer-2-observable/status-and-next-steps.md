@@ -15,7 +15,7 @@
 
 ## 📊 Progress Summary
 
-**Overall:** 5/18 tasks complete
+**Overall:** 6/18 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
@@ -28,7 +28,7 @@
 
 ## 🚀 Next Steps
 
-1. **Group 2** — `/task 6` (Prometheus + `prometheus.yml`) on `spike/layer-2-observable`; Q5 resolved — extend root `docker-compose.yml`.
+1. **Group 2** — `/task 7` (Grafana + provisioning) on `spike/layer-2-observable`.
 2. **Handoff** — [`spike-outcomes.md`](spike-outcomes.md) § Group 2 handoff (images, ports, scrape jobs, `PIHOLE_API_TOKEN` reuse).
 3. **Daily learning log** — append to [`notes/spike-l2.md`](../../../../../notes/spike-l2.md) with evidence as compose and Pi deploy proceed.
 4. **Anti-drift** — Group 2 is first **code** on the spike; keep scope on the observability stack, not Layer 1 or production hardening.
