@@ -1,6 +1,6 @@
 # Status & Next Steps — Layer 2 Observable (Learning Spike)
 
-**Status:** 🔴 Not Started — Scaffolding only
+**Status:** 🟠 In Progress — Group 1 started
 **Last Updated:** 2026-06-02
 
 ---
@@ -11,7 +11,7 @@
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
-| Dashboards and Exporter Fit | 🟡 Ready | 0/4 tasks | ✅ Expanded — derive metrics, verify exporters, lock choices in [`spike-outcomes.md`](spike-outcomes.md). |
+| Dashboards and Exporter Fit | 🟠 In Progress | 0/4 tasks | Task 1 in flight — metrics list in [`spike-outcomes.md`](spike-outcomes.md). |
 | Compose and Services | 🔴 Not Started | 0/5 tasks | Spike compose = `{prometheus, grafana, node-exporter, pihole-exporter, docker-exporter}`, not the starter stack. |
 | Incident and Alerting | 🔴 Not Started | 0/4 tasks | Resolves Q3 (incident shape) and Q4 (alert delivery — Grafana UI lean). |
 | Deploy and Incident Walkthrough | 🔴 Not Started | 0/5 tasks | The simulated-incident moment is the spike's deliverable (Task 18). |

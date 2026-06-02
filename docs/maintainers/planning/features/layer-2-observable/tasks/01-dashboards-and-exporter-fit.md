@@ -2,7 +2,7 @@
 
 **Feature:** Layer 2 Observable (Training-Week Spike)  
 **Group:** Dashboards and Exporter Fit  
-**Status:** ✅ Expanded  
+**Status:** 🟠 In Progress  
 **Last Updated:** 2026-06-02  
 
 ---
