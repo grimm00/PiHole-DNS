@@ -99,6 +99,30 @@ These are the genuine "can it work?" unknowns. Each could later become its own r
 
 *(Next session: resolve Q3 — choose the simulated incident shape. Q4 — alert delivery, leaning Grafana UI only — needs no further research yet. Q5 — compose architecture — likely decided alongside drafting the actual compose file.)*
 
+### 2026-06-02 (Task 1 — dashboard metrics)
+
+- **Task 1 complete:** Required metrics/panel themes for both dashboards derived from the done-signal and Q3 incident candidates. Lists tagged **incident-critical** vs **nice-to-have** in [`docs/maintainers/planning/features/layer-2-observable/spike-outcomes.md`](../docs/maintainers/planning/features/layer-2-observable/spike-outcomes.md) § Dashboards (Pi-hole: P1–P8; platform: H1–H9). Exporter mapping intentionally deferred to Tasks 2–3.
+- **Design note:** Requirements cover all four Q3 candidates so picking the incident later does not force a metrics rework.
+
+### 2026-06-02 (Task 2 — Mosher-Labs verification)
+
+- **Decision:** Spike uses **wholesale** `Mosher-Labs/pihole6-exporter` (digest-pinned at deploy); **official Layer 2 follow-up** = thin in-repo exporter using v6 session patterns, not long-term dependency on low-activity upstreams. Rationale: learning goal is incident-time **operations**, not exporter authorship this week.
+- **Mapping (P1–P3):** All **covered** per README + source (`pihole_query_*_1m`, `pihole_query_upstream_count`, Prometheus `up`). Table in [`spike-outcomes.md`](../docs/maintainers/planning/features/layer-2-observable/spike-outcomes.md) § Exporter decisions.
+- **Maintainership:** Mosher-Labs / nbx3 / alantoch all lightly maintained; no swap for activity alone. nbx3 reserved if Pi panels show weak P3 signal.
+- **Evidence:** [Mosher-Labs README metrics](https://github.com/Mosher-Labs/pihole6-exporter#metrics); last meaningful commits Jan 2026 (session management).
+
+### 2026-06-02 (Task 3 — platform exporters)
+
+- **Task 3 complete:** **node-exporter** covers H1–H2 (host CPU, memory); **docker-exporter** covers H5–H6 (`container_state`, `container_memory_working_set_bytes` with Pi 5–safe working set). **cAdvisor explicitly out** — cAdvisor#2523.
+- **No incident-critical GAP** on desk review. Container name filters (`name=~".*pihole.*"`) to be matched to actual Compose `container_name` on Pi.
+- **Evidence:** [dlepaux/docker-exporter readme — Metrics](https://github.com/dlepaux/docker-exporter/blob/main/readme.md#metrics); [node_exporter](https://github.com/prometheus/node_exporter).
+
+### 2026-06-02 (Task 4 — exporter lock-in; Group 1 complete)
+
+- **Locked (no swap):** `ghcr.io/mosher-labs/pihole6-exporter`, `ghcr.io/dlepaux/docker-exporter`, `prom/node-exporter`. cAdvisor remains out (Pi 5).
+- **Group 2 handoff** in [`spike-outcomes.md`](../docs/maintainers/planning/features/layer-2-observable/spike-outcomes.md) § Group 2 handoff — ports 9617 / 9713 / 9100; `PIHOLE_API_TOKEN` from `FTLCONF_webserver_api_password`; scrape targets `pihole-exporter`, `docker-exporter`, `node-exporter`.
+- **Pause point:** Group 1 done — good time for sense-making before compose (Group 2).
+
 *(Append daily: what got tried, what worked, what surprised, what didn't work. Cite evidence — command output, observed dashboard panel, error text — not vibes.)*
 
 ---
@@ -106,6 +130,7 @@ These are the genuine "can it work?" unknowns. Each could later become its own r
 ## Cross-references
 
 - **Plan skeleton (scaffolded 2026-06-02):** [`docs/maintainers/planning/features/layer-2-observable/implementation-plan.md`](../docs/maintainers/planning/features/layer-2-observable/implementation-plan.md) — 18 tasks across 4 groups (Dashboards / Compose / Incident+Alerting / Deploy). The plan is *structure*; this file remains the *content* — posture, scope fence, open questions with status, daily learning log. Per the scaffold's note: this was a re-pivot from the spike-with-minimum-scaffolding decision after the desk-research session expanded the picture (felt scope-tracking pain, not anticipated — see the working frame inlined in "Boxed-in scope" above).
+- **Spike outcomes (distilled decisions):** [`docs/maintainers/planning/features/layer-2-observable/spike-outcomes.md`](../docs/maintainers/planning/features/layer-2-observable/spike-outcomes.md) — handoff doc for official Layer 2; dashboard metrics locked in Task 1.
 - **Parent thread:** personal training-week notes (private) — the full discussion that landed on the spike posture, the Layer-1-not-a-dependency check, the substance-vs-collaboration-surface split, and the spike-vs-write-plan methodology choice.
 - **Starter stack (reference shape):** `~/Projects/Observability/docker-compose.yml`.
 - **Substrate:** `~/Projects/PiHole-DNS/docker-compose.yml` and `docs/roadmap.md` Track B ("Observability & engagement: L2–L3 strongest; intent from L0; Minimum viable metrics after L0").

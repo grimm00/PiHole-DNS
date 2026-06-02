@@ -55,10 +55,10 @@ Learning spike to move the observability competency from familiar-with-help to i
 ## 📝 Implementation Plan
 
 ### Dashboards and Exporter Fit
-- [ ] Task 1: Derive required metrics for the two dashboards from the done-signal
-- [ ] Task 2: Verify Mosher-Labs/pihole6-exporter metric set against PiHole-dashboard requirements
-- [ ] Task 3: Verify docker-exporter + node-exporter coverage against platform-dashboard requirements
-- [ ] Task 4: Lock in exporter choices; log any swap from the current lean
+- [x] Task 1: Derive required metrics for the two dashboards from the done-signal
+- [x] Task 2: Verify Mosher-Labs/pihole6-exporter metric set against PiHole-dashboard requirements
+- [x] Task 3: Verify docker-exporter + node-exporter coverage against platform-dashboard requirements
+- [x] Task 4: Lock in exporter choices; log any swap from the current lean
 
 ### Compose and Services
 - [ ] Task 5: Decide extend-existing-compose vs separate-compose-file (resolves Q5 from `spike-l2.md`)
@@ -97,6 +97,7 @@ Learning spike to move the observability competency from familiar-with-help to i
 ## 🔗 Related
 
 - **Working scratchpad / learning log:** [`notes/spike-l2.md`](../../../../notes/spike-l2.md) — *the* source of truth for posture, the boxed-in scope fence, the open-questions-with-status, and the daily append-only learning log. This plan is structure; that is content.
+- **Spike outcomes (official Layer 2 handoff):** [`spike-outcomes.md`](spike-outcomes.md) — distilled decisions; update as groups complete; seeds formal Layer 2 research when the spike ends.
 - **Parent thread:** personal training-week notes (private) — the full multi-thread discussion that landed on the spike posture, the Layer-1-not-a-dependency check, and the spike-vs-write-plan methodology choice.
 - **Frame for resisting drift:** the *"what is this work for?"* frame — fix-pain-now, fix-pain-later, skill-development, or aesthetic alignment. Apply whenever the spike pulls toward something that isn't the done-signal. Don't let one motivation borrow urgency from another.
 - **Project roadmap:** [`docs/roadmap.md`](../../../../roadmap.md) — Track B ("Observability & engagement: L2–L3 strongest; intent from L0; Minimum viable metrics after L0") supports Layer 2 bootstrapping from Layer 0.
