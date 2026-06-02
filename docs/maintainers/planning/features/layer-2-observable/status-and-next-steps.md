@@ -15,12 +15,12 @@
 
 ## 📊 Progress Summary
 
-**Overall:** 4/18 tasks complete
+**Overall:** 5/18 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
 | Dashboards and Exporter Fit | ✅ Complete | 4/4 tasks | Exporters locked in [`spike-outcomes.md`](spike-outcomes.md) § Group 2 handoff. |
-| Compose and Services | 🟠 In Progress | 0/5 tasks | Task 5 (Q5 layout) in progress. |
+| Compose and Services | 🟠 In Progress | 1/5 tasks | Q5 locked — extend `docker-compose.yml`; Task 6 next (Prometheus). |
 | Incident and Alerting | 🔴 Not Started | 0/4 tasks | Resolves Q3 (incident shape) and Q4 (alert delivery — Grafana UI lean). |
 | Deploy and Incident Walkthrough | 🔴 Not Started | 0/5 tasks | The simulated-incident moment is the spike's deliverable (Task 18). |
 
@@ -28,7 +28,7 @@
 
 ## 🚀 Next Steps
 
-1. **Group 2** — `/task 5` on `spike/layer-2-observable` per expanded [`tasks/02-compose-and-services.md`](tasks/02-compose-and-services.md) (Q5 → Prometheus → Grafana → exporters → `.env.example`).
+1. **Group 2** — `/task 6` (Prometheus + `prometheus.yml`) on `spike/layer-2-observable`; Q5 resolved — extend root `docker-compose.yml`.
 2. **Handoff** — [`spike-outcomes.md`](spike-outcomes.md) § Group 2 handoff (images, ports, scrape jobs, `PIHOLE_API_TOKEN` reuse).
 3. **Daily learning log** — append to [`notes/spike-l2.md`](../../../../../notes/spike-l2.md) with evidence as compose and Pi deploy proceed.
 4. **Anti-drift** — Group 2 is first **code** on the spike; keep scope on the observability stack, not Layer 1 or production hardening.

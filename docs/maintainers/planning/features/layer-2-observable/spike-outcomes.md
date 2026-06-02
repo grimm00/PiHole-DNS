@@ -2,7 +2,7 @@
 
 **Status:** 🟡 In progress — distill from `notes/spike-l2.md` as decisions land  
 **Created:** 2026-06-02  
-**Last updated:** 2026-06-02 (Task 4 — exporter lock-in; Group 1 complete)  
+**Last updated:** 2026-06-02 (Task 5 — Q5 compose layout; extend `docker-compose.yml`)  
 **Posture:** Learning-week spike, not roadmap reorder. Layer 1 remains the project's official next layer after the week ends.
 
 **Purpose:** Curated decisions and carry-forward context for when Layer 2 becomes official on the roadmap. Raw evidence, daily noise, and screenshots stay in [`notes/spike-l2.md`](../../../../../notes/spike-l2.md).
@@ -20,7 +20,12 @@
 | docker-exporter | `ghcr.io/dlepaux/docker-exporter` (digest pin on Pi) | `9713` | Container metrics H5–H6; not cAdvisor |
 | Pi-hole | existing [`docker-compose.yml`](../../../../../docker-compose.yml) | `53`, `80` | `container_name: pihole` |
 
-**Compose layout (Q5):** _Not decided — extend existing `docker-compose.yml` vs separate compose file._
+**Compose layout (Q5):** **Extend** root [`docker-compose.yml`](../../../../../docker-compose.yml) — one Compose project on the Pi.
+
+- **Operator command:** `docker compose up -d` from repo root (no `-f` override).
+- **Rationale:** Single default bridge network so Prometheus scrape targets match § Group 2 handoff DNS names (`pihole`, `pihole-exporter:9617`, `docker-exporter:9713`, `node-exporter:9100`, `prometheus:9090`); same project for stop-container incident (Task 18); aligns with desk lean in `notes/spike-l2.md`.
+- **Rejected for spike:** Sibling `compose.observability.yml` — extra mental overhead and `-f docker-compose.yml -f compose.observability.yml` on every deploy/drill without benefit while hostnames are fixed in handoff.
+- **Pi-hole-only rollback:** `docker compose up -d pihole` (other services stopped) or comment out observability services — acceptable tradeoff vs second file.
 
 ---
 

@@ -62,7 +62,7 @@ Learning spike to move the observability competency from familiar-with-help to i
 - [x] Task 4: Lock in exporter choices; log any swap from the current lean
 
 ### Compose and Services
-- [ ] Task 5: Decide extend-existing-compose vs separate-compose-file (resolves Q5 from `spike-l2.md`)
+- [x] Task 5: Decide extend-existing-compose vs separate-compose-file (resolves Q5 from `spike-l2.md`)
 - [ ] Task 6: Add Prometheus service + draft scrape config for all 5 exporters
 - [ ] Task 7: Add Grafana service + provisioning (datasource + dashboard provisioning structure)
 - [ ] Task 8: Add node-exporter + pihole-exporter + docker-exporter services to compose

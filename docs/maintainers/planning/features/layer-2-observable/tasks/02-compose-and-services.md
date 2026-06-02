@@ -169,7 +169,7 @@
 
 ## ✅ Completion Criteria
 
-- [ ] Q5 decision recorded (extend-existing vs separate compose file) with a one-line rationale in `notes/spike-l2.md` learning log.
+- [x] Q5 decision recorded (extend-existing vs separate compose file) with a one-line rationale in `notes/spike-l2.md` learning log.
 - [ ] All 5 new services declared in compose, with pinned image digests (or explicit follow-up pin commit documented on Pi before Task 15).
 - [ ] `prometheus-config/prometheus.yml` scrape config covers all 5 targets including self-scrape.
 - [ ] Grafana provisioning directories exist with at least the Prometheus datasource configured.
