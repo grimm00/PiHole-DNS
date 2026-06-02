@@ -42,7 +42,7 @@ Sourcery's guide summarizes the PR accurately: Group 1 tasks expanded and comple
 
 | Comment | Priority | Impact | Effort | Action |
 |---------|----------|--------|--------|--------|
-| #1 — docker-exporter metrics under pihole-exporter heading | 🟢 LOW | 🟡 MEDIUM (doc clarity) | 🟢 LOW | **Fix before merge** — move bullet or clarify cross-exporter labels |
+| #1 — docker-exporter metrics under pihole-exporter heading | 🟢 LOW | 🟡 MEDIUM (doc clarity) | 🟢 LOW | **Addressed** — moved to docker-exporter § (2026-06-02) |
 
 ### Per-comment detail
 
@@ -51,7 +51,7 @@ Sourcery's guide summarizes the PR accurately: Group 1 tasks expanded and comple
 **Priority:** LOW 🟢  
 **Impact:** MEDIUM 🟡 — wrong section may confuse Group 2 implementer wiring Grafana/Prometheus labels  
 **Effort:** LOW 🟢 — one-line move or parenthetical in `spike-outcomes.md`  
-**Action:** Fix on `spike/layer-2-observable` before merge (optional follow-up commit on same PR).
+**Action:** Addressed — bullet moved under docker-exporter § Group 2 handoff.
 
 ### Priority reference
 
@@ -70,4 +70,4 @@ Sourcery's guide summarizes the PR accurately: Group 1 tasks expanded and comple
 
 ## Merge recommendation
 
-**Approve after Comment #1 doc fix** (or accept with explicit acknowledgment that H5/H6 labels are docker-exporter — content is correct in Task 3 table, only Group 2 handoff subsection is misfiled).
+**Approve** — Comment #1 addressed.

@@ -48,11 +48,11 @@
 
 - **Reach Pi-hole:** same Compose network — host `pihole`, `--pihole-port 80`, `--protocol http` (or equivalent env).
 - **Auth:** `PIHOLE_API_TOKEN` = value of `FTLCONF_webserver_api_password` from `.env` (same secret as Pi-hole service).
-- **Dashboard labels:** `container_state{name="pihole"}` / `container_memory_working_set_bytes{name="pihole"}` (matches [`docker-compose.yml`](../../../../../docker-compose.yml) `container_name`).
 
 ### docker-exporter
 
 - **Socket:** mount `/var/run/docker.sock:/var/run/docker.sock:ro`.
+- **Dashboard labels (H5/H6):** `container_state{name="pihole"}` / `container_memory_working_set_bytes{name="pihole"}` — matches [`docker-compose.yml`](../../../../../docker-compose.yml) `container_name`.
 - **Optional:** add container to `docker` group if socket permission issues on Pi (see upstream readme).
 
 ### node-exporter
