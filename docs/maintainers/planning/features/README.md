@@ -10,7 +10,7 @@
 
 ### Active Features
 
-*(None — next feature TBD.)*
+- **[layer-2-observable](layer-2-observable/implementation-plan.md)** — Layer 2 learning-week spike (Prometheus + Grafana on Pi) — 🟠 **4/18** ([status](layer-2-observable/status-and-next-steps.md); Group 1 merged via [PR #4](https://github.com/grimm00/PiHole-DNS/pull/4))
 
 ### Recently completed
 

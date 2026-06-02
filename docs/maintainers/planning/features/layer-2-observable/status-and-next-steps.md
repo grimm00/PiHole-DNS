@@ -1,7 +1,15 @@
 # Status & Next Steps — Layer 2 Observable (Learning Spike)
 
-**Status:** 🟠 In Progress — Group 1 complete; pause or start Group 2
+**Status:** 🟠 In Progress — Group 1 merged; Group 2 next (compose + observability stack)
 **Last Updated:** 2026-06-02
+
+---
+
+## Merged
+
+| PR | Base | Merged | What shipped |
+|----|------|--------|--------------|
+| [#4](https://github.com/grimm00/PiHole-DNS/pull/4) | `develop` | 2026-06-02 | Group 1 (Tasks 1–4): dashboard requirements P1–P8 / H1–H9, exporter lock-in, [`spike-outcomes.md`](spike-outcomes.md) § Group 2 handoff; Sourcery [`pr4.md`](../../../feedback/sourcery/pr4.md) — see [`fix/pr4/README.md`](fix/pr4/README.md) |
 
 ---
 
@@ -20,10 +28,10 @@
 
 ## 🚀 Next Steps
 
-1. **Optional pause (recommended)** — read [`spike-outcomes.md`](spike-outcomes.md) § Dashboards + § Group 2 handoff; sanity-check P1–P3 / H1–H6 against how you’d investigate one Q3 incident.
-2. **Group 2** — run `/write-plan-expand 2` if Group 2 tasks are still scaffolding, then `/task 5` (compose layout Q5).
-3. **Daily learning log** — append to `notes/spike-l2.md` with evidence as compose and Pi deploy proceed.
-4. **Anti-drift** — Group 2 is first **code** on the spike branch; keep scope on the five-service stack, not Layer 1 or production hardening.
+1. **Group 2** — expand [`tasks/02-compose-and-services.md`](tasks/02-compose-and-services.md) (if not already ✅ Expanded), then `/task 5` on `spike/layer-2-observable` (Q5 compose layout → Prometheus → Grafana → exporters → `.env.example`).
+2. **Handoff reference** — [`spike-outcomes.md`](spike-outcomes.md) § Group 2 handoff (images, ports, scrape jobs, `PIHOLE_API_TOKEN` reuse).
+3. **Daily learning log** — append to [`notes/spike-l2.md`](../../../../../notes/spike-l2.md) with evidence as compose and Pi deploy proceed.
+4. **Anti-drift** — Group 2 is first **code** on the spike; keep scope on the observability stack, not Layer 1 or production hardening.
 
 ---
 

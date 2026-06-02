@@ -123,6 +123,12 @@ These are the genuine "can it work?" unknowns. Each could later become its own r
 - **Group 2 handoff** in [`spike-outcomes.md`](../docs/maintainers/planning/features/layer-2-observable/spike-outcomes.md) § Group 2 handoff — ports 9617 / 9713 / 9100; `PIHOLE_API_TOKEN` from `FTLCONF_webserver_api_password`; scrape targets `pihole-exporter`, `docker-exporter`, `node-exporter`.
 - **Pause point:** Group 1 done — good time for sense-making before compose (Group 2).
 
+### 2026-06-02 (PR #4 merged — Group 1 on `develop`)
+
+- **[PR #4](https://github.com/grimm00/PiHole-DNS/pull/4)** merged to `develop` from `spike/layer-2-observable`. Planning artifacts + `spike-outcomes.md` now on default integration branch.
+- **Sourcery:** H5/H6 label placement fixed pre-merge; no deferred review items ([`fix/pr4/README.md`](../docs/maintainers/planning/features/layer-2-observable/fix/pr4/README.md)).
+- **Next:** Group 2 compose — Q5 still open until Task 5; handoff § in `spike-outcomes.md` is the wiring spec.
+
 *(Append daily: what got tried, what worked, what surprised, what didn't work. Cite evidence — command output, observed dashboard panel, error text — not vibes.)*
 
 ---

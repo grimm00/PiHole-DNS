@@ -21,9 +21,10 @@ tasks_files:
 ---
 # Implementation Plan — Layer 2 Observable (Learning Spike)
 
-**Status:** 🔴 Not Started — Scaffolding only
+**Status:** 🟠 In Progress — 4/18 tasks (Group 1 merged via PR #4)
 **Created:** 2026-06-02
 **Last Updated:** 2026-06-02
+**Merged:** PR #4 (2026-06-02) — Group 1 dashboards and exporter fit
 **Source:** [`../../../../notes/spike-l2.md`](../../../../../notes/spike-l2.md) (working spike scratchpad — *the* source of truth for posture, scope fence, and learning log)
 
 ---
