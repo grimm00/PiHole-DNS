@@ -15,7 +15,7 @@
 
 ## 📊 Progress Summary
 
-**Overall:** 7/18 tasks complete
+**Overall:** 8/18 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
@@ -28,7 +28,7 @@
 
 ## 🚀 Next Steps
 
-1. **Group 2** — `/task 8` (node-, pihole-, docker-exporters) on `spike/layer-2-observable`.
+1. **Group 2** — `/task 9` (`.env.example` secrets) on `spike/layer-2-observable`.
 2. **Handoff** — [`spike-outcomes.md`](spike-outcomes.md) § Group 2 handoff (images, ports, scrape jobs, `PIHOLE_API_TOKEN` reuse).
 3. **Daily learning log** — append to [`notes/spike-l2.md`](../../../../../notes/spike-l2.md) with evidence as compose and Pi deploy proceed.
 4. **Anti-drift** — Group 2 is first **code** on the spike; keep scope on the observability stack, not Layer 1 or production hardening.
