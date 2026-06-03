@@ -1,0 +1,6 @@
+# Desk / rootless Podman — merge with docker-compose.yml (Pi: base file only).
+# Mount host podman.sock; in-container path stays docker.sock for docker-exporter.
+services:
+  docker-exporter:
+    volumes:
+      - /run/user/1000/podman/podman.sock:/var/run/docker.sock:ro
