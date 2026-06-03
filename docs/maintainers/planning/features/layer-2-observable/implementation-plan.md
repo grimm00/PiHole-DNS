@@ -66,7 +66,7 @@ Learning spike to move the observability competency from familiar-with-help to i
 - [x] Task 6: Add Prometheus service + draft scrape config for all 5 exporters
 - [x] Task 7: Add Grafana service + provisioning (datasource + dashboard provisioning structure)
 - [x] Task 8: Add node-exporter + pihole-exporter + docker-exporter services to compose
-- [ ] Task 9: Update `.env.example` for new secrets (Grafana admin password; reuse of `FTLCONF_webserver_api_password` by pihole-exporter)
+- [x] Task 9: Update `.env.example` for new secrets (Grafana admin password; reuse of `FTLCONF_webserver_api_password` by pihole-exporter)
 
 ### Incident and Alerting
 - [ ] Task 10: Choose simulated-incident shape from candidates (resolves Q3 from `spike-l2.md`)
