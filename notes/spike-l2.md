@@ -129,6 +129,11 @@ These are the genuine "can it work?" unknowns. Each could later become its own r
 - **Sourcery:** H5/H6 label placement fixed pre-merge; no deferred review items ([`fix/pr4/README.md`](../docs/maintainers/planning/features/layer-2-observable/fix/pr4/README.md)).
 - **Next:** Group 2 compose — Q5 still open until Task 5; handoff § in `spike-outcomes.md` is the wiring spec.
 
+### 2026-06-02 (Task 9 — .env.example; Group 2 complete)
+
+- **Updated:** `.env.example` — `GF_SECURITY_ADMIN_PASSWORD`; documented pihole-exporter reuse of `FTLCONF_webserver_api_password`; node/docker exporters need no extra secrets.
+- **Group 2 done:** full spike compose in root `docker-compose.yml` (Pi-hole + Prometheus + Grafana + three exporters). Desk smoke: `podman-compose config` / optional `up` before Pi (Group 4).
+
 ### 2026-06-02 (Task 8 — exporters)
 
 - **Added:** `node-exporter` (:9100, proc/sys/rootfs mounts), `pihole-exporter` (Mosher-Labs, `-H pihole`, `PIHOLE_API_TOKEN` from `FTLCONF_webserver_api_password`), `docker-exporter` (:9713, docker.sock ro).
