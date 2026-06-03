@@ -52,7 +52,7 @@ Step-by-step checks for the observability stack added to root `docker-compose.ym
 
 **Expected Result:** ✅ Six observability services + pihole show running (or restarting with clear logs — fix before pass).
 
-**Desk:** `-f docker-compose.desk.yml` plus in `.env`: `PIHOLE_HOST_DNS_PORT=1053`, `PIHOLE_HOST_WEB_PORT=8080` (not `5353` — mDNS; rootless cannot bind 53/80).
+**Desk:** `-f docker-compose.desk.yml` plus in `.env`: `PIHOLE_HOST_DNS_PORT=15353`, `PIHOLE_HOST_WEB_PORT=18080` (see `.env.example`; avoid `5353` mDNS; rootless cannot bind 53/80).
 
 ---
 
