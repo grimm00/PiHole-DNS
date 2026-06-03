@@ -21,9 +21,9 @@ services:
     # When pinning or bumping, record which upstream pihole/pihole:<tag> this digest came from (commit message or runbook step — see minimum-deploy digest workflow).
     image: docker.io/pihole/pihole@sha256:300cc8f9e966b00440358aafef21f91b32dfe8887e8bd9a6193ed1c4328655d4
     ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "80:80/tcp"
+      - "${PIHOLE_HOST_DNS_PORT:-53}:53/tcp"
+      - "${PIHOLE_HOST_DNS_PORT:-53}:53/udp"
+      - "${PIHOLE_HOST_WEB_PORT:-80}:80/tcp"
     environment:
       # US Central (Chicago). Set to another IANA time zone if your Pi is elsewhere.
       TZ: 'America/Chicago'

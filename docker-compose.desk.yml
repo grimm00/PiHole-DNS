@@ -1,12 +1,8 @@
 # Desk / rootless Podman — merge with docker-compose.yml (Pi: base file only).
-# - docker-exporter: host podman.sock (no /var/run/docker.sock on Steam OS)
-# - pihole: host ports >= 1024 (rootless cannot bind 53/80 on the host)
+# Mount host podman.sock; in-container path stays docker.sock for docker-exporter.
+# Pi-hole host ports: set PIHOLE_HOST_DNS_PORT=5353 and PIHOLE_HOST_WEB_PORT=8080 in .env
+# (rootless cannot bind host ports < 1024; defaults 53/80 are for Pi/Docker).
 services:
-  pihole:
-    ports:
-      - "5353:53/tcp"
-      - "5353:53/udp"
-      - "8080:80/tcp"
   docker-exporter:
     volumes:
       - /run/user/1000/podman/podman.sock:/var/run/docker.sock:ro
