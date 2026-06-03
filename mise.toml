@@ -1,19 +1,19 @@
-# Desk compose shortcuts (rootless Podman + docker-compose.desk.yml).
-# Pi production: docker compose up -d  (no desk override file)
+# Desk compose shortcuts (manual-testing.md). Pi: docker compose up -d (no desk file).
+# Uses bash -lic so ~/.bashrc podman-compose (distrobox) is available — mise shells are non-interactive.
 # Requires .env at repo root. First time: mise trust
 
 [tasks.up]
-description = "Desk: podman-compose up -d (base + desk override)"
-run = "podman-compose -f docker-compose.yml -f docker-compose.desk.yml up -d"
+description = "Desk: stack up (base + docker-compose.desk.yml)"
+run = "bash -lic 'podman-compose -f docker-compose.yml -f docker-compose.desk.yml up -d'"
 
 [tasks.down]
 description = "Desk: tear down stack"
-run = "podman-compose -f docker-compose.yml -f docker-compose.desk.yml down"
+run = "bash -lic 'podman-compose -f docker-compose.yml -f docker-compose.desk.yml down'"
 
 [tasks.ps]
 description = "Desk: compose ps"
-run = "podman-compose -f docker-compose.yml -f docker-compose.desk.yml ps"
+run = "bash -lic 'podman-compose -f docker-compose.yml -f docker-compose.desk.yml ps'"
 
 [tasks.config]
 description = "Desk: validate compose config"
-run = "podman-compose -f docker-compose.yml -f docker-compose.desk.yml config"
+run = "bash -lic 'podman-compose -f docker-compose.yml -f docker-compose.desk.yml config'"

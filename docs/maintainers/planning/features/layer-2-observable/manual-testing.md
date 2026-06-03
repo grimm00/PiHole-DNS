@@ -19,7 +19,7 @@ Step-by-step checks for the observability stack added to root `docker-compose.ym
 
 ### Desk compose shortcut (mise)
 
-From repo root: `mise run up` (both `-f` files — see [`mise.toml`](../../../../../mise.toml)). Also `config`, `ps`, `down`. Pi uses `docker compose` without the desk file.
+From repo root: `mise run up` (both `-f` files — see [`mise.toml`](../../../../../mise.toml); invokes `podman-compose` via `bash -lic` so your `~/.bashrc` distrobox wrapper applies). Also `config`, `ps`, `down`. Pi uses `docker compose` without the desk file.
 
 ---
 
