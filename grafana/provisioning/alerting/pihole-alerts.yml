@@ -1,0 +1,127 @@
+# Layer 2 spike — Grafana unified alerting (Task 12).
+# Mirrors prometheus-config/alerts.yml PromQL. No Alertmanager; no external contact points.
+apiVersion: 1
+
+groups:
+  - orgId: 1
+    name: pihole_spike_incident
+    folder: Layer 2 Spike
+    interval: 1m
+    rules:
+      - uid: pihole_container_down
+        title: Pi-hole container not running
+        condition: C
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 300
+              to: 0
+            datasourceUid: prometheus
+            model:
+              editorMode: code
+              expr: container_state{name="pihole",state="running"} == 0
+              instant: true
+              intervalMs: 1000
+              legendFormat: __auto
+              maxDataPoints: 43200
+              range: false
+              refId: A
+          - refId: C
+            relativeTimeRange:
+              from: 0
+              to: 0
+            datasourceUid: __expr__
+            model:
+              conditions:
+                - evaluator:
+                    params:
+                      - 1
+                    type: lt
+                  operator:
+                    type: and
+                  query:
+                    params:
+                      - C
+                  reducer:
+                    params: []
+                    type: last
+                  type: query
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: A
+              intervalMs: 1000
+              maxDataPoints: 43200
+              refId: C
+              type: threshold
+        dashboardUid: platform-health
+        panelId: 3
+        noDataState: Alerting
+        execErrState: Alerting
+        for: 1m
+        annotations:
+          summary: Pi-hole container is not running
+          description: >-
+            docker-exporter reports container_state=0 for pihole. Open Platform
+            Health → H5, then Pi-hole DNS → P1.
+        labels:
+          severity: critical
+          spike_incident: stop_container
+
+      - uid: pihole_query_rate_zero
+        title: Pi-hole DNS query rate zero
+        condition: C
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: prometheus
+            model:
+              editorMode: code
+              expr: sum(pihole_query_type_1m) == 0
+              instant: true
+              intervalMs: 1000
+              legendFormat: __auto
+              maxDataPoints: 43200
+              range: false
+              refId: A
+          - refId: C
+            relativeTimeRange:
+              from: 0
+              to: 0
+            datasourceUid: __expr__
+            model:
+              conditions:
+                - evaluator:
+                    params:
+                      - 0
+                    type: gt
+                  operator:
+                    type: and
+                  query:
+                    params:
+                      - C
+                  reducer:
+                    params: []
+                    type: last
+                  type: query
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: A
+              intervalMs: 1000
+              maxDataPoints: 43200
+              refId: C
+              type: threshold
+        dashboardUid: pihole-dns
+        panelId: 1
+        noDataState: NoData
+        execErrState: Error
+        for: 2m
+        annotations:
+          summary: Pi-hole DNS query rate is zero
+          description: No queries in 1m window. Open Pi-hole DNS dashboard → P1.
+        labels:
+          severity: critical
+          spike_incident: stop_container

@@ -184,11 +184,13 @@ nbx3 wins on labeled upstream detail if Mosher-Labs P3 panels are ambiguous afte
 
 ---
 
-## Incident and alerting (fill as Group 3 completes)
+## Incident and alerting (Group 3 — Tasks 10–13)
 
-- **Simulated incident (Q3):** _not chosen_
-- **Alert delivery (Q4):** _leaning Grafana UI only_
-- **Alert → dashboard path:** _one paragraph when Task 12 completes_
+- **Simulated incident (Q3):** **Stop Pi-hole container** (`docker compose stop pihole`) — chosen 2026-06-03. Rationale: H5 + P1/P2 cross-check gives unambiguous “container down” story without iptables or config corruption. Rejected block :53 (upstream-only signal), corrupt dnsmasq (ambiguous), spike load (wrong failure mode).
+- **Alert delivery (Q4):** **Grafana unified alerting UI only** — no Alertmanager, no email/Slack/webhook. Prometheus rules in `prometheus-config/alerts.yml`; Grafana rules in `grafana/provisioning/alerting/pihole-alerts.yml`.
+- **Alert → dashboard path:** Grafana → Alerting → Firing → **Pi-hole container not running** → linked **Platform Health** panel H5 (id 3); corroborate **Pi-hole DNS** P1 (id 1). See learning log in [`notes/spike-l2.md`](../../../../../notes/spike-l2.md) 2026-06-03 Task 12 entry.
+- **Dashboards (Task 13):** `grafana/provisioning/dashboards/json/pihole-dns.json` (`uid: pihole-dns`), `platform-health.json` (`uid: platform-health`).
+- **Primary alert rules:** `PiHoleContainerNotRunning` (`container_state{name="pihole",state="running"}==0`, `for: 1m`); corroboration `PiHoleDNSQueryRateZero` (`sum(pihole_query_type_1m)==0`, `for: 2m`).
 
 ---
 

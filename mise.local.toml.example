@@ -1,0 +1,6 @@
+# Optional per-machine overrides (copy to mise.local.toml — gitignored).
+# Default tasks use bash -lic + ~/.bashrc podman-compose (Steam Deck distrobox).
+# Override only if you need a different compose command, e.g. plain docker on another host:
+#
+# [tasks.compose-up]
+# run = "docker compose up -d"

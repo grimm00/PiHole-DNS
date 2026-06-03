@@ -22,6 +22,7 @@ logs/
 .env
 .env.local
 .env.*.local
+mise.local.toml
 
 # Docker
 .docker/

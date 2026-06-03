@@ -56,8 +56,8 @@ These are the genuine "can it work?" unknowns. Each could later become its own r
 
 1. **PiHole v6 metrics exposure.** Does the current pinned image (`pihole/pihole@sha256:300cc8f9e966b00440358aafef21f91b32dfe8887e8bd9a6193ed1c4328655d4`) expose a Prometheus-scrapable metrics endpoint natively, or is a sidecar exporter (`pihole-exporter`) needed? *Status: **ANSWERED 2026-06-02** — no native endpoint; sidecar exporter required. Leaning `Mosher-Labs/pihole6-exporter`. See learning log for evidence and alternatives.*
 2. **cAdvisor on Pi 5 (ARM64).** Does the published cAdvisor image run on Pi 5 / Raspberry Pi OS, or does the architecture introduce gotchas? *Status: **ANSWERED 2026-06-02** — runs, but has a Pi-5-specific silent-lying bug on memory metrics (cAdvisor#2523). Leaning `docker-exporter` instead. See learning log for evidence.*
-3. **Choice of "simulated incident."** Candidates: stop PiHole container; block outbound :53 to upstream resolvers; corrupt dnsmasq config; spike query load. Pick one with a clean signal *for the dashboard* — i.e., the dashboard tells the story without ambiguity. *Status: candidates listed, not chosen.*
-4. **Alert delivery.** Prometheus → Alertmanager → where? Just Grafana UI for the dashboard moment, or notification (email/webhook)? Probably "just Grafana UI" for week-1 simplicity. *Status: leaning Grafana UI only.*
+3. **Choice of "simulated incident."** Candidates: stop PiHole container; block outbound :53 to upstream resolvers; corrupt dnsmasq config; spike query load. Pick one with a clean signal *for the dashboard* — i.e., the dashboard tells the story without ambiguity. *Status: **ANSWERED 2026-06-03 (Task 10)** — **stop Pi-hole container** (`docker compose stop pihole`). H5→NOT RUNNING + P1→0 + P2 may stay UP; clearest cross-dashboard story. Rejected: block :53 (P3-only, container looks up), corrupt dnsmasq (ambiguous vs container down), spike load (wrong failure mode for week-1 drill).*
+4. **Alert delivery.** Prometheus → Alertmanager → where? Just Grafana UI for the dashboard moment, or notification (email/webhook)? Probably "just Grafana UI" for week-1 simplicity. *Status: **ANSWERED 2026-06-03 (Task 12)** — **Grafana unified alerting UI only**; Prometheus rules in `alerts.yml` + mirrored Grafana provisioned rules; no Alertmanager, no email/Slack/webhook.*
 5. **Where on the Pi does the new observability stack live?** Side-by-side with the existing Compose? Same Compose file? Separate? *Status: **ANSWERED 2026-06-02 (Task 5)** — **extend** root `docker-compose.yml`; one `docker compose up -d`, default network, scrape hostnames per `spike-outcomes.md` § Group 2 handoff. Separate override file rejected for spike (operator friction, no hostname win).*
 
 (Append more as discovered.)
@@ -158,6 +158,19 @@ These are the genuine "can it work?" unknowns. Each could later become its own r
 - **Rationale (one line):** One Compose project + default network keeps handoff scrape DNS (`pihole-exporter`, `docker-exporter`, `node-exporter`, `pihole`) and stop-container incident in the same stack as Layer 0 Pi-hole.
 - **Alternatives considered:** Separate compose file — easier “Pi-hole only” file split, but every Task 15/18 drill needs `-f` twice; hostnames unchanged so no win.
 - **Recorded in:** [`spike-outcomes.md`](../docs/maintainers/planning/features/layer-2-observable/spike-outcomes.md) § Stack shape.
+
+### 2026-06-03 (Task 10 — Q3 incident shape)
+
+- **Decision:** Simulated incident = **stop Pi-hole container** (`docker compose stop pihole` on the Pi; same Compose project as observability stack).
+- **Rationale:** Clearest dashboard story for week-1 — **H5** flips to NOT RUNNING, **P1** query rate drops to zero, **H6** working set drops; **P2** may remain UP (exporter still scrapes) which is useful signal ("exporter blind vs DNS quiet").
+- **Rejected:** block outbound :53 (container still "running"; upstream panels only), corrupt dnsmasq (misconfig vs down is ambiguous without SSH), spike query load (teaches load not outage).
+- **Recorded in:** [`spike-outcomes.md`](../docs/maintainers/planning/features/layer-2-observable/spike-outcomes.md) § Incident and alerting.
+
+### 2026-06-03 (Task 12 — Q4 alert delivery + navigation)
+
+- **Decision:** **Grafana unified alerting UI only** — no Alertmanager service, no external contact points.
+- **Dual evaluation:** Prometheus `prometheus-config/alerts.yml` (for `/alerts` UI + rule consistency) + Grafana provisioned rules in `grafana/provisioning/alerting/pihole-alerts.yml` (mirrored PromQL).
+- **Alert → dashboard navigation:** In Grafana, open **Alerting → Alert rules** (or **Alerting → Firing** when incident active). Click **Pi-hole container not running** → **View panel** / linked dashboard opens **Platform Health** at **H5 — Pi-hole container running state** (panel 3). Confirm corroboration on **Pi-hole DNS** dashboard **P1 — DNS query rate** (panel 1). Recovery: `docker compose start pihole`; watch H5→RUNNING and P1 rise.
 
 *(Append daily: what got tried, what worked, what surprised, what didn't work. Cite evidence — command output, observed dashboard panel, error text — not vibes.)*
 

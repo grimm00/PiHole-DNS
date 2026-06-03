@@ -1,0 +1,19 @@
+# Desk compose shortcuts (manual-testing.md). Pi: docker compose up -d (no desk file).
+# Uses bash -lic so ~/.bashrc podman-compose (distrobox) is available — mise shells are non-interactive.
+# Requires .env at repo root. First time: mise trust
+
+[tasks.compose-up]
+description = "Desk: stack up (base + docker-compose.desk.yml)"
+run = "bash -lic 'podman-compose -f docker-compose.yml -f docker-compose.desk.yml up -d'"
+
+[tasks.compose-down]
+description = "Desk: tear down stack"
+run = "bash -lic 'podman-compose -f docker-compose.yml -f docker-compose.desk.yml down'"
+
+[tasks.compose-ps]
+description = "Desk: compose ps"
+run = "bash -lic 'podman-compose -f docker-compose.yml -f docker-compose.desk.yml ps'"
+
+[tasks.compose-config]
+description = "Desk: validate compose config"
+run = "bash -lic 'podman-compose -f docker-compose.yml -f docker-compose.desk.yml config'"

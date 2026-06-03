@@ -1,0 +1,36 @@
+# Layer 2 spike — alerting rules for stop-container incident (Task 11).
+# Evaluated by Prometheus; mirrored in Grafana unified alerting (Task 12).
+# No Alertmanager — rules visible via Prometheus UI and Grafana Alerting.
+
+groups:
+  - name: pihole_dns_incident
+    interval: 15s
+    rules:
+      - alert: PiHoleContainerNotRunning
+        expr: container_state{name="pihole",state="running"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          spike_incident: stop_container
+        annotations:
+          summary: Pi-hole container is not running
+          description: >-
+            docker-exporter reports container_state=0 for pihole. DNS query rate
+            should drop. Open Platform Health dashboard → H5 (container state),
+            then Pi-hole DNS dashboard → P1 (query rate).
+          dashboard_uid: platform-health
+          panel_id: "3"
+
+      - alert: PiHoleDNSQueryRateZero
+        expr: sum(pihole_query_type_1m) == 0
+        for: 2m
+        labels:
+          severity: critical
+          spike_incident: stop_container
+        annotations:
+          summary: Pi-hole DNS query rate is zero
+          description: >-
+            No DNS queries in the 1m exporter window. Corroborates container-down
+            or DNS stall. Open Pi-hole DNS dashboard → P1 (query rate).
+          dashboard_uid: pihole-dns
+          panel_id: "1"
