@@ -21,7 +21,7 @@ tasks_files:
 ---
 # Implementation Plan — Layer 2 Observable (Learning Spike)
 
-**Status:** 🟠 In Progress — 9/18 tasks (Groups 1–2 merged; Group 3 in flight)
+**Status:** 🟠 In Progress — 13/18 tasks (Group 3 complete; Group 4 deploy next)
 **Created:** 2026-06-02
 **Last Updated:** 2026-06-03
 **Merged:** PR #4 (2026-06-02) — Group 1; PR #5 (2026-06-03) — Group 2 compose and services
@@ -69,10 +69,10 @@ Learning spike to move the observability competency from familiar-with-help to i
 - [x] Task 9: Update `.env.example` for new secrets (Grafana admin password; reuse of `FTLCONF_webserver_api_password` by pihole-exporter)
 
 ### Incident and Alerting
-- [ ] Task 10: Choose simulated-incident shape from candidates (resolves Q3 from `spike-l2.md`)
-- [ ] Task 11: Write the Prometheus alert rule for the chosen incident
-- [ ] Task 12: Configure Grafana alerting (no Alertmanager — resolves Q4); define alert→dashboard navigation
-- [ ] Task 13: Build the two dashboards in Grafana (provisioned JSON, not click-built only)
+- [x] Task 10: Choose simulated-incident shape from candidates (resolves Q3 from `spike-l2.md`)
+- [x] Task 11: Write the Prometheus alert rule for the chosen incident
+- [x] Task 12: Configure Grafana alerting (no Alertmanager — resolves Q4); define alert→dashboard navigation
+- [x] Task 13: Build the two dashboards in Grafana (provisioned JSON, not click-built only)
 
 ### Deploy and Incident Walkthrough
 - [ ] Task 14: Pull spike branch / sync files onto the Pi; capture pre-deployment Pi state

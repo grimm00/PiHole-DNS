@@ -2,7 +2,8 @@
 
 **Feature:** Layer 2 Observable (Training-Week Spike)  
 **Group:** Incident and Alerting  
-**Status:** ✅ Expanded  
+**Status:** ✅ Complete  
+**Completed:** 2026-06-03  
 **Last Updated:** 2026-06-03  
 
 ---
@@ -118,12 +119,12 @@
 
 ## ✅ Completion Criteria
 
-- [ ] Q3 decision recorded with rationale in `notes/spike-l2.md`.
-- [ ] Q4 decision recorded (Grafana UI only; no Alertmanager).
-- [ ] Alert rule file exists in `prometheus-config/alerts.yml` and is referenced from `prometheus.yml`.
-- [ ] Two dashboard JSON files exist in `grafana/provisioning/dashboards/json/`.
-- [ ] Alert → dashboard navigation path documented in `notes/spike-l2.md`.
-- [ ] No external notification channels configured.
+- [x] Q3 decision recorded with rationale in `notes/spike-l2.md`.
+- [x] Q4 decision recorded (Grafana UI only; no Alertmanager).
+- [x] Alert rule file exists in `prometheus-config/alerts.yml` and is referenced from `prometheus.yml`.
+- [x] Two dashboard JSON files exist in `grafana/provisioning/dashboards/json/`.
+- [x] Alert → dashboard navigation path documented in `notes/spike-l2.md`.
+- [x] No external notification channels configured.
 
 ---
 
