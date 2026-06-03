@@ -19,7 +19,7 @@ Step-by-step checks for the observability stack added to root `docker-compose.ym
 
 ### Desk compose shortcut (mise)
 
-From repo root: `mise run up` (both `-f` files — see [`mise.toml`](../../../../../mise.toml); invokes `podman-compose` via `bash -lic` so your `~/.bashrc` distrobox wrapper applies). Also `config`, `ps`, `down`. Pi uses `docker compose` without the desk file.
+From repo root: `mise run compose-up` (both `-f` files — see [`mise.toml`](../../../../../mise.toml); invokes `podman-compose` via `bash -lic` so your `~/.bashrc` distrobox wrapper applies). Also `compose-config`, `compose-ps`, `compose-down`. Pi uses `docker compose` without the desk file.
 
 ---
 
@@ -56,7 +56,7 @@ From repo root: `mise run up` (both `-f` files — see [`mise.toml`](../../../..
 
 **Expected Result:** ✅ Six observability services + pihole show running (or restarting with clear logs — fix before pass).
 
-**Desk:** `mise run up` or `podman-compose -f docker-compose.yml -f docker-compose.desk.yml up -d`; in `.env`: `PIHOLE_HOST_DNS_PORT=15353`, `PIHOLE_HOST_WEB_PORT=18080` (see `.env.example`; avoid `5353` mDNS).
+**Desk:** `mise run compose-up` or `podman-compose -f docker-compose.yml -f docker-compose.desk.yml up -d`; in `.env`: `PIHOLE_HOST_DNS_PORT=15353`, `PIHOLE_HOST_WEB_PORT=18080` (see `.env.example`; avoid `5353` mDNS).
 
 ---
 

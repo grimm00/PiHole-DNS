@@ -2,5 +2,5 @@
 # Default tasks use bash -lic + ~/.bashrc podman-compose (Steam Deck distrobox).
 # Override only if you need a different compose command, e.g. plain docker on another host:
 #
-# [tasks.up]
+# [tasks.compose-up]
 # run = "docker compose up -d"
