@@ -17,6 +17,22 @@ Step-by-step checks for the observability stack added to root `docker-compose.ym
 - Docker Compose on Pi (production path) or Podman Compose on desk (wiring-only; see notes).
 - Ports available: 80, 3000, 9090, 9100, 9617, 9713 (53 optional for wiring-only desk test).
 
+### Quick run (mise)
+
+From repo root ([`mise.toml`](../../../../../mise.toml) at project root):
+
+| Task | Manual test scenario |
+|------|----------------------|
+| `mise run l2-config` | 1 — compose config |
+| `mise run l2-up` / `l2-ps` | 2 — stack start / status |
+| `mise run l2-smoke` | 1 + 3 + 4 + 7 (stack must already be up) |
+| `mise run l2-exporters` | 4 — `/metrics` curls |
+| `mise run l2-prometheus-rules` | 7 — alert rules API |
+| `mise run l2-urls` | 5, 6, 8 — browser URLs (Grafana login, dashboards, alerting UI) |
+| `mise run l2-stop-pihole` / `l2-start-pihole` | 9 — incident preview / recovery |
+
+**Desk Podman:** `cp mise.local.toml.example mise.local.toml` (sets `L2_COMPOSE` to `podman-compose -f docker-compose.yml -f docker-compose.desk.yml`).
+
 ---
 
 ## Group 2 — Compose smoke (PR #5)

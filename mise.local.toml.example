@@ -1,0 +1,8 @@
+# Desk / rootless Podman — copy to mise.local.toml (gitignored via .env.*.local pattern; add mise.local.toml to gitignore if needed)
+#
+#   cp mise.local.toml.example mise.local.toml
+#   mise run l2-up
+#   mise run l2-smoke
+
+[env]
+L2_COMPOSE = "podman-compose -f docker-compose.yml -f docker-compose.desk.yml"
