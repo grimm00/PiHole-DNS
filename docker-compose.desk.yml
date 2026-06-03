@@ -1,0 +1,11 @@
+# Desk / rootless Podman — merge with docker-compose.yml (Pi: base file only).
+# Mount host podman.sock; in-container path stays docker.sock for docker-exporter.
+# Pi-hole host ports: set PIHOLE_HOST_DNS_PORT=15353 and PIHOLE_HOST_WEB_PORT=18080 in .env
+# (do not use 5353 — mDNS on Steam OS / Linux; omit vars on Pi for 53/80)
+# (rootless cannot bind host ports < 1024; defaults 53/80 are for Pi/Docker).
+services:
+  docker-exporter:
+    # Rootless socket is uid 1000 on host; keep-id maps container user for read access.
+    userns_mode: keep-id
+    volumes:
+      - /run/user/1000/podman/podman.sock:/var/run/docker.sock:ro

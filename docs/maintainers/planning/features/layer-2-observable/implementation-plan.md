@@ -21,7 +21,7 @@ tasks_files:
 ---
 # Implementation Plan — Layer 2 Observable (Learning Spike)
 
-**Status:** 🟠 In Progress — 4/18 tasks (Group 1 merged via PR #4)
+**Status:** 🟠 In Progress — 9/18 tasks (Group 1 via PR #4; Group 2 in this PR)
 **Created:** 2026-06-02
 **Last Updated:** 2026-06-02
 **Merged:** PR #4 (2026-06-02) — Group 1 dashboards and exporter fit
@@ -62,11 +62,11 @@ Learning spike to move the observability competency from familiar-with-help to i
 - [x] Task 4: Lock in exporter choices; log any swap from the current lean
 
 ### Compose and Services
-- [ ] Task 5: Decide extend-existing-compose vs separate-compose-file (resolves Q5 from `spike-l2.md`)
-- [ ] Task 6: Add Prometheus service + draft scrape config for all 5 exporters
-- [ ] Task 7: Add Grafana service + provisioning (datasource + dashboard provisioning structure)
-- [ ] Task 8: Add node-exporter + pihole-exporter + docker-exporter services to compose
-- [ ] Task 9: Update `.env.example` for new secrets (Grafana admin password; reuse of `FTLCONF_webserver_api_password` by pihole-exporter)
+- [x] Task 5: Decide extend-existing-compose vs separate-compose-file (resolves Q5 from `spike-l2.md`)
+- [x] Task 6: Add Prometheus service + draft scrape config for all 5 exporters
+- [x] Task 7: Add Grafana service + provisioning (datasource + dashboard provisioning structure)
+- [x] Task 8: Add node-exporter + pihole-exporter + docker-exporter services to compose
+- [x] Task 9: Update `.env.example` for new secrets (Grafana admin password; reuse of `FTLCONF_webserver_api_password` by pihole-exporter)
 
 ### Incident and Alerting
 - [ ] Task 10: Choose simulated-incident shape from candidates (resolves Q3 from `spike-l2.md`)

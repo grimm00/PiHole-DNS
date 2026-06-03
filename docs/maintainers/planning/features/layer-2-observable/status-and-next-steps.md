@@ -1,6 +1,6 @@
 # Status & Next Steps — Layer 2 Observable (Learning Spike)
 
-**Status:** 🟠 In Progress — Group 1 merged (PR #4); Group 2 expanded, implementation next
+**Status:** 🟠 In Progress — Group 2 compose complete; Group 3 (incident + alerting) next
 **Last Updated:** 2026-06-02
 
 ---
@@ -15,23 +15,23 @@
 
 ## 📊 Progress Summary
 
-**Overall:** 4/18 tasks complete
+**Overall:** 9/18 tasks complete
 
 | Group | Status | Progress | Notes |
 |-------|--------|----------|-------|
 | Dashboards and Exporter Fit | ✅ Complete | 4/4 tasks | Exporters locked in [`spike-outcomes.md`](spike-outcomes.md) § Group 2 handoff. |
-| Compose and Services | 🟠 Ready | 0/5 tasks | Group 2 ✅ Expanded — `/task 5` (Q5 compose layout) when ready. |
-| Incident and Alerting | 🔴 Not Started | 0/4 tasks | Resolves Q3 (incident shape) and Q4 (alert delivery — Grafana UI lean). |
+| Compose and Services | ✅ Complete | 5/5 tasks | Full stack in `docker-compose.yml`; desk `podman-compose config` OK. |
+| Incident and Alerting | 🔴 Not Started | 0/4 tasks | Next: Task 10 (Q3 incident shape); then alerts + dashboards. |
 | Deploy and Incident Walkthrough | 🔴 Not Started | 0/5 tasks | The simulated-incident moment is the spike's deliverable (Task 18). |
 
 ---
 
 ## 🚀 Next Steps
 
-1. **Group 2** — `/task 5` on `spike/layer-2-observable` per expanded [`tasks/02-compose-and-services.md`](tasks/02-compose-and-services.md) (Q5 → Prometheus → Grafana → exporters → `.env.example`).
-2. **Handoff** — [`spike-outcomes.md`](spike-outcomes.md) § Group 2 handoff (images, ports, scrape jobs, `PIHOLE_API_TOKEN` reuse).
-3. **Daily learning log** — append to [`notes/spike-l2.md`](../../../../../notes/spike-l2.md) with evidence as compose and Pi deploy proceed.
-4. **Anti-drift** — Group 2 is first **code** on the spike; keep scope on the observability stack, not Layer 1 or production hardening.
+1. **Optional desk smoke** — copy `.env.example` → `.env`, `podman-compose up -d`, check Prometheus targets UP (wiring only; not Pi metrics).
+2. **Group 3** — `/task 10` (choose Q3 incident shape), then alerts and provisioned dashboards (Tasks 11–13).
+3. **PR for Group 2** — when ready, `/pr` for compose stack on `spike/layer-2-observable` (code changes).
+4. **Anti-drift** — Group 4 Pi deploy + Task 18 incident drill stay on the Pi; desk smoke does not replace them.
 
 ---
 

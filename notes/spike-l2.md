@@ -58,7 +58,7 @@ These are the genuine "can it work?" unknowns. Each could later become its own r
 2. **cAdvisor on Pi 5 (ARM64).** Does the published cAdvisor image run on Pi 5 / Raspberry Pi OS, or does the architecture introduce gotchas? *Status: **ANSWERED 2026-06-02** — runs, but has a Pi-5-specific silent-lying bug on memory metrics (cAdvisor#2523). Leaning `docker-exporter` instead. See learning log for evidence.*
 3. **Choice of "simulated incident."** Candidates: stop PiHole container; block outbound :53 to upstream resolvers; corrupt dnsmasq config; spike query load. Pick one with a clean signal *for the dashboard* — i.e., the dashboard tells the story without ambiguity. *Status: candidates listed, not chosen.*
 4. **Alert delivery.** Prometheus → Alertmanager → where? Just Grafana UI for the dashboard moment, or notification (email/webhook)? Probably "just Grafana UI" for week-1 simplicity. *Status: leaning Grafana UI only.*
-5. **Where on the Pi does the new observability stack live?** Side-by-side with the existing Compose? Same Compose file? Separate? *Status: lean toward extending the existing `docker-compose.yml`, but not certain. Now slightly higher-stakes given the spike compose adds 4–5 new services on top of PiHole — see learning log architectural-implication note.*
+5. **Where on the Pi does the new observability stack live?** Side-by-side with the existing Compose? Same Compose file? Separate? *Status: **ANSWERED 2026-06-02 (Task 5)** — **extend** root `docker-compose.yml`; one `docker compose up -d`, default network, scrape hostnames per `spike-outcomes.md` § Group 2 handoff. Separate override file rejected for spike (operator friction, no hostname win).*
 
 (Append more as discovered.)
 
@@ -128,6 +128,36 @@ These are the genuine "can it work?" unknowns. Each could later become its own r
 - **[PR #4](https://github.com/grimm00/PiHole-DNS/pull/4)** merged to `develop` from `spike/layer-2-observable`. Planning artifacts + `spike-outcomes.md` now on default integration branch.
 - **Sourcery:** H5/H6 label placement fixed pre-merge; no deferred review items ([`fix/pr4/README.md`](../docs/maintainers/planning/features/layer-2-observable/fix/pr4/README.md)).
 - **Next:** Group 2 compose — Q5 still open until Task 5; handoff § in `spike-outcomes.md` is the wiring spec.
+
+### 2026-06-02 (Task 9 — .env.example; Group 2 complete)
+
+- **Updated:** `.env.example` — `GF_SECURITY_ADMIN_PASSWORD`; documented pihole-exporter reuse of `FTLCONF_webserver_api_password`; node/docker exporters need no extra secrets.
+- **Group 2 done:** full spike compose in root `docker-compose.yml` (Pi-hole + Prometheus + Grafana + three exporters). Desk smoke: `podman-compose config` / optional `up` before Pi (Group 4).
+
+### 2026-06-02 (Task 8 — exporters)
+
+- **Added:** `node-exporter` (:9100, proc/sys/rootfs mounts), `pihole-exporter` (Mosher-Labs, `-H pihole`, `PIHOLE_API_TOKEN` from `FTLCONF_webserver_api_password`), `docker-exporter` (:9713, docker.sock ro).
+- **Service names** match `prometheus-config/prometheus.yml` scrape targets.
+- **Pi validation:** curl `/metrics` on each port; Prometheus targets `up` after `docker compose up -d` (Group 4 / Task 16).
+
+### 2026-06-02 (Task 7 — Grafana)
+
+- **Added:** `grafana` service (`:3000`); provisioning at `grafana/provisioning/` — Prometheus datasource (`http://prometheus:9090`), file dashboard provider + empty `json/` for Task 13.
+- **Secrets:** `GF_SECURITY_ADMIN_PASSWORD` from `.env` only (documented in Task 9 `.env.example`).
+- **Pi access:** `http://<pi-lan-ip>:3000` (no Layer 1 DNS names). UI validation deferred to Group 4.
+
+### 2026-06-02 (Task 6 — Prometheus)
+
+- **Added:** `prometheus-config/prometheus.yml` (jobs: `prometheus`, `pihole`, `docker`, `node` → handoff targets); `prometheus` service in root `docker-compose.yml` (`9090`, config volume).
+- **Digest:** `prom/prometheus:latest` on branch — pin `@sha256:…` on Pi before production scrape (same as Pi-hole).
+- **Pi validation:** Targets stay `down` until Task 8 exporters exist; `docker compose config` / `/-/healthy` on Pi.
+
+### 2026-06-02 (Task 5 — Q5 compose layout)
+
+- **Decision:** **Extend** root `docker-compose.yml` (not a sibling `compose.observability.yml`).
+- **Rationale (one line):** One Compose project + default network keeps handoff scrape DNS (`pihole-exporter`, `docker-exporter`, `node-exporter`, `pihole`) and stop-container incident in the same stack as Layer 0 Pi-hole.
+- **Alternatives considered:** Separate compose file — easier “Pi-hole only” file split, but every Task 15/18 drill needs `-f` twice; hostnames unchanged so no win.
+- **Recorded in:** [`spike-outcomes.md`](../docs/maintainers/planning/features/layer-2-observable/spike-outcomes.md) § Stack shape.
 
 *(Append daily: what got tried, what worked, what surprised, what didn't work. Cite evidence — command output, observed dashboard panel, error text — not vibes.)*
 

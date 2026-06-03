@@ -2,7 +2,8 @@
 
 **Feature:** Layer 2 Observable (Training-Week Spike)  
 **Group:** Compose and Services  
-**Status:** ✅ Expanded  
+**Status:** ✅ Complete  
+**Completed:** 2026-06-02  
 **Last Updated:** 2026-06-02  
 
 ---
@@ -169,12 +170,12 @@
 
 ## ✅ Completion Criteria
 
-- [ ] Q5 decision recorded (extend-existing vs separate compose file) with a one-line rationale in `notes/spike-l2.md` learning log.
-- [ ] All 5 new services declared in compose, with pinned image digests (or explicit follow-up pin commit documented on Pi before Task 15).
-- [ ] `prometheus-config/prometheus.yml` scrape config covers all 5 targets including self-scrape.
-- [ ] Grafana provisioning directories exist with at least the Prometheus datasource configured.
-- [ ] `.env.example` updated; `.env` not committed.
-- [ ] `docker compose config` (locally on the work-machine clone, dry-run) parses without errors.
+- [x] Q5 decision recorded (extend-existing vs separate compose file) with a one-line rationale in `notes/spike-l2.md` learning log.
+- [x] All 5 new services declared in compose, with pinned image digests (or explicit follow-up pin commit documented on Pi before Task 15).
+- [x] `prometheus-config/prometheus.yml` scrape config covers all 5 targets including self-scrape.
+- [x] Grafana provisioning directories exist with at least the Prometheus datasource configured.
+- [x] `.env.example` updated; `.env` not committed.
+- [x] `docker compose config` (locally on the work-machine clone, dry-run) parses without errors.
 
 ---
 

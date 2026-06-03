@@ -1,5 +1,6 @@
 # PiHole-DNS — Docker Compose Stack
 # Layer 0 (MVP): Pi-Hole DNS server
+# Layer 2 (spike): Prometheus + exporters + Grafana (see docs/maintainers/planning/features/layer-2-observable/)
 # Layer 1 (planned): Add OurFileServer, local DNS records
 #
 # Prerequisites:
@@ -9,17 +10,20 @@
 # Usage:
 #   docker compose up -d
 #   docker compose logs -f pihole
+#
+# Images: Docker Hub refs use docker.io/… (fully qualified) for Podman without
+# registries.conf changes (e.g. immutable Steam OS). Same images on Docker/Pi.
 
 services:
   pihole:
     container_name: pihole
     # Pinned on Pi after verify (NFR-1 / ADR-004). Bump with backup + pull + new digest.
     # When pinning or bumping, record which upstream pihole/pihole:<tag> this digest came from (commit message or runbook step — see minimum-deploy digest workflow).
-    image: pihole/pihole@sha256:300cc8f9e966b00440358aafef21f91b32dfe8887e8bd9a6193ed1c4328655d4
+    image: docker.io/pihole/pihole@sha256:300cc8f9e966b00440358aafef21f91b32dfe8887e8bd9a6193ed1c4328655d4
     ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "80:80/tcp"
+      - "${PIHOLE_HOST_DNS_PORT:-53}:53/tcp"
+      - "${PIHOLE_HOST_DNS_PORT:-53}:53/udp"
+      - "${PIHOLE_HOST_WEB_PORT:-80}:80/tcp"
     environment:
       # US Central (Chicago). Set to another IANA time zone if your Pi is elsewhere.
       TZ: 'America/Chicago'
@@ -30,4 +34,78 @@ services:
     volumes:
       - ./etc-pihole:/etc/pihole
       - ./etc-dnsmasq.d:/etc/dnsmasq.d
+    restart: unless-stopped
+
+  prometheus:
+    container_name: prometheus
+    # Pin on Pi after verify (NFR-1 / ADR-004). Record upstream prom/prometheus:<tag> when bumping.
+    image: docker.io/prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus-config:/etc/prometheus:ro
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+    restart: unless-stopped
+
+  grafana:
+    container_name: grafana
+    # Pin on Pi after verify (NFR-1 / ADR-004). Record upstream grafana/grafana:<tag> when bumping.
+    image: docker.io/grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GF_SECURITY_ADMIN_PASSWORD}
+      GF_USERS_ALLOW_SIGN_UP: 'false'
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
+  node-exporter:
+    container_name: node-exporter
+    # Pin on Pi after verify (NFR-1 / ADR-004). Record upstream prom/node-exporter:<tag> when bumping.
+    image: docker.io/prom/node-exporter:latest
+    command:
+      - --path.procfs=/host/proc
+      - --path.rootfs=/rootfs
+      - --path.sysfs=/host/sys
+      - --collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    ports:
+      - "9100:9100"
+    restart: unless-stopped
+
+  pihole-exporter:
+    container_name: pihole-exporter
+    # Pin on Pi after verify (NFR-1 / ADR-004). Record upstream Mosher-Labs image when bumping.
+    image: ghcr.io/mosher-labs/pihole6-exporter:latest
+    command:
+      - -H
+      - pihole
+      - --pihole-port
+      - "80"
+      - --protocol
+      - http
+    environment:
+      PIHOLE_API_TOKEN: ${FTLCONF_webserver_api_password}
+    ports:
+      - "9617:9617"
+    depends_on:
+      - pihole
+    restart: unless-stopped
+
+  docker-exporter:
+    container_name: docker-exporter
+    # Pin on Pi after verify (NFR-1 / ADR-004). If socket permission denied on Pi, see upstream readme (group_add).
+    image: ghcr.io/dlepaux/docker-exporter:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - "9713:9713"
     restart: unless-stopped
