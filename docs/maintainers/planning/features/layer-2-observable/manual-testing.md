@@ -52,7 +52,7 @@ Step-by-step checks for the observability stack added to root `docker-compose.ym
 
 **Expected Result:** ✅ Six observability services + pihole show running (or restarting with clear logs — fix before pass).
 
-**Desk:** add `-f docker-compose.desk.yml` to compose commands (rootless Podman socket for `docker-exporter`).
+**Desk:** add `-f docker-compose.desk.yml` to compose commands (Podman socket + Pi-hole on host `5353`/`8080` — rootless cannot bind 53/80).
 
 ---
 
