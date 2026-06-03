@@ -129,6 +129,12 @@ These are the genuine "can it work?" unknowns. Each could later become its own r
 - **Sourcery:** H5/H6 label placement fixed pre-merge; no deferred review items ([`fix/pr4/README.md`](../docs/maintainers/planning/features/layer-2-observable/fix/pr4/README.md)).
 - **Next:** Group 2 compose — Q5 still open until Task 5; handoff § in `spike-outcomes.md` is the wiring spec.
 
+### 2026-06-02 (Task 8 — exporters)
+
+- **Added:** `node-exporter` (:9100, proc/sys/rootfs mounts), `pihole-exporter` (Mosher-Labs, `-H pihole`, `PIHOLE_API_TOKEN` from `FTLCONF_webserver_api_password`), `docker-exporter` (:9713, docker.sock ro).
+- **Service names** match `prometheus-config/prometheus.yml` scrape targets.
+- **Pi validation:** curl `/metrics` on each port; Prometheus targets `up` after `docker compose up -d` (Group 4 / Task 16).
+
 ### 2026-06-02 (Task 7 — Grafana)
 
 - **Added:** `grafana` service (`:3000`); provisioning at `grafana/provisioning/` — Prometheus datasource (`http://prometheus:9090`), file dashboard provider + empty `json/` for Task 13.

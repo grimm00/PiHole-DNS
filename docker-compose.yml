@@ -60,3 +60,49 @@ services:
     depends_on:
       - prometheus
     restart: unless-stopped
+
+  node-exporter:
+    container_name: node-exporter
+    # Pin on Pi after verify (NFR-1 / ADR-004). Record upstream prom/node-exporter:<tag> when bumping.
+    image: prom/node-exporter:latest
+    command:
+      - --path.procfs=/host/proc
+      - --path.rootfs=/rootfs
+      - --path.sysfs=/host/sys
+      - --collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    ports:
+      - "9100:9100"
+    restart: unless-stopped
+
+  pihole-exporter:
+    container_name: pihole-exporter
+    # Pin on Pi after verify (NFR-1 / ADR-004). Record upstream Mosher-Labs image when bumping.
+    image: ghcr.io/mosher-labs/pihole6-exporter:latest
+    command:
+      - -H
+      - pihole
+      - --pihole-port
+      - "80"
+      - --protocol
+      - http
+    environment:
+      PIHOLE_API_TOKEN: ${FTLCONF_webserver_api_password}
+    ports:
+      - "9617:9617"
+    depends_on:
+      - pihole
+    restart: unless-stopped
+
+  docker-exporter:
+    container_name: docker-exporter
+    # Pin on Pi after verify (NFR-1 / ADR-004). If socket permission denied on Pi, see upstream readme (group_add).
+    image: ghcr.io/dlepaux/docker-exporter:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - "9713:9713"
+    restart: unless-stopped
