@@ -19,7 +19,7 @@ groups:
             datasourceUid: prometheus
             model:
               editorMode: code
-              expr: min(container_state{name="pihole",state="running"})
+              expr: container_state{name="pihole",state="running"} == 0
               instant: true
               intervalMs: 1000
               legendFormat: __auto
@@ -79,7 +79,7 @@ groups:
             datasourceUid: prometheus
             model:
               editorMode: code
-              expr: sum(pihole_query_type_1m)
+              expr: sum(pihole_query_type_1m) == 0
               instant: true
               intervalMs: 1000
               legendFormat: __auto
@@ -95,8 +95,8 @@ groups:
               conditions:
                 - evaluator:
                     params:
-                      - 1
-                    type: lt
+                      - 0
+                    type: gt
                   operator:
                     type: and
                   query:
@@ -116,8 +116,8 @@ groups:
               type: threshold
         dashboardUid: pihole-dns
         panelId: 1
-        noDataState: Alerting
-        execErrState: Alerting
+        noDataState: NoData
+        execErrState: Error
         for: 2m
         annotations:
           summary: Pi-hole DNS query rate is zero

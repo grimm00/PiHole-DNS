@@ -30,7 +30,7 @@
 ## 🚀 Next Steps
 
 1. **Group 4** — Pi deploy, scrape validation (Task 16), dashboard visual check (Task 17), simulated incident drill (Task 18).
-2. **Merge Group 3 PR** when review satisfied.
+2. **Merge Group 3 PR** when review is complete.
 3. **Pi validation** — digest pins, docker-exporter memory regression, alert firing on real stop-container.
 
 ---
