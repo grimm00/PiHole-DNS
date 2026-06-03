@@ -21,7 +21,7 @@ tasks_files:
 ---
 # Implementation Plan — Layer 2 Observable (Learning Spike)
 
-**Status:** 🟠 In Progress — 4/18 tasks (Group 1 merged via PR #4)
+**Status:** 🟠 In Progress — 9/18 tasks (Group 1 via PR #4; Group 2 in this PR)
 **Created:** 2026-06-02
 **Last Updated:** 2026-06-02
 **Merged:** PR #4 (2026-06-02) — Group 1 dashboards and exporter fit
