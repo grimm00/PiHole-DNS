@@ -1,8 +1,5 @@
-# Desk / rootless Podman — copy to mise.local.toml (gitignored via .env.*.local pattern; add mise.local.toml to gitignore if needed)
+# Optional overrides (copy to mise.local.toml — gitignored).
+# Use if plain podman-compose in mise.toml is not on your PATH (e.g. distrobox wrapper):
 #
-#   cp mise.local.toml.example mise.local.toml
-#   mise run l2-up
-#   mise run l2-smoke
-
-[env]
-L2_COMPOSE = "podman-compose -f docker-compose.yml -f docker-compose.desk.yml"
+# [tasks.up]
+# run = "distrobox enter net-tools --env CONTAINER_HOST=unix:///run/user/1000/podman/podman.sock -- podman-compose -f docker-compose.yml -f docker-compose.desk.yml up -d"

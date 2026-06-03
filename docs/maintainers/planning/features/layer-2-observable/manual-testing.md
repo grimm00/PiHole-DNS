@@ -17,21 +17,9 @@ Step-by-step checks for the observability stack added to root `docker-compose.ym
 - Docker Compose on Pi (production path) or Podman Compose on desk (wiring-only; see notes).
 - Ports available: 80, 3000, 9090, 9100, 9617, 9713 (53 optional for wiring-only desk test).
 
-### Quick run (mise)
+### Desk compose shortcut (mise)
 
-From repo root ([`mise.toml`](../../../../../mise.toml) at project root):
-
-| Task | Manual test scenario |
-|------|----------------------|
-| `mise run l2-config` | 1 — compose config |
-| `mise run l2-up` / `l2-ps` | 2 — stack start / status |
-| `mise run l2-smoke` | 1 + 3 + 4 + 7 (stack must already be up) |
-| `mise run l2-exporters` | 4 — `/metrics` curls |
-| `mise run l2-prometheus-rules` | 7 — alert rules API |
-| `mise run l2-urls` | 5, 6, 8 — browser URLs (Grafana login, dashboards, alerting UI) |
-| `mise run l2-stop-pihole` / `l2-start-pihole` | 9 — incident preview / recovery |
-
-**Desk Podman:** `cp mise.local.toml.example mise.local.toml` (sets `L2_COMPOSE` to `podman-compose -f docker-compose.yml -f docker-compose.desk.yml`).
+From repo root: `mise run up` (both `-f` files — see [`mise.toml`](../../../../../mise.toml)). Also `config`, `ps`, `down`. Pi uses `docker compose` without the desk file.
 
 ---
 
@@ -68,7 +56,7 @@ From repo root ([`mise.toml`](../../../../../mise.toml) at project root):
 
 **Expected Result:** ✅ Six observability services + pihole show running (or restarting with clear logs — fix before pass).
 
-**Desk:** `-f docker-compose.desk.yml` plus in `.env`: `PIHOLE_HOST_DNS_PORT=15353`, `PIHOLE_HOST_WEB_PORT=18080` (see `.env.example`; avoid `5353` mDNS; rootless cannot bind 53/80). Desk file also sets `userns_mode: keep-id` on `docker-exporter` for rootless Podman socket access.
+**Desk:** `mise run up` or `podman-compose -f docker-compose.yml -f docker-compose.desk.yml up -d`; in `.env`: `PIHOLE_HOST_DNS_PORT=15353`, `PIHOLE_HOST_WEB_PORT=18080` (see `.env.example`; avoid `5353` mDNS).
 
 ---
 
