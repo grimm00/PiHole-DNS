@@ -13,9 +13,9 @@
 
 | Service | Image (spike lock) | Port(s) | Notes |
 |---------|-------------------|---------|-------|
-| Prometheus | `prom/prometheus` (digest pin on Pi) | `9090` | Config: `prometheus-config/prometheus.yml` |
-| Grafana | `grafana/grafana` (digest pin on Pi) | `3000` | Provisioning: `grafana/provisioning/`; LAN IP only |
-| node-exporter | `prom/node-exporter` (digest pin on Pi) | `9100` | Host metrics H1–H2 |
+| Prometheus | `docker.io/prom/prometheus` (digest pin on Pi) | `9090` | Config: `prometheus-config/prometheus.yml` |
+| Grafana | `docker.io/grafana/grafana` (digest pin on Pi) | `3000` | Provisioning: `grafana/provisioning/`; LAN IP only |
+| node-exporter | `docker.io/prom/node-exporter` (digest pin on Pi) | `9100` | Host metrics H1–H2 |
 | pihole-exporter | `ghcr.io/mosher-labs/pihole6-exporter` (digest pin on Pi) | `9617` | Pi-hole metrics P1–P3 |
 | docker-exporter | `ghcr.io/dlepaux/docker-exporter` (digest pin on Pi) | `9713` | Container metrics H5–H6; not cAdvisor |
 | Pi-hole | existing [`docker-compose.yml`](../../../../../docker-compose.yml) | `53`, `80` | `container_name: pihole` |
@@ -39,7 +39,7 @@
 |---------|-----------------|--------------|
 | pihole-exporter | `ghcr.io/mosher-labs/pihole6-exporter:latest` → pin `@sha256:…` on Pi | `/metrics` |
 | docker-exporter | `ghcr.io/dlepaux/docker-exporter:latest` → pin `@sha256:…` on Pi | `/metrics` |
-| node-exporter | `prom/node-exporter:latest` → pin `@sha256:…` on Pi | `/metrics` |
+| node-exporter | `docker.io/prom/node-exporter:latest` → pin `@sha256:…` on Pi | `/metrics` |
 
 ### Prometheus scrape targets (static)
 

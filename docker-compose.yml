@@ -10,13 +10,16 @@
 # Usage:
 #   docker compose up -d
 #   docker compose logs -f pihole
+#
+# Images: Docker Hub refs use docker.io/… (fully qualified) for Podman without
+# registries.conf changes (e.g. immutable Steam OS). Same images on Docker/Pi.
 
 services:
   pihole:
     container_name: pihole
     # Pinned on Pi after verify (NFR-1 / ADR-004). Bump with backup + pull + new digest.
     # When pinning or bumping, record which upstream pihole/pihole:<tag> this digest came from (commit message or runbook step — see minimum-deploy digest workflow).
-    image: pihole/pihole@sha256:300cc8f9e966b00440358aafef21f91b32dfe8887e8bd9a6193ed1c4328655d4
+    image: docker.io/pihole/pihole@sha256:300cc8f9e966b00440358aafef21f91b32dfe8887e8bd9a6193ed1c4328655d4
     ports:
       - "53:53/tcp"
       - "53:53/udp"
@@ -36,7 +39,7 @@ services:
   prometheus:
     container_name: prometheus
     # Pin on Pi after verify (NFR-1 / ADR-004). Record upstream prom/prometheus:<tag> when bumping.
-    image: prom/prometheus:latest
+    image: docker.io/prom/prometheus:latest
     ports:
       - "9090:9090"
     volumes:
@@ -49,7 +52,7 @@ services:
   grafana:
     container_name: grafana
     # Pin on Pi after verify (NFR-1 / ADR-004). Record upstream grafana/grafana:<tag> when bumping.
-    image: grafana/grafana:latest
+    image: docker.io/grafana/grafana:latest
     ports:
       - "3000:3000"
     environment:
@@ -64,7 +67,7 @@ services:
   node-exporter:
     container_name: node-exporter
     # Pin on Pi after verify (NFR-1 / ADR-004). Record upstream prom/node-exporter:<tag> when bumping.
-    image: prom/node-exporter:latest
+    image: docker.io/prom/node-exporter:latest
     command:
       - --path.procfs=/host/proc
       - --path.rootfs=/rootfs
