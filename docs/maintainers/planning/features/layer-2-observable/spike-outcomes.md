@@ -16,7 +16,7 @@
 | Prometheus | `docker.io/prom/prometheus` (digest pin on Pi) | `9090` | Config: `prometheus-config/prometheus.yml` |
 | Grafana | `docker.io/grafana/grafana` (digest pin on Pi) | `3000` | Provisioning: `grafana/provisioning/`; LAN IP only |
 | node-exporter | `docker.io/prom/node-exporter` (digest pin on Pi) | `9100` | Host metrics H1–H2 |
-| pihole-exporter | `ghcr.io/mosher-labs/pihole6-exporter` (digest pin on Pi) | `9617` | Pi-hole metrics P1–P3 |
+| pihole-exporter | Build `docker/pihole6-exporter` → `pihole-dns/pihole6-exporter:spike` | `9617` | Mosher-Labs script; GHCR amd64-only |
 | docker-exporter | `ghcr.io/dlepaux/docker-exporter` (digest pin on Pi) | `9713` | Container metrics H5–H6; not cAdvisor |
 | Pi-hole | existing [`docker-compose.yml`](../../../../../docker-compose.yml) | `53`, `80` | `container_name: pihole` |
 
@@ -37,7 +37,7 @@
 
 | Service | Image reference | Metrics path |
 |---------|-----------------|--------------|
-| pihole-exporter | `ghcr.io/mosher-labs/pihole6-exporter:latest` → pin `@sha256:…` on Pi | `/metrics` |
+| pihole-exporter | **Build** `docker/pihole6-exporter` → `pihole-dns/pihole6-exporter:spike` (Mosher-Labs script; GHCR has no arm64) | `/metrics` |
 | docker-exporter | `ghcr.io/dlepaux/docker-exporter:latest` → pin `@sha256:…` on Pi | `/metrics` |
 | node-exporter | `docker.io/prom/node-exporter:latest` → pin `@sha256:…` on Pi | `/metrics` |
 
@@ -87,7 +87,7 @@
 ### Pi-hole side
 
 - **Spike choice (Task 2):** `ghcr.io/mosher-labs/pihole6-exporter` — covers P1–P3; v6 session handling aligned with pinned Pi-hole.
-- **Locked (Task 4):** `ghcr.io/mosher-labs/pihole6-exporter` — **no swap** from desk lean.
+- **Locked (Task 4):** Mosher-Labs **exporter logic** — **no swap** to nbx3/alantoch for spike; **delivery:** local build on Pi (GHCR lacks arm64, validated 2026-06-04).
 - **Fallbacks if Pi fails:** `nbx3/pihole-exporter` (richest upstream metrics), then `alantoch/pihole-exporter` (OpenAPI-generated, scheduled releases)
 
 #### Task 2 — Mosher-Labs metric mapping (P1–P3)

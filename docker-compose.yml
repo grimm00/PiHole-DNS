@@ -83,8 +83,9 @@ services:
 
   pihole-exporter:
     container_name: pihole-exporter
-    # Pin on Pi after verify (NFR-1 / ADR-004). Record upstream Mosher-Labs image when bumping.
-    image: ghcr.io/mosher-labs/pihole6-exporter:latest
+    # GHCR image is amd64-only; build from Mosher-Labs script for Pi (arm64). Pin script ref in docker/pihole6-exporter/Dockerfile.
+    build: ./docker/pihole6-exporter
+    image: pihole-dns/pihole6-exporter:spike
     command:
       - -H
       - pihole

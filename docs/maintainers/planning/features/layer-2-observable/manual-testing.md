@@ -2,8 +2,18 @@
 
 **Feature:** Layer 2 Observable (training-week spike)  
 **Phases covered:** Group 2 (Compose and Services) — PR #5; Group 3 (Incident and Alerting) — PR #6  
-**Last Updated:** 2026-06-03  
+**Last Updated:** 2026-06-04  
 **Status:** ✅ Active
+
+---
+
+## Pi LAN address
+
+**Verified Pi IPv4:** `192.168.50.2` ([ADR-001 — stable LAN addressing](../../decisions/layer-0-foundation/adr-001-stable-lan-addressing.md)).
+
+- **On the Pi (SSH):** use `127.0.0.1` in scenarios below.
+- **From another LAN host (e.g. Deck browser):** use `http://192.168.50.2:3000`, `:9090`, and `dig @192.168.50.2 …`.
+- If the router reservation changes, update ADR-001 first, then this guide and Group 4 task URLs.
 
 ---
 
@@ -33,6 +43,7 @@ From repo root: `mise run compose-up` (both `-f` files — see [`mise.toml`](../
 
 1. From repo root with `.env` present:
    ```bash
+   docker compose build pihole-exporter   # arm64 Pi: GHCR Mosher image has no arm64 manifest
    docker compose config
    ```
    (Desk Podman: `podman-compose config` or your distrobox wrapper.)
