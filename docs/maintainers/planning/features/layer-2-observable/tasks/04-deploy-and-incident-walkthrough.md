@@ -3,7 +3,9 @@
 **Feature:** Layer 2 Observable (Training-Week Spike)  
 **Group:** Deploy and Incident Walkthrough  
 **Status:** ✅ Expanded  
-**Last Updated:** 2026-06-03  
+**Last Updated:** 2026-06-04  
+
+**Pi LAN IP:** `192.168.50.2` ([ADR-001](../../../../decisions/layer-0-foundation/adr-001-stable-lan-addressing.md)) — substitute for `<pi-ip>` below when testing from off-Pi.
 
 ---
 
@@ -44,17 +46,18 @@
 
 - **Steps:**
 
-  1. From repo root on the Pi: `docker compose pull` (pin digests on Pi per NFR-1 / ADR-004 if not already — record upstream tags when bumping).
-  2. `docker compose up -d` — **no** `-f docker-compose.desk.yml` on the Pi.
-  3. `docker compose ps` — expect pihole, prometheus, grafana, node-exporter, pihole-exporter, docker-exporter running (or document restarts).
-  4. Spot-check health endpoints (from Pi or LAN client):
+  1. From repo root on the Pi: `docker compose build pihole-exporter` (arm64 — upstream `ghcr.io/mosher-labs/pihole6-exporter` is amd64-only; see `docker/pihole6-exporter/Dockerfile`).
+  2. `docker compose pull` for other services (pin digests on Pi per NFR-1 / ADR-004 when ready — record upstream tags when bumping).
+  3. `docker compose up -d` — **no** `-f docker-compose.desk.yml` on the Pi.
+  4. `docker compose ps` — expect pihole, prometheus, grafana, node-exporter, pihole-exporter, docker-exporter running (or document restarts).
+  5. Spot-check health endpoints (from Pi or LAN client):
      - Prometheus `http://<pi-ip>:9090/-/healthy`
      - Grafana `http://<pi-ip>:3000/api/health`
      - `curl -s http://127.0.0.1:9617/metrics | head -3` (pihole-exporter)
      - `curl -s http://127.0.0.1:9713/metrics | head -3` (docker-exporter)
      - `curl -s http://127.0.0.1:9100/metrics | head -3` (node-exporter)
-  5. Confirm Pi-hole still answers DNS on **:53** and admin UI on **:80** (Layer 0 not regressed).
-  6. Log any pull/start errors in `notes/spike-l2.md`.
+  6. Confirm Pi-hole still answers DNS on **:53** and admin UI on **:80** (Layer 0 not regressed).
+  7. Log any pull/start errors in `notes/spike-l2.md`.
 
 - **Files:** [`docker-compose.yml`](../../../../../docker-compose.yml), [`notes/spike-l2.md`](../../../../../notes/spike-l2.md)
 

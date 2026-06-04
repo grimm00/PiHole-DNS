@@ -1,9 +1,19 @@
 # Manual Testing Guide — Layer 2 Observable (learning spike)
 
 **Feature:** Layer 2 Observable (training-week spike)  
-**Phases covered:** Group 2 (Compose and Services) — PR #5; Group 3 (Incident and Alerting) — PR #6  
-**Last Updated:** 2026-06-03  
+**Phases covered:** Group 2 (PR #5); Group 3 (PR #6); Fix PR #7 (arm64 pihole-exporter build)  
+**Last Updated:** 2026-06-04  
 **Status:** ✅ Active
+
+---
+
+## Pi LAN address
+
+**Verified Pi IPv4:** `192.168.50.2` ([ADR-001 — stable LAN addressing](../../decisions/layer-0-foundation/adr-001-stable-lan-addressing.md)).
+
+- **On the Pi (SSH):** use `127.0.0.1` in scenarios below.
+- **From another LAN host (e.g. Deck browser):** use `http://192.168.50.2:3000`, `:9090`, and `dig @192.168.50.2 …`.
+- If the router reservation changes, update ADR-001 first, then this guide and Group 4 task URLs.
 
 ---
 
@@ -33,6 +43,7 @@ From repo root: `mise run compose-up` (both `-f` files — see [`mise.toml`](../
 
 1. From repo root with `.env` present:
    ```bash
+   docker compose build pihole-exporter   # arm64 Pi: GHCR Mosher image has no arm64 manifest
    docker compose config
    ```
    (Desk Podman: `podman-compose config` or your distrobox wrapper.)
@@ -178,12 +189,40 @@ From repo root: `mise run compose-up` (both `-f` files — see [`mise.toml`](../
 
 ---
 
+## Fix PR #7 — arm64 pihole-exporter build
+
+### Scenario 10: Build pihole-exporter on Pi (arm64)
+
+**Objective:** Confirm `docker compose pull` no longer requires GHCR Mosher image; local build succeeds on Raspberry Pi.
+
+**Prerequisites:** PR #7 merged or branch checked out; `.env` present; Docker on Pi.
+
+**Steps:**
+
+1. On the Pi from repo root:
+   ```bash
+   docker compose build pihole-exporter
+   docker compose pull
+   docker compose up -d
+   ```
+2. ```bash
+   docker compose ps pihole-exporter
+   curl -s http://127.0.0.1:9617/metrics | grep -E '^pihole_query_type_1m|^# HELP pihole' | head -5
+   ```
+
+**Expected Result:** ✅ Build completes; container running; `/metrics` exposes `pihole_*` series.
+
+**Desk (optional):** `mise run compose-up` builds amd64 image from same Dockerfile — wiring only.
+
+---
+
 ## Acceptance checklist (Group 3)
 
 - [ ] Scenario 6 — dashboards load
 - [ ] Scenario 7 — Prometheus rules
 - [ ] Scenario 8 — Grafana alert rules
 - [ ] Scenario 9 — stop-container preview (optional on desk; required on Pi for Task 18)
+- [ ] Scenario 10 — Pi arm64 build (PR #7; required before Group 4 Task 15)
 
 ---
 
