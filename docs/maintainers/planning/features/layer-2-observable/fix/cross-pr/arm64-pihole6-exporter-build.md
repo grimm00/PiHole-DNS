@@ -24,7 +24,7 @@ Image: `ghcr.io/mosher-labs/pihole6-exporter:latest` — GHCR publish is **amd64
 
 | Change | Rationale |
 |--------|-----------|
-| `docker/pihole6-exporter/Dockerfile` | Build Mosher-Labs script on Pi (python:3.14-alpine, pinned commit) |
+| `docker/pihole6-exporter/Dockerfile` + vendored `pihole6_exporter` | Build Mosher-Labs script on Pi (COPY, pinned pip deps) |
 | `docker-compose.yml` | `build: ./docker/pihole6-exporter`, image `pihole-dns/pihole6-exporter:spike` |
 | Docs / manual-testing / Task 15 | `docker compose build pihole-exporter` before `pull` / `up` |
 
