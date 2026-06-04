@@ -103,8 +103,10 @@ services:
 
   docker-exporter:
     container_name: docker-exporter
-    # Pin on Pi after verify (NFR-1 / ADR-004). If socket permission denied on Pi, see upstream readme (group_add).
+    # Runs as UID 65532 (distroless). Needs host docker group GID — see DOCKER_GID in .env.
     image: ghcr.io/dlepaux/docker-exporter:latest
+    group_add:
+      - "${DOCKER_GID:?Set DOCKER_GID in .env — Pi: getent group docker | cut -d: -f3}"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     ports:

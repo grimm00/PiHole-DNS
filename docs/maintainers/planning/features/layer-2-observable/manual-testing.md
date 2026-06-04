@@ -24,6 +24,7 @@ Step-by-step checks for the observability stack added to root `docker-compose.ym
 **Prerequisites:**
 
 - Copy `.env.example` → `.env` with real passwords (`FTLCONF_webserver_api_password`, `GF_SECURITY_ADMIN_PASSWORD`).
+- Set `DOCKER_GID` on Pi: `getent group docker | cut -d: -f3` (docker-exporter needs socket access).
 - Docker Compose on Pi (production path) or Podman Compose on desk (wiring-only; see notes).
 - Ports available: 80, 3000, 9090, 9100, 9617, 9713 (53 optional for wiring-only desk test).
 
