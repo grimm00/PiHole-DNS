@@ -172,6 +172,43 @@ These are the genuine "can it work?" unknowns. Each could later become its own r
 - **Dual evaluation:** Prometheus `prometheus-config/alerts.yml` (for `/alerts` UI + rule consistency) + Grafana provisioned rules in `grafana/provisioning/alerting/pihole-alerts.yml` (mirrored PromQL).
 - **Alert → dashboard navigation:** In Grafana, open **Alerting → Alert rules** (or **Alerting → Firing** when incident active). Click **Pi-hole container not running** → **View panel** / linked dashboard opens **Platform Health** at **H5 — Pi-hole container running state** (panel 3). Confirm corroboration on **Pi-hole DNS** dashboard **P1 — DNS query rate** (panel 1). Recovery: `docker compose start pihole`; watch H5→RUNNING and P1 rise.
 
+### 2026-06-04 (Group 4 — Pi deploy + Task 18 incident drill)
+
+**Deploy notes (Tasks 14–16):**
+
+- Pi at **`192.168.50.2`**; stack via `docker compose build pihole-exporter` + `pull` + `up -d` (arm64 build + `DOCKER_GID` for docker-exporter socket).
+- All Prometheus scrape targets **UP** (`docker`, `node`, `pihole`, `prometheus`).
+- **Memory regression (Task 16):** `container_memory_working_set_bytes{name="pihole"}` reports **0** while container running — same class of “flat zero” as cAdvisor#2523 concern; H6 not trustworthy on this Pi. Incident drill does not depend on H6.
+- **docker-exporter:** Required `DOCKER_GID` in `.env` + `group_add` in compose (UID 65532 cannot read socket otherwise).
+
+**Task 18 — simulated incident (done-signal):**
+
+| Phase | Evidence |
+|-------|----------|
+| **Healthy baseline** | Grafana `http://192.168.50.2:3000` — P1 active, H5 RUNNING ([screenshots](../docs/maintainers/planning/features/layer-2-observable/evidence/task-18-2026-06-04/)) |
+| **Trigger** | On Pi: `docker compose stop pihole` (~14:55 local) |
+| **Real impact** | LAN DNS to Pi failed; `docker compose ps -a pihole` → **Exited (0)** |
+| **Live metrics** | `curl :9713/metrics` → `container_state{...,state="exited"} 0` only (no `state="running"` series) |
+
+**What I saw (dashboards only):**
+
+1. **Pi-hole DNS** — **P1** query rate and **P3** upstream forwarding **stop ~14:55**; clearest outage signal. **P2** stays green **UP** (pihole-exporter still running — do **not** use for “Pi-hole is up”).
+2. **Platform Health** — **H1/H2** stable (host fine); **H8** observability stack still running. **H5** behavior depends on time range:
+   - **Last 1 hour** (includes pre-stop): stat panel can show stale **RUNNING** (last value before series disappeared).
+   - **Last 30 minutes** (mostly post-stop): **No data** — correct-ish (no `state="running"` series), but ambiguous UX vs explicit “STOPPED”.
+3. **H6** — flat **0 B** before and after (memory panel not useful on this hardware).
+
+**What I concluded (one sentence):**  
+Pi-hole **container was stopped** — DNS workload ceased (P1/P3), running-state metric series vanished (H5 No data / stale RUNNING in wider range), host and observability stack remained healthy; P2 UP is exporter-only noise.
+
+**Recovery:** `docker compose start pihole` — expect P1 traffic return and H5 RUNNING when `state="running"` series reappears.
+
+**Surprises / follow-ups:**
+
+- H5 stat + PromQL `container_state{...,state="running"} == 0` may not read as “down” when the series **disappears** (staleness / no data vs explicit 0). Post-spike: panel query + alert expr tweak.
+- Deck: secondary public DNS (8.8.8.8) breaks **`pi.katdog.home`** (NXDOMAIN / negative cache); use **IPs** during drill, not Pi-hole + Google DNS together.
+- Screenshots: [`evidence/task-18-2026-06-04/`](../docs/maintainers/planning/features/layer-2-observable/evidence/task-18-2026-06-04/README.md)
+
 *(Append daily: what got tried, what worked, what surprised, what didn't work. Cite evidence — command output, observed dashboard panel, error text — not vibes.)*
 
 ---

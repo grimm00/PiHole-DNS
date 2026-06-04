@@ -196,9 +196,9 @@ nbx3 wins on labeled upstream detail if Mosher-Labs P3 panels are ambiguous afte
 
 ## Validated on Pi (fill as Group 4 completes)
 
-- Scrape targets up: _pending_
-- docker-exporter memory regression vs cAdvisor#2523: _pending_
-- Task 18 incident walkthrough: _pending_
+- Scrape targets up: **done** (2026-06-04) — `docker`, `node`, `pihole`, `prometheus` all UP
+- docker-exporter memory regression vs cAdvisor#2523: **gap** — `container_memory_working_set_bytes{name="pihole"}` = 0 while running; H6 not trustworthy; drill used P1/H5 not H6
+- Task 18 incident walkthrough: **done** (2026-06-04) — evidence [`evidence/task-18-2026-06-04/`](evidence/task-18-2026-06-04/README.md); narrative [`notes/spike-l2.md`](../../../../../notes/spike-l2.md) § 2026-06-04
 
 ---
 
