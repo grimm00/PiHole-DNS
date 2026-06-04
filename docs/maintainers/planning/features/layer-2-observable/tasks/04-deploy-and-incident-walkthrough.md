@@ -1,58 +1,189 @@
 # Deploy and Incident Walkthrough
 
-**Feature:** Layer 2 Observable (Learning Spike)
-**Group:** Deploy and Incident Walkthrough
-**Status:** 🔴 Scaffolding (needs expansion via `write-plan-expand`)
-**Last Updated:** 2026-06-02
-
-> ⚠️ **Scaffolding only.** Each task below has a 1-line hint, not a full step list / acceptance criteria. Run `write-plan-expand` against this file when ready to detail it.
+**Feature:** Layer 2 Observable (Training-Week Spike)  
+**Group:** Deploy and Incident Walkthrough  
+**Status:** ✅ Expanded  
+**Last Updated:** 2026-06-03  
 
 ---
 
 ## 📝 Tasks
 
-- [ ] Task 14: Sync spike work onto the Pi; capture pre-deployment state
-  - Pull the spike branch on the Pi (or copy files if no remote yet — note in the learning log). Capture pre-deployment state: `docker compose ps`, free disk, `/boot/firmware/cmdline.txt` cgroup flags, IP address. This is the rollback-reference snapshot.
+### Task 14: Sync spike work onto the Pi; capture pre-deployment state
 
-- [ ] Task 15: `docker compose up` the new stack; verify all services healthy
-  - Run `docker compose pull` then `docker compose up -d`. Verify each service comes up healthy via `docker compose ps` and per-service healthcheck (Prometheus :9090/-/healthy, Grafana :3000/api/health, node-exporter :9100/metrics, pihole-exporter :9617/health, docker-exporter :9713/metrics, PiHole still on :53 and :80). Capture any errors in `notes/spike-l2.md`.
+**Type:** Docs / coordination (operator runbook on Pi)
 
-- [ ] Task 16: Verify all 5 scrape targets "up" in Prometheus; regression-check docker-exporter memory metrics
-  - Open Prometheus :9090/targets in browser, verify all 5 scrape targets show `UP`. Then explicitly regression-check the Pi-5 cgroup-v2 memory bug: query `container_memory_working_set_bytes` and `container_memory_rss` from docker-exporter — they must return non-zero values for the PiHole container. (This is why we swapped from cAdvisor — confirming the swap actually fixed it.)
+- **Purpose:** Establish a rollback reference before changing the live Pi-hole host. Group 4 runs on the **Pi** (Docker, ports 53/80) — not the Steam Deck desk override (`docker-compose.desk.yml`).
 
-- [ ] Task 17: Validate dashboards render with real PiHole + Pi signals
-  - Open both dashboards in Grafana :3000. Each panel must show actual data, not "No data" or constant-zero. Generate real DNS traffic (e.g., `dig @<pi-ip> example.com` from a client) and confirm PiHole-dashboard query-count panels respond. Confirm platform-dashboard CPU/memory/disk panels show realistic values.
+- **Steps:**
 
-- [ ] Task 18: Trigger simulated incident; investigate using *only* dashboards; capture the moment
-  - Execute the Task-10-chosen incident on the Pi. Verify the alert fires (visible in Grafana UI per Task 12). Then — *without SSH, `docker logs`, or the `pihole` CLI* — investigate the incident using only the dashboards. Capture: (a) screenshots of the alert + dashboard states at incident-time, (b) a written walkthrough in `notes/spike-l2.md` of "saw alert → went to dashboard X → saw signal Y → concluded Z," (c) the recovery action taken, (d) post-recovery dashboard state confirming the alert cleared. **This is the competency-milestone moment** — independent execution on the observability competency.
+  1. On the Pi, ensure Layer 0 Pi-hole is running from this repo (or note current state if upgrading in place).
+  2. `git fetch origin && git checkout develop && git pull origin develop` (or copy equivalent tree if no remote on Pi — record method in [`notes/spike-l2.md`](../../../../../notes/spike-l2.md)).
+  3. Confirm `.env` exists with `FTLCONF_webserver_api_password` and `GF_SECURITY_ADMIN_PASSWORD` (see [`.env.example`](../../../../../.env.example)); never commit `.env`.
+  4. Capture **pre-deployment snapshot** in the learning log (command output or paste):
+     - `docker compose ps`
+     - `df -h` (free disk for images/volumes)
+     - Pi LAN IP (for `dig` tests in Task 17)
+     - Optional: `grep cgroup /boot/firmware/cmdline.txt` if cgroup v2 matters for docker-exporter (Pi 5 regression context per Task 16)
+  5. Note current Pi-hole image digest/tag in compose for rollback mental model ([`docker-compose.yml`](../../../../../docker-compose.yml)).
+
+- **Files:** [`notes/spike-l2.md`](../../../../../notes/spike-l2.md), [`docs/runbooks/minimum-deploy.md`](../../../../runbooks/minimum-deploy.md) (Track A reference)
+
+- **Acceptance:**
+  - Pi has `develop` (or documented copy) with Group 1–3 artifacts.
+  - Pre-deployment snapshot recorded in `notes/spike-l2.md` with date.
+  - `.env` present; secrets not committed.
+
+---
+
+### Task 15: `docker compose up` the new stack on the Pi; verify all services healthy
+
+**Type:** Code + integration (operator deploy)
+
+- **Purpose:** Run the full spike stack on production hardware — the only environment that satisfies NFR/memory regression and the Task 18 drill.
+
+- **Steps:**
+
+  1. From repo root on the Pi: `docker compose pull` (pin digests on Pi per NFR-1 / ADR-004 if not already — record upstream tags when bumping).
+  2. `docker compose up -d` — **no** `-f docker-compose.desk.yml` on the Pi.
+  3. `docker compose ps` — expect pihole, prometheus, grafana, node-exporter, pihole-exporter, docker-exporter running (or document restarts).
+  4. Spot-check health endpoints (from Pi or LAN client):
+     - Prometheus `http://<pi-ip>:9090/-/healthy`
+     - Grafana `http://<pi-ip>:3000/api/health`
+     - `curl -s http://127.0.0.1:9617/metrics | head -3` (pihole-exporter)
+     - `curl -s http://127.0.0.1:9713/metrics | head -3` (docker-exporter)
+     - `curl -s http://127.0.0.1:9100/metrics | head -3` (node-exporter)
+  5. Confirm Pi-hole still answers DNS on **:53** and admin UI on **:80** (Layer 0 not regressed).
+  6. Log any pull/start errors in `notes/spike-l2.md`.
+
+- **Files:** [`docker-compose.yml`](../../../../../docker-compose.yml), [`notes/spike-l2.md`](../../../../../notes/spike-l2.md)
+
+- **Acceptance:**
+  - All seven services present in `docker compose ps` with stable state (not endless restart loop).
+  - Health/metrics curls succeed for exporters and Prometheus.
+  - Pi-hole DNS/UI reachable on standard ports.
+  - Errors (if any) documented with command output in learning log.
+
+---
+
+### Task 16: Verify all scrape targets UP; regression-check docker-exporter memory on Pi 5
+
+**Type:** Docs / verification (metrics truth on Pi)
+
+- **Purpose:** Confirm Prometheus sees all jobs and that docker-exporter reports **non-zero** container memory for Pi-hole — the cAdvisor#2523 regression that motivated the exporter swap (see [`spike-outcomes.md`](../spike-outcomes.md)).
+
+- **Steps:**
+
+  1. Open `http://<pi-ip>:9090/targets` — verify jobs `prometheus`, `pihole`, `docker`, `node` are **UP** (allow 30–60s after start).
+  2. Open `http://<pi-ip>:9090/rules` — confirm group `pihole_dns_incident` loaded (inactive while healthy).
+  3. In Prometheus **Graph** or Grafana Explore, run:
+     - `container_memory_working_set_bytes{name="pihole"}`
+     - `container_memory_rss{name="pihole"}`
+  4. **Regression pass:** both series return **non-zero** values for the Pi-hole container while it is running. If zero, stop and document — swap did not fix Pi 5 cgroup v2 on this hardware.
+  5. Optional cross-check: `docker stats pihole` (allowed for regression only; not part of Task 18 investigation).
+  6. Record query results or screenshot paths in `notes/spike-l2.md`; update [`spike-outcomes.md`](../spike-outcomes.md) § Validated on Pi when pass.
+
+- **Files:** [`prometheus-config/prometheus.yml`](../../../../../prometheus-config/prometheus.yml), [`notes/spike-l2.md`](../../../../../notes/spike-l2.md), [`spike-outcomes.md`](../spike-outcomes.md)
+
+- **Acceptance:**
+  - All four exporter jobs + self-scrape UP.
+  - `container_memory_working_set_bytes` and `container_memory_rss` non-zero for `name="pihole"`.
+  - Outcome recorded in learning log (pass/fail with evidence).
+
+---
+
+### Task 17: Validate dashboards with real Pi-hole and Pi signals
+
+**Type:** Docs / verification (Grafana UI on Pi)
+
+- **Purpose:** Panels must show **real** LAN/Pi data before Task 18 — not merely “panel exists.” Aligns with [`manual-testing.md`](../manual-testing.md) Scenarios 6–8 on the Pi (browser at `<pi-ip>:3000`).
+
+- **Steps:**
+
+  1. Log into Grafana at `http://<pi-ip>:3000` (`GF_SECURITY_ADMIN_PASSWORD`).
+  2. Open dashboards **Pi-hole DNS** (`pihole-dns`) and **Platform Health** (`platform-health`).
+  3. **Incident-critical panels** while healthy:
+     - Pi-hole **P1** — DNS query rate shows activity (not flat zero forever).
+     - Platform **H5** — Pi-hole container state shows running.
+     - Platform **H1/H2** — host CPU/memory plausible (not “No data” everywhere).
+  4. Generate DNS traffic from a LAN client: `dig @<pi-ip> example.com` (repeat a few times); confirm P1 responds.
+  5. **Alerting → Alert rules** — folder **Layer 2 Spike**; rules present, not firing.
+  6. Note any panel query mismatches (metric rename vs Mosher-Labs) in learning log for follow-up — do not block Task 18 if incident-critical panels work.
+
+- **Files:** `grafana/provisioning/dashboards/json/*.json`, [`manual-testing.md`](../manual-testing.md), [`notes/spike-l2.md`](../../../../../notes/spike-l2.md)
+
+- **Acceptance:**
+  - Both dashboards load with data on incident-critical panels (P1, H5 minimum).
+  - `dig` traffic visible on query-rate panel.
+  - Grafana alert rules visible; healthy state = not firing.
+  - Gaps on nice-to-have panels documented, not silently ignored.
+
+---
+
+### Task 18: Simulated incident drill — dashboard-only investigation (done-signal)
+
+**Type:** Docs / competency milestone (operator drill on Pi)
+
+- **Purpose:** Satisfy the spike done-signal: **investigate a simulated incident using only dashboards** ([`implementation-plan.md`](../implementation-plan.md) § Goals). Incident shape: **stop Pi-hole container** (Task 10 / [`spike-outcomes.md`](../spike-outcomes.md) § Incident and alerting).
+
+- **Recommended investigation path (beginner-friendly):**
+  1. **Learn healthy** — complete Task 17 first; know what H5 and P1 look like when OK.
+  2. **Break** (operator action, not investigation): `docker compose stop pihole` on the Pi.
+  3. **Wait** ≥2 minutes for `for: 1m` / `for: 2m` alert delays.
+  4. **Investigate (dashboards only)** — no SSH into logs, no `docker logs`, no Pi-hole CLI:
+     - Open **Platform Health** → **H5** (container state).
+     - Open **Pi-hole DNS** → **P1** (query rate).
+     - Optionally corroborate via **Grafana → Alerting → Firing** and **Prometheus → Alerts** (allowed as observability UI).
+  5. **Conclude in writing** before recovery: e.g. “Pi-hole container down; DNS quiet; consistent with stop-container drill.”
+  6. **Capture evidence** — screenshots or paths; narrative in learning log.
+  7. **Recover:** `docker compose start pihole` (or `up -d pihole`); confirm panels and alerts return to healthy.
+
+- **Steps:**
+
+  1. Execute drill per path above on the Pi (not Deck).
+  2. Verify **Grafana** shows firing alert for **Pi-hole container not running** (Task 12 path).
+  3. Write walkthrough in [`notes/spike-l2.md`](../../../../../notes/spike-l2.md) § Task 18 (date):
+     - **Saw** — which panels/alerts changed (cite H5, P1, alert names).
+     - **Went** — navigation path (dashboard-first OK; note if alert link used).
+     - **Concluded** — root cause in one sentence (container stopped).
+     - **Acted** — recovery command.
+     - **After** — alert cleared; panels healthy.
+  4. Store screenshots under a dated folder (e.g. `docs/.../evidence/task-18-YYYY-MM-DD/` or paths in log — do not commit secrets).
+  5. Update [`spike-outcomes.md`](../spike-outcomes.md) § Validated on Pi — Task 18 walkthrough: done.
+
+- **Files:** [`notes/spike-l2.md`](../../../../../notes/spike-l2.md), [`spike-outcomes.md`](../spike-outcomes.md), [`manual-testing.md`](../manual-testing.md) Scenario 9 (Pi variant)
+
+- **Acceptance:**
+  - Incident triggered on Pi; primary alert fired in Grafana (and optionally visible in Prometheus `/alerts`).
+  - Investigation used **only** Grafana/Prometheus UIs — no host log forensics.
+  - Learning log contains dated narrative + screenshot references + recovery.
+  - Post-recovery: H5/P1 healthy; alerts inactive.
+  - Competency claim is defensible to a reviewer without coaching during the drill.
 
 ---
 
 ## 🎯 Goals
 
-1. The spike stack runs on the Pi without silently lying about memory metrics (regression-test on Task 16).
-2. The simulated incident can be diagnosed using only dashboards — that's the independent-execution claim on the observability competency.
-3. The walkthrough is captured as evidence (screenshots + narrative + recovery), suitable for sharing with a reviewer.
+1. The spike stack runs on the Pi without silently lying about memory metrics (Task 16 regression).
+2. The simulated incident can be diagnosed using only dashboards (Task 18).
+3. Evidence is captured for the learning log and optional reviewer handoff.
 
 ---
 
 ## ✅ Completion Criteria
 
-- [ ] All services up and scraping cleanly on the Pi.
-- [ ] docker-exporter memory metrics regression-pass: non-zero values for the PiHole container, confirming the Pi-5 cgroup-v2 bug is bypassed.
-- [ ] Both dashboards rendering real data with no "No data" / constant-zero panels.
-- [ ] Simulated incident triggered; alert fired; dashboard-only investigation completed and recovery confirmed.
-- [ ] The Task 18 incident walkthrough is in `notes/spike-l2.md` with at least: (a) screenshot file paths or inline images, (b) the diagnostic narrative ("saw → concluded → acted"), (c) recovery action, (d) post-recovery state.
-- [ ] The competency-milestone claim is defensible — the walkthrough demonstrates independent execution on the observability competency without coaching during the incident.
+- [ ] Tasks 14–18 each meet acceptance above.
+- [ ] `spike-outcomes.md` § Validated on Pi filled for scrape, memory regression, and Task 18.
+- [ ] Spike definition of done in `implementation-plan.md` satisfied for Pi deploy and incident walkthrough.
 
 ---
 
 ## 🔗 Dependencies
 
-- **Group 2** — compose stack must exist before it can be deployed.
-- **Group 3** — alert rule + dashboards must exist before they can be exercised under the simulated incident.
-- **Out-of-repo:** physical access to the Pi (or remote shell to it) for Tasks 14–18.
+- **Groups 1–3** merged to `develop` (PR #4–#6).
+- **Physical access** to Pi (SSH for deploy/recovery only; not for Task 18 investigation forensics).
+- **Out-of-repo:** LAN client for `dig` tests; browser on machine that can reach `<pi-ip>:3000` and `:9090`.
 
 ---
 
-**Last Updated:** 2026-06-02
+**Last Updated:** 2026-06-03

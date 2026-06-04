@@ -24,7 +24,7 @@ tasks_files:
 **Status:** 🟠 In Progress — 13/18 tasks (Group 3 complete; Group 4 deploy next)
 **Created:** 2026-06-02
 **Last Updated:** 2026-06-03
-**Merged:** PR #4 (2026-06-02) — Group 1; PR #5 (2026-06-03) — Group 2 compose and services
+**Merged:** PR #4 (2026-06-02) Group 1; PR #5 (2026-06-03) Group 2; PR #6 (2026-06-03) Group 3
 **Source:** [`../../../../notes/spike-l2.md`](../../../../../notes/spike-l2.md) (working spike scratchpad — *the* source of truth for posture, scope fence, and learning log)
 
 ---
@@ -107,4 +107,4 @@ Learning spike to move the observability competency from familiar-with-help to i
 
 ---
 
-**Last Updated:** 2026-06-02
+**Last Updated:** 2026-06-03

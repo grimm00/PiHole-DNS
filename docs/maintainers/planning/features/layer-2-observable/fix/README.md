@@ -9,6 +9,7 @@
 
 - **[PR #4](pr4/README.md)** — Group 1 dashboards and exporter fit (docs) — ✅ merged 2026-06-02
 - **[PR #5](pr5/README.md)** — Group 2 compose and observability stack — ✅ merged 2026-06-03
+- **[PR #6](pr6/README.md)** — Group 3 incident and alerting — ✅ merged 2026-06-03
 
 ---
 
